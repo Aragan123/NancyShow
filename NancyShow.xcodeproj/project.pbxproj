@@ -37,6 +37,7 @@
 		6D8E8263170C0CE500B1B45F /* BGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGViewController.h; sourceTree = "<group>"; };
 		6D8E8264170C0CE500B1B45F /* BGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGViewController.m; sourceTree = "<group>"; };
 		6D8E8267170C0CE500B1B45F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BGViewController.xib; sourceTree = "<group>"; };
+		6D8E8272170C10E900B1B45F /* BGPageSwitcherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGPageSwitcherDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +57,8 @@
 		6D8E823F170C0CE500B1B45F = {
 			isa = PBXGroup;
 			children = (
+				6D8E826E170C107300B1B45F /* Resources */,
+				6D8E8270170C108C00B1B45F /* Library */,
 				6D8E8251170C0CE500B1B45F /* NancyShow */,
 				6D8E824A170C0CE500B1B45F /* Frameworks */,
 				6D8E8249170C0CE500B1B45F /* Products */,
@@ -85,6 +88,7 @@
 			children = (
 				6D8E825A170C0CE500B1B45F /* BGAppDelegate.h */,
 				6D8E825B170C0CE500B1B45F /* BGAppDelegate.m */,
+				6D8E8272170C10E900B1B45F /* BGPageSwitcherDelegate.h */,
 				6D8E8263170C0CE500B1B45F /* BGViewController.h */,
 				6D8E8264170C0CE500B1B45F /* BGViewController.m */,
 				6D8E8266170C0CE500B1B45F /* BGViewController.xib */,
@@ -105,6 +109,29 @@
 				6D8E8261170C0CE500B1B45F /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D8E826E170C107300B1B45F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6D8E8271170C109F00B1B45F /* Images */,
+			);
+			name = Resources;
+			path = NancyShow;
+			sourceTree = "<group>";
+		};
+		6D8E8270170C108C00B1B45F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		6D8E8271170C109F00B1B45F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,6 +326,7 @@
 				6D8E826D170C0CE500B1B45F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
