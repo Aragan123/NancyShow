@@ -1,0 +1,306 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6D8E824C170C0CE500B1B45F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8E824B170C0CE500B1B45F /* UIKit.framework */; };
+		6D8E824E170C0CE500B1B45F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8E824D170C0CE500B1B45F /* Foundation.framework */; };
+		6D8E8250170C0CE500B1B45F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8E824F170C0CE500B1B45F /* CoreGraphics.framework */; };
+		6D8E8256170C0CE500B1B45F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E8254170C0CE500B1B45F /* InfoPlist.strings */; };
+		6D8E8258170C0CE500B1B45F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8E8257170C0CE500B1B45F /* main.m */; };
+		6D8E825C170C0CE500B1B45F /* BGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8E825B170C0CE500B1B45F /* BGAppDelegate.m */; };
+		6D8E825E170C0CE500B1B45F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E825D170C0CE500B1B45F /* Default.png */; };
+		6D8E8260170C0CE500B1B45F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E825F170C0CE500B1B45F /* Default@2x.png */; };
+		6D8E8262170C0CE500B1B45F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E8261170C0CE500B1B45F /* Default-568h@2x.png */; };
+		6D8E8265170C0CE500B1B45F /* BGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8E8264170C0CE500B1B45F /* BGViewController.m */; };
+		6D8E8268170C0CE500B1B45F /* BGViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E8266170C0CE500B1B45F /* BGViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6D8E8248170C0CE500B1B45F /* NancyShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NancyShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D8E824B170C0CE500B1B45F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6D8E824D170C0CE500B1B45F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6D8E824F170C0CE500B1B45F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6D8E8253170C0CE500B1B45F /* NancyShow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NancyShow-Info.plist"; sourceTree = "<group>"; };
+		6D8E8255170C0CE500B1B45F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D8E8257170C0CE500B1B45F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6D8E8259170C0CE500B1B45F /* NancyShow-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NancyShow-Prefix.pch"; sourceTree = "<group>"; };
+		6D8E825A170C0CE500B1B45F /* BGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGAppDelegate.h; sourceTree = "<group>"; };
+		6D8E825B170C0CE500B1B45F /* BGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGAppDelegate.m; sourceTree = "<group>"; };
+		6D8E825D170C0CE500B1B45F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		6D8E825F170C0CE500B1B45F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		6D8E8261170C0CE500B1B45F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		6D8E8263170C0CE500B1B45F /* BGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGViewController.h; sourceTree = "<group>"; };
+		6D8E8264170C0CE500B1B45F /* BGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGViewController.m; sourceTree = "<group>"; };
+		6D8E8267170C0CE500B1B45F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BGViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D8E8245170C0CE500B1B45F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D8E824C170C0CE500B1B45F /* UIKit.framework in Frameworks */,
+				6D8E824E170C0CE500B1B45F /* Foundation.framework in Frameworks */,
+				6D8E8250170C0CE500B1B45F /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6D8E823F170C0CE500B1B45F = {
+			isa = PBXGroup;
+			children = (
+				6D8E8251170C0CE500B1B45F /* NancyShow */,
+				6D8E824A170C0CE500B1B45F /* Frameworks */,
+				6D8E8249170C0CE500B1B45F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6D8E8249170C0CE500B1B45F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D8E8248170C0CE500B1B45F /* NancyShow.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D8E824A170C0CE500B1B45F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D8E824B170C0CE500B1B45F /* UIKit.framework */,
+				6D8E824D170C0CE500B1B45F /* Foundation.framework */,
+				6D8E824F170C0CE500B1B45F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D8E8251170C0CE500B1B45F /* NancyShow */ = {
+			isa = PBXGroup;
+			children = (
+				6D8E825A170C0CE500B1B45F /* BGAppDelegate.h */,
+				6D8E825B170C0CE500B1B45F /* BGAppDelegate.m */,
+				6D8E8263170C0CE500B1B45F /* BGViewController.h */,
+				6D8E8264170C0CE500B1B45F /* BGViewController.m */,
+				6D8E8266170C0CE500B1B45F /* BGViewController.xib */,
+				6D8E8252170C0CE500B1B45F /* Supporting Files */,
+			);
+			path = NancyShow;
+			sourceTree = "<group>";
+		};
+		6D8E8252170C0CE500B1B45F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6D8E8253170C0CE500B1B45F /* NancyShow-Info.plist */,
+				6D8E8254170C0CE500B1B45F /* InfoPlist.strings */,
+				6D8E8257170C0CE500B1B45F /* main.m */,
+				6D8E8259170C0CE500B1B45F /* NancyShow-Prefix.pch */,
+				6D8E825D170C0CE500B1B45F /* Default.png */,
+				6D8E825F170C0CE500B1B45F /* Default@2x.png */,
+				6D8E8261170C0CE500B1B45F /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6D8E8247170C0CE500B1B45F /* NancyShow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D8E826B170C0CE500B1B45F /* Build configuration list for PBXNativeTarget "NancyShow" */;
+			buildPhases = (
+				6D8E8244170C0CE500B1B45F /* Sources */,
+				6D8E8245170C0CE500B1B45F /* Frameworks */,
+				6D8E8246170C0CE500B1B45F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NancyShow;
+			productName = NancyShow;
+			productReference = 6D8E8248170C0CE500B1B45F /* NancyShow.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D8E8240170C0CE500B1B45F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BG;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Brute Games Studio";
+			};
+			buildConfigurationList = 6D8E8243170C0CE500B1B45F /* Build configuration list for PBXProject "NancyShow" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6D8E823F170C0CE500B1B45F;
+			productRefGroup = 6D8E8249170C0CE500B1B45F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D8E8247170C0CE500B1B45F /* NancyShow */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6D8E8246170C0CE500B1B45F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D8E8256170C0CE500B1B45F /* InfoPlist.strings in Resources */,
+				6D8E825E170C0CE500B1B45F /* Default.png in Resources */,
+				6D8E8260170C0CE500B1B45F /* Default@2x.png in Resources */,
+				6D8E8262170C0CE500B1B45F /* Default-568h@2x.png in Resources */,
+				6D8E8268170C0CE500B1B45F /* BGViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D8E8244170C0CE500B1B45F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D8E8258170C0CE500B1B45F /* main.m in Sources */,
+				6D8E825C170C0CE500B1B45F /* BGAppDelegate.m in Sources */,
+				6D8E8265170C0CE500B1B45F /* BGViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6D8E8254170C0CE500B1B45F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D8E8255170C0CE500B1B45F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6D8E8266170C0CE500B1B45F /* BGViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D8E8267170C0CE500B1B45F /* en */,
+			);
+			name = BGViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6D8E8269170C0CE500B1B45F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		6D8E826A170C0CE500B1B45F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6D8E826C170C0CE500B1B45F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NancyShow/NancyShow-Prefix.pch";
+				INFOPLIST_FILE = "NancyShow/NancyShow-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6D8E826D170C0CE500B1B45F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NancyShow/NancyShow-Prefix.pch";
+				INFOPLIST_FILE = "NancyShow/NancyShow-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D8E8243170C0CE500B1B45F /* Build configuration list for PBXProject "NancyShow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D8E8269170C0CE500B1B45F /* Debug */,
+				6D8E826A170C0CE500B1B45F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D8E826B170C0CE500B1B45F /* Build configuration list for PBXNativeTarget "NancyShow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D8E826C170C0CE500B1B45F /* Debug */,
+				6D8E826D170C0CE500B1B45F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6D8E8240170C0CE500B1B45F /* Project object */;
+}
