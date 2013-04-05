@@ -13,11 +13,17 @@
 @end
 
 @implementation BGViewController
+@synthesize delegate;
+//@synthesize btnAbout;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -26,4 +32,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidUnload{
+//    self.btnAbout=nil;
+}
+
+- (void) dealloc{
+    delegate=nil;
+//    [btnAbout release];
+    
+    [super dealloc];
+}
+
+- (IBAction)clickMenuButton:(id)sender {
+    UIButton *button = (UIButton*)sender;
+    int tag = button.tag;
+    
+    NSLog(@"click button tag = %i", tag);
+    
+    if (delegate != nil) {
+        [delegate switchViewTo:tag fromView:kPageMain];
+    }
+    
+}
 @end

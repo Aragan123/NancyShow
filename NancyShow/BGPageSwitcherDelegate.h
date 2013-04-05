@@ -10,19 +10,21 @@
 
 #ifndef kPageMain
 #define kPageMain 0
-#define kPageGalleryHome 1
+#define kPageDiaryHome 1
 #define kPageGallery 2
 #define kPageAbout 3
-#define kPageUI 4
+#define kPageDiary 4
+#define kPageOnlineGallery 5
 #endif
 
 enum enumPage {
 	pageMain =0,
-	pageGalleryHome,
+	pageDiaryHome,
 	pageGallery,
     pageAbout,
-    pageUI,
-};
+    pageDiary,
+    pageOnlineGallery,
+}PageNumber;
 
 
 @protocol BGPageSwitcherDelegate <NSObject>
