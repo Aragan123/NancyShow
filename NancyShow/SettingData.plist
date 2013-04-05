@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DiaryTamplates</key>
+	<array/>
+	<key>OLGalleryBooks</key>
+	<array>
+		<dict>
+			<key>GalleryDesc</key>
+			<string>Gallery 1</string>
+			<key>GalleryImageNames</key>
+			<array>
+				<string>0.png</string>
+				<string>1.png</string>
+				<string>2.png</string>
+			</array>
+			<key>GalleryURL</key>
+			<string>Gallery0</string>
+		</dict>
+		<dict>
+			<key>GalleryDesc</key>
+			<string>Gallery 2</string>
+			<key>GalleryImageNames</key>
+			<array>
+				<string>0.png</string>
+				<string>1.png</string>
+			</array>
+			<key>GalleryURL</key>
+			<string>Gallery1</string>
+		</dict>
+	</array>
+	<key>OLGalleryURL</key>
+	<string>file://NancyShow/</string>
+</dict>
+</plist>
