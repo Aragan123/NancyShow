@@ -64,6 +64,11 @@
 		6D8E8262170C0CE500B1B45F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E8261170C0CE500B1B45F /* Default-568h@2x.png */; };
 		6D8E8265170C0CE500B1B45F /* BGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8E8264170C0CE500B1B45F /* BGViewController.m */; };
 		6D8E8268170C0CE500B1B45F /* BGViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D8E8266170C0CE500B1B45F /* BGViewController.xib */; };
+		6DBE632617119AC60071C669 /* ATArrayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE632117119AC60071C669 /* ATArrayView.m */; };
+		6DBE632717119AC60071C669 /* UIView+WhenTappedBlocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE632517119AC60071C669 /* UIView+WhenTappedBlocks.m */; };
+		6DBE632A17119B1D0071C669 /* BGTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE632917119B1D0071C669 /* BGTableViewController.m */; };
+		6DBE632E1711BB2B0071C669 /* BGTplHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE632C1711BB2B0071C669 /* BGTplHomeViewController.m */; };
+		6DBE632F1711BB2B0071C669 /* BGTplHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE632D1711BB2B0071C669 /* BGTplHomeViewController.xib */; };
 		6DD7BE45170EABB3002EA9B4 /* AKSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD7BE44170EABB3002EA9B4 /* AKSegmentedControl.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6DD7BE47170EAD31002EA9B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD7BE46170EAD31002EA9B4 /* QuartzCore.framework */; };
 		6DD7BE4C170EB28F002EA9B4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6DD7BE49170EB28F002EA9B4 /* SVProgressHUD.bundle */; };
@@ -158,6 +163,16 @@
 		6D8E8264170C0CE500B1B45F /* BGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGViewController.m; sourceTree = "<group>"; };
 		6D8E8267170C0CE500B1B45F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BGViewController.xib; sourceTree = "<group>"; };
 		6D8E8272170C10E900B1B45F /* BGPageSwitcherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGPageSwitcherDelegate.h; sourceTree = "<group>"; };
+		6DBE632017119AC60071C669 /* ATArrayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATArrayView.h; sourceTree = "<group>"; };
+		6DBE632117119AC60071C669 /* ATArrayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATArrayView.m; sourceTree = "<group>"; };
+		6DBE632317119AC60071C669 /* JMWhenTapped.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMWhenTapped.h; sourceTree = "<group>"; };
+		6DBE632417119AC60071C669 /* UIView+WhenTappedBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WhenTappedBlocks.h"; sourceTree = "<group>"; };
+		6DBE632517119AC60071C669 /* UIView+WhenTappedBlocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WhenTappedBlocks.m"; sourceTree = "<group>"; };
+		6DBE632817119B1D0071C669 /* BGTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGTableViewController.h; sourceTree = "<group>"; };
+		6DBE632917119B1D0071C669 /* BGTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGTableViewController.m; sourceTree = "<group>"; };
+		6DBE632B1711BB2B0071C669 /* BGTplHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGTplHomeViewController.h; sourceTree = "<group>"; };
+		6DBE632C1711BB2B0071C669 /* BGTplHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGTplHomeViewController.m; sourceTree = "<group>"; };
+		6DBE632D1711BB2B0071C669 /* BGTplHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGTplHomeViewController.xib; sourceTree = "<group>"; };
 		6DD7BE43170EABB3002EA9B4 /* AKSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSegmentedControl.h; sourceTree = "<group>"; };
 		6DD7BE44170EABB3002EA9B4 /* AKSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSegmentedControl.m; sourceTree = "<group>"; };
 		6DD7BE46170EAD31002EA9B4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -272,6 +287,11 @@
 				6D5DA7B5170DDAEF00AAAF58 /* BGGalleryViewController.xib */,
 				6D5A186517105E2D00CBE762 /* BGScrollViewController.h */,
 				6D5A186617105E2D00CBE762 /* BGScrollViewController.m */,
+				6DBE632817119B1D0071C669 /* BGTableViewController.h */,
+				6DBE632917119B1D0071C669 /* BGTableViewController.m */,
+				6DBE632B1711BB2B0071C669 /* BGTplHomeViewController.h */,
+				6DBE632C1711BB2B0071C669 /* BGTplHomeViewController.m */,
+				6DBE632D1711BB2B0071C669 /* BGTplHomeViewController.xib */,
 			);
 			path = NancyShow;
 			sourceTree = "<group>";
@@ -305,6 +325,8 @@
 		6D8E8270170C108C00B1B45F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				6DBE631F17119AC60071C669 /* ATArrayView */,
+				6DBE632217119AC60071C669 /* JMWhenTapped */,
 				6D5A184617104D1200CBE762 /* AFNetworking */,
 				6DDC0029170F177B00A91279 /* ATPagingView */,
 				6DDC0025170F14AC00A91279 /* DMLazyScrollView */,
@@ -351,6 +373,25 @@
 				6D543469170D756A00D4EC25 /* Icon-Small@2x.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		6DBE631F17119AC60071C669 /* ATArrayView */ = {
+			isa = PBXGroup;
+			children = (
+				6DBE632017119AC60071C669 /* ATArrayView.h */,
+				6DBE632117119AC60071C669 /* ATArrayView.m */,
+			);
+			path = ATArrayView;
+			sourceTree = "<group>";
+		};
+		6DBE632217119AC60071C669 /* JMWhenTapped */ = {
+			isa = PBXGroup;
+			children = (
+				6DBE632317119AC60071C669 /* JMWhenTapped.h */,
+				6DBE632417119AC60071C669 /* UIView+WhenTappedBlocks.h */,
+				6DBE632517119AC60071C669 /* UIView+WhenTappedBlocks.m */,
+			);
+			path = JMWhenTapped;
 			sourceTree = "<group>";
 		};
 		6DD7BE42170EABB3002EA9B4 /* AKSegmentedControl */ = {
@@ -487,6 +528,7 @@
 				6DD7BE5B170EEB8D002EA9B4 /* sep_border_material@2x.png in Resources */,
 				6D5A186A17110D2C00CBE762 /* Gallery0 in Resources */,
 				6D5A186B17110D2C00CBE762 /* Gallery1 in Resources */,
+				6DBE632F1711BB2B0071C669 /* BGTplHomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +560,10 @@
 				6D5A186117104D1200CBE762 /* AFXMLRequestOperation.m in Sources */,
 				6D5A186217104D1200CBE762 /* UIImageView+AFNetworking.m in Sources */,
 				6D5A186717105E2D00CBE762 /* BGScrollViewController.m in Sources */,
+				6DBE632617119AC60071C669 /* ATArrayView.m in Sources */,
+				6DBE632717119AC60071C669 /* UIView+WhenTappedBlocks.m in Sources */,
+				6DBE632A17119B1D0071C669 /* BGTableViewController.m in Sources */,
+				6DBE632E1711BB2B0071C669 /* BGTplHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 static BGGlobalData *instance = nil;
 
 @implementation BGGlobalData
-@synthesize galleryBooks, galleryURI, onlineGalleryBooks;
+@synthesize galleryBooks, galleryURI, onlineGalleryBooks, diaryTemplates;
 
 #pragma mark -
 #pragma mark Data File Read & Write
@@ -31,6 +31,7 @@ static BGGlobalData *instance = nil;
 //		self.hasCarddaySet = [[settings objectForKey:@"HasCarddaySet"] boolValue];
 		self.galleryBooks = [settings objectForKey:@"OLGalleryBooks"];
         self.galleryURI = [settings objectForKey:@"OLGalleryURL"];
+        self.diaryTemplates = [settings objectForKey:@"DiaryTemplates"];
         
 		[settings release];
 	}
@@ -47,7 +48,8 @@ static BGGlobalData *instance = nil;
 //	[settings setValue:[NSNumber numberWithBool:self.hasCarddaySet] forKey:@"HasCarddaySet"];
     [settings setValue:self.galleryBooks forKey:@"OLGalleryBooks"];
     [settings setValue:self.galleryURI forKey:@"OLGalleryURL"];
-	
+	[settings setValue:self.diaryTemplates forKey:@"DiaryTemplates"];
+    
 	// write to file
 	[settings writeToFile:[self settingsDataFilePath] atomically:YES];
 	[settings release];
@@ -106,7 +108,8 @@ static BGGlobalData *instance = nil;
     [galleryBooks release];
     [galleryURI release];
     [onlineGalleryBooks release];
-	
+	[diaryTemplates release];
+    
 	[super release];
 }
 

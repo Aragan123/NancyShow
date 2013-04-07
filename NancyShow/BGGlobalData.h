@@ -15,6 +15,7 @@
 @interface BGGlobalData : NSObject{
     NSArray *galleryBooks;
     NSString *galleryURI;
+    NSDictionary *diaryTemplates;
     
     NSArray *onlineGalleryBooks;
 }
@@ -22,6 +23,8 @@
 @property (nonatomic, retain) NSArray *galleryBooks;
 @property (nonatomic, copy) NSString *galleryURI;
 @property (nonatomic, retain) NSArray *onlineGalleryBooks;
+
+@property (nonatomic, retain) NSDictionary *diaryTemplates;
 
 + (BGGlobalData *) sharedData;
 -(void) loadSettingsDataFile;
