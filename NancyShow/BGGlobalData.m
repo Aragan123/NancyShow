@@ -11,7 +11,7 @@
 static BGGlobalData *instance = nil;
 
 @implementation BGGlobalData
-@synthesize galleryBooks, galleryURI;
+@synthesize galleryBooks, galleryURI, onlineGalleryBooks;
 
 #pragma mark -
 #pragma mark Data File Read & Write
@@ -105,6 +105,7 @@ static BGGlobalData *instance = nil;
 	instance = nil;
     [galleryBooks release];
     [galleryURI release];
+    [onlineGalleryBooks release];
 	
 	[super release];
 }

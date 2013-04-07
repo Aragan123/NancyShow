@@ -9,24 +9,37 @@
 #import "BGGalleryViewController.h"
 #import "BGGlobalData.h"
 #import "AKSegmentedControl.h"
+#import "BGScrollViewController.h"
 
 @interface BGGalleryViewController ()
 
 @end
 
 @implementation BGGalleryViewController
-@synthesize delegate;
+@synthesize delegate, isOnlineGallery;
 @synthesize bottomBarView, pageControl, bottomBarImgView;
+@synthesize scrollViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+   // default is offline/local galleries
+    return [self initWithNibName:nibNameOrNil
+                          bundle:nibBundleOrNil
+                       galleries:[[BGGlobalData sharedData] galleryBooks]
+                 isOnlineGallery:NO
+            ];
+    
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil galleries:(NSArray*)gBooks isOnlineGallery:(BOOL)online
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        galleries = [[BGGlobalData sharedData] galleryBooks];
-        galleryURI = [[BGGlobalData sharedData] galleryURI];
+        isOnlineGallery = online;
+        galleries = gBooks;
+    
         currentGalleryIndex =0;
-        currentGallery = [galleries objectAtIndex:currentGalleryIndex];
+        currentGalleryObject = [galleries objectAtIndex:currentGalleryIndex];
     }
     return self;
 }
@@ -37,7 +50,7 @@
     // Do any additional setup after loading the view from its nib.
     
     // set Page Control
-    self.pageControl.numberOfPages = [[currentGallery objectForKey:@"GalleryImageNames"] count];
+    self.pageControl.numberOfPages = [self numberOfImagesInGallery];
     self.pageControl.currentPage = 0;
     
     // add and set Segmented Control in bottomBar View
@@ -51,11 +64,13 @@
     
     [bottomBarView insertSubview:segmentedControl aboveSubview:bottomBarImgView];
 
-    // load image paging view
-    self.pagingView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - bottomBarView.frame.size.height);
-    self.pagingView.horizontal = YES;
-    self.pagingView.currentPageIndex = 0;
-//    [self currentPageDidChangeInPagingView:self.pagingView];
+    // load image scroll paging view
+    self.scrollViewController = [[BGScrollViewController alloc] init];
+    self.scrollViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - bottomBarView.frame.size.height);
+    self.scrollViewController.delegate = self;
+    self.scrollViewController.isOnlineData = isOnlineGallery;
+    self.scrollViewController.dataSource = [self getGalleryImageURIs];
+    [self.view addSubview:self.scrollViewController.view];
     
 }
 
@@ -73,6 +88,13 @@
     pageControl = nil;
     [bottomBarImgView release];
     bottomBarImgView = nil;
+    
+    segmentedControl=nil;
+    galleries=nil;
+    currentGalleryObject=nil;
+    
+    self.scrollViewController=nil;
+    
     [super viewDidUnload];
 }
 
@@ -82,26 +104,35 @@
     [bottomBarView release];
     [pageControl release];
     [bottomBarImgView release];
+    
+    [segmentedControl release];
+    [galleries release];
+    [currentGalleryObject release];
+    
+    [scrollViewController release];
+    
     [super dealloc];
 }
 
+#pragma mark -
+#pragma mark Controls
 - (void) reloadDataWith: (int) galleryIndex {
     // reload data
-    currentGallery = [galleries objectAtIndex:galleryIndex];
-    
+    currentGalleryIndex = galleryIndex;
+    currentGalleryObject = [galleries objectAtIndex:galleryIndex];
     
     // update page control
-    self.pageControl.numberOfPages = [[currentGallery objectForKey:@"GalleryImageNames"] count];
+    self.pageControl.numberOfPages = [self numberOfImagesInGallery];
     self.pageControl.currentPage = 0; // always go to first one
 //    [self.pageControl reloadInputViews];
     
-    // update paging view
-    self.pagingView.currentPageIndex = 0;
-    [self.pagingView reloadData];
+    // update scroll paging view
+    self.scrollViewController.dataSource = [self getGalleryImageURIs];
+    [self.scrollViewController reloadDataSource:[self getGalleryImageURIs]];
 }
 
 - (IBAction)clickReturnHome:(id)sender {
-    if (delegate !=nil) {
+    if (nil != delegate) {
         [delegate switchViewTo:kPageMain fromView:kPageGallery];
     }
 }
@@ -110,6 +141,34 @@
     // page control is click to change value, need to move scroll view
     UIPageControl *pc = (UIPageControl*)sender;
     int pageIndex = pc.currentPage;
+    [self.scrollViewController updateScrollerPagetoIndex:pageIndex]; // update scroller
+}
+
+#pragma mark - 
+#pragma mark Private Methods
+- (NSArray*) getGalleryImageURIs {
+    NSString *uri = [currentGalleryObject objectForKey:@"GalleryURL"];
+    NSArray *imgNames = [currentGalleryObject objectForKey:@"GalleryImageNames"];
+    NSMutableArray *imgURIs = [NSMutableArray arrayWithCapacity:[imgNames count]];
+    
+    for (NSString *imgName in imgNames){
+        if (!isOnlineGallery) {
+            // local gallery
+            NSString *imgFilePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingFormat:@"/%@/%@", uri, imgName];
+            [imgURIs addObject:imgFilePath];
+        }else{
+            // online gallery
+            NSString *imgFilePath = [NSString stringWithFormat:@"%@/%@", uri, imgName];
+            [imgURIs addObject:imgFilePath];
+            
+        }
+    }
+
+    return  imgURIs;
+}
+
+- (int) numberOfImagesInGallery {
+    return [[currentGalleryObject objectForKey:@"GalleryImageNames"] count];
 }
 
 #pragma mark -
@@ -140,7 +199,11 @@
         UIButton *button = [[UIButton alloc] init];
 //        [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 5.0)];
         
-        NSString *buttonTitle = [NSString stringWithFormat:@"Gallery %i", i+1];
+        // get buttontitle from plist data
+        NSDictionary *galleryBook = [galleries objectAtIndex:i];
+        NSString *buttonTitle = [galleryBook objectForKey:@"GalleryDesc"];
+        
+//        NSString *buttonTitle = [NSString stringWithFormat:@"Gallery %i", i+1];
         [button setTitle:buttonTitle forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
@@ -178,28 +241,19 @@
 - (void)segmentedViewController:(id)sender
 {
     AKSegmentedControl *segControl = (AKSegmentedControl *)sender;
+    int selectedSegIndex = [[segControl selectedIndexes] firstIndex];
     
-    NSLog(@"SegmentedControl #1 : Selected Index %@", [segControl selectedIndexes]);
-
+//    NSLog(@"SegmentedControl: Selected Index %@", [segControl selectedIndexes]);
+    NSLog(@"SegmentedControl: selected index %i", selectedSegIndex);
+    
+    [self reloadDataWith:selectedSegIndex]; // reload gallery 
 }
 
-#pragma mark -
-#pragma mark ATPagingViewDelegate methods
-
-- (NSInteger)numberOfPagesInPagingView:(ATPagingView *)pagingView {
-    return [[currentGallery objectForKey:@"GalleryImageNames"] count];
-}
-
-- (UIView *)viewForPageInPagingView:(ATPagingView *)pagingView atIndex:(NSInteger)index {
-    UIView *view = [pagingView dequeueReusablePage];
-    if (view == nil) {
-//        view = [[[DemoPageView alloc] init] autorelease];
-    }
-    return view;
-}
-
-- (void)currentPageDidChangeInPagingView:(ATPagingView *)pagingView {
-    self.pageControl.currentPage = pagingView.currentPageIndex;
+#pragma mark --
+#pragma mark BGScrollShowViewController delegate methods
+- (void) scrollerPageViewChanged:(int)newPageIndex{
+    // update page controll index
+    self.pageControl.currentPage = newPageIndex;
 }
 
 @end

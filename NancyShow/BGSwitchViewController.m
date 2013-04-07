@@ -7,9 +7,11 @@
 //
 
 #import "BGSwitchViewController.h"
+#import "BGGlobalData.h"
 #import "BGViewController.h"
 #import "BGAboutViewController.h"
 #import "BGGalleryViewController.h"
+
 
 @interface BGSwitchViewController ()
 
@@ -101,6 +103,19 @@
         NSLog(@"toPage = GalleryPage");
         if (self.galleryPageViewController.view.superview == nil) {
             BGGalleryViewController *controller = [[BGGalleryViewController alloc] initWithNibName:@"BGGalleryViewController" bundle:nil];
+            self.galleryPageViewController = controller;
+            [controller release];
+        }
+        self.galleryPageViewController.delegate = self;
+    }
+    
+    else if (toPage == kPageOnlineGallery) {
+        NSLog(@"toPage = OnlineGalleryPage");
+        if (self.galleryPageViewController.view.superview == nil) {
+            BGGalleryViewController *controller = [[BGGalleryViewController alloc] initWithNibName:@"BGGalleryViewController"
+                                                                                            bundle:nil
+                                                                                         galleries:[[BGGlobalData sharedData] onlineGalleryBooks]
+                                                                                   isOnlineGallery:YES];
             self.galleryPageViewController = controller;
             [controller release];
         }

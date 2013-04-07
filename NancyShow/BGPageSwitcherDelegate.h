@@ -17,6 +17,8 @@
 #define kPageOnlineGallery 5
 #endif
 
+#define kOnlineGalleryURI @"http://122.70.133.214/GalleryNancy/OnlineGalleryList.plist"
+
 enum enumPage {
 	pageMain =0,
 	pageDiaryHome,

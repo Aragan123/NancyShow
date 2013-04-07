@@ -7,6 +7,9 @@
 //
 
 #import "BGViewController.h"
+#import "BGGlobalData.h"
+#import "SVProgressHUD.h"
+#import "AFPropertyListRequestOperation.h"
 
 @interface BGViewController ()
 
@@ -54,4 +57,36 @@
     }
     
 }
+
+- (IBAction)clickOnlineGallery:(id)sender{
+    NSLog(@"click online gallery button");
+    [SVProgressHUD showWithStatus:@"Connecting" maskType:SVProgressHUDMaskTypeGradient];
+    
+    // download online plist file
+    NSURL *url = [NSURL URLWithString:kOnlineGalleryURI];
+    NSURLRequest *requst = [NSURLRequest requestWithURL:url];
+    NSLog(@"Network URL: %@", kOnlineGalleryURI);
+    
+    AFPropertyListRequestOperation *operation = [AFPropertyListRequestOperation
+                                                 propertyListRequestOperationWithRequest:requst
+                                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, id propertyList){
+                                                     // stop HUD
+                                                     [SVProgressHUD dismiss];
+                                                     
+                                                     // get plist and assign to global data, then redirect to gallery show page
+                                                     NSDictionary *pList = (NSDictionary*)propertyList;
+                                                     [[BGGlobalData sharedData] setOnlineGalleryBooks:[pList objectForKey:@"OLGalleryBooks"]];
+                                                     if (nil != delegate) {
+//                                                         [delegate switchViewTo:kPageOnlineGallery fromView:kPageMain]; // go to gallery show page
+                                                     }
+                                                 }
+                                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id propertyList){
+                                                     NSLog(@"Network Error: %@", error);
+                                                     // stop HUD with error
+                                                     [SVProgressHUD showErrorWithStatus:@"Network Not Connected"];
+                                                 }];
+    // start http call
+    [operation start];
+}
+
 @end

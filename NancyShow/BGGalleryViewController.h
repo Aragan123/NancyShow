@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "BGPageSwitcherDelegate.h"
 #import "ATPagingView.h"
+#import "BGScrollViewController.h"
 
 @class AKSegmentedControl;
 
-@interface BGGalleryViewController : ATPagingViewController{
+@interface BGGalleryViewController : UIViewController <BGScrollViewControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     IBOutlet UIView *bottomBarView;
     IBOutlet UIPageControl *pageControl;
@@ -20,9 +21,11 @@
     
     AKSegmentedControl *segmentedControl;
     NSArray *galleries;
-    NSString *galleryURI;
-    int currentGalleryIndex;
-    NSDictionary *currentGallery;
+    int currentGalleryIndex; // init with 0
+    NSDictionary *currentGalleryObject;
+    BOOL isOnlineGallery; // default is NO
+    
+    BGScrollViewController *scrollViewController;
     
 }
 
@@ -30,6 +33,10 @@
 @property(nonatomic, retain) IBOutlet UIView *bottomBarView;
 @property(nonatomic, retain) IBOutlet UIPageControl *pageControl;
 @property(nonatomic, retain) IBOutlet UIImageView *bottomBarImgView;
+@property (nonatomic, retain) BGScrollViewController *scrollViewController;
+@property (nonatomic, assign) BOOL isOnlineGallery;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil galleries:(NSArray*)gBooks isOnlineGallery:(BOOL)online;
 
 - (IBAction)clickReturnHome:(id)sender;
 - (IBAction)clickPageControl:(id)sender;

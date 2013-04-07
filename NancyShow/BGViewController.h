@@ -18,4 +18,5 @@
 //@property (nonatomic, retain) IBOutlet UIButton *btnAbout;
 
 - (IBAction)clickMenuButton:(id)sender;
+- (IBAction)clickOnlineGallery:(id)sender;
 @end
