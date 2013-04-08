@@ -11,6 +11,8 @@
 #import "BGViewController.h"
 #import "BGAboutViewController.h"
 #import "BGGalleryViewController.h"
+#import "BGTplHomeViewController.h"
+#import "BGDiaryViewController.h"
 
 
 @interface BGSwitchViewController ()
@@ -18,7 +20,7 @@
 @end
 
 @implementation BGSwitchViewController
-@synthesize homePageViewController, aboutPageViewController, galleryPageViewController;
+@synthesize homePageViewController, aboutPageViewController, galleryPageViewController, tplHomeViewController, diaryViewController;
 
 - (void)viewDidLoad
 {
@@ -51,15 +53,19 @@
 }
 
 - (void) viewDidUnload{
-    self.homePageViewController=nil;
-    self.aboutPageViewController=nil;
-    self.galleryPageViewController=nil;
+    homePageViewController=nil;
+    aboutPageViewController=nil;
+    galleryPageViewController=nil;
+    tplHomeViewController=nil;
+    diaryViewController=nil;
 }
 
 - (void) dealloc{
     [homePageViewController release];
     [aboutPageViewController release];
     [galleryPageViewController release];
+    [tplHomeViewController release];
+    [diaryViewController release];
     
     [super dealloc];
 }
@@ -122,6 +128,27 @@
         self.galleryPageViewController.delegate = self;
     }
     
+    else if (toPage == kPageDiaryHome) {
+        NSLog(@"toPage = DiaryHomePage");
+        if (self.tplHomeViewController == nil) {
+            BGTplHomeViewController *controller = [[BGTplHomeViewController alloc] initWithNibName:@"BGTplHomeViewController" bundle:nil];
+                                                                                        
+            self.tplHomeViewController = controller;
+            [controller release];
+        }
+        self.tplHomeViewController.delegate = self;
+    }
+    
+    else if (toPage == kPageDiary) {
+        NSLog(@"toPage = DiaryPage");
+        if (self.diaryViewController.view.superview == nil) {
+            BGDiaryViewController *controller = [[BGDiaryViewController alloc] initWithNibName:@"BGDiaryViewController" bundle:nil];
+            self.diaryViewController = controller;
+            [controller release];
+        }
+//        [self.diaryViewController reloadImageView];
+        self.diaryViewController.delegate = self;
+    }
     
     // get from and to view controller
 	UIViewController *fromViewController = [self getSwitchViewController:fromPage];
@@ -151,10 +178,11 @@
 			break;
 			
 		case kPageDiaryHome:
-            //			return self.galleryHomePageViewController;
+            return self.tplHomeViewController;
 			break;
             
 		case kPageGallery:
+        case kPageOnlineGallery:
             return self.galleryPageViewController;
 			break;
             
@@ -163,10 +191,7 @@
             break;
             
         case kPageDiary:
-            // return self.uiPageViewController;
-            break;
-        case kPageOnlineGallery:
-            // return self.olGalleryPageViewController;
+            return self.diaryViewController;
             break;
 	}
 	return nil;

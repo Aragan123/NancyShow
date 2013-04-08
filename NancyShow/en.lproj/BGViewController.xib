@@ -62,12 +62,14 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="358067276">
-							<int key="type">2</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="184975515">
+							<string key="name">Noteworthy-Bold</string>
+							<string key="family">Noteworthy</string>
+							<int key="traits">2</int>
 							<double key="pointSize">15</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="1031575670">
-							<string key="NSName">Helvetica-Bold</string>
+						<object class="NSFont" key="IBUIFont" id="225188381">
+							<string key="NSName">Noteworthy-Bold</string>
 							<double key="NSSize">15</double>
 							<int key="NSfFlags">16</int>
 						</object>
@@ -92,8 +94,8 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1063538240"/>
-						<reference key="IBUIFontDescription" ref="358067276"/>
-						<reference key="IBUIFont" ref="1031575670"/>
+						<reference key="IBUIFontDescription" ref="184975515"/>
+						<reference key="IBUIFont" ref="225188381"/>
 					</object>
 					<object class="IBUIButton" id="800697995">
 						<reference key="NSNextResponder" ref="766721923"/>
@@ -116,8 +118,8 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1063538240"/>
-						<reference key="IBUIFontDescription" ref="358067276"/>
-						<reference key="IBUIFont" ref="1031575670"/>
+						<reference key="IBUIFontDescription" ref="184975515"/>
+						<reference key="IBUIFont" ref="225188381"/>
 					</object>
 					<object class="IBUIButton" id="452567117">
 						<reference key="NSNextResponder" ref="766721923"/>
@@ -140,8 +142,8 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="1063538240"/>
-						<reference key="IBUIFontDescription" ref="358067276"/>
-						<reference key="IBUIFont" ref="1031575670"/>
+						<reference key="IBUIFontDescription" ref="184975515"/>
+						<reference key="IBUIFont" ref="225188381"/>
 					</object>
 				</array>
 				<string key="NSFrameSize">{1024, 768}</string>
@@ -203,9 +205,9 @@
 						<string key="label">clickMenuButton:</string>
 						<reference key="source" ref="1027653330"/>
 						<reference key="destination" ref="841351856"/>
-						<int key="IBEventType">3</int>
+						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">10</int>
+					<int key="connectionID">17</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -293,7 +295,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">16</int>
+			<int key="maxID">17</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

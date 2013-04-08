@@ -48,6 +48,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UIImage *backgroundPattern = [UIImage imageNamed:@"beauty_background.png"];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundPattern];
     
     // set Page Control
     self.pageControl.numberOfPages = [self numberOfImagesInGallery];
@@ -55,7 +57,7 @@
     
     // add and set Segmented Control in bottomBar View
     segmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(0,0, galleries.count*100+6, 44)];
-    segmentedControl.center = CGPointMake(bottomBarImgView.center.x, bottomBarImgView.center.y+2);
+    segmentedControl.center = CGPointMake(bottomBarImgView.center.x, bottomBarImgView.center.y+3);
     
     [segmentedControl addTarget:self action:@selector(segmentedViewController:) forControlEvents:UIControlEventValueChanged];
     [segmentedControl setSegmentedControlMode:AKSegmentedControlModeSticky];
@@ -207,7 +209,7 @@
         [button setTitle:buttonTitle forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
-        [button.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+        [button.titleLabel setFont:[UIFont fontWithName:@"Noteworthy-Bold" size:12.0]];
         [button setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
         
         if (i==0) {

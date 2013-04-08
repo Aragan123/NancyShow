@@ -21,7 +21,7 @@
 @property (nonatomic, retain) NSArray *dataSource;
 @property (nonatomic, assign) BOOL isOnlineData;
 
-- (void) reloadDataSource: (NSArray*) ds;
+- (void) reloadDataSource: (NSArray*) ds isOnlineData: (BOOL)online;
 
 @end
 

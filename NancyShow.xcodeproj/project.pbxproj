@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D2AEB291712BEB9005CDE03 /* DiaryTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 6D2AEB281712BEB9005CDE03 /* DiaryTemplates */; };
+		6D2AEB2B171311FD005CDE03 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D2AEB2A171311FD005CDE03 /* loading.jpg */; };
 		6D543460170D6B6E00D4EC25 /* BGSwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D54345F170D6B6E00D4EC25 /* BGSwitchViewController.m */; };
 		6D543464170D709F00D4EC25 /* BGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D543462170D709F00D4EC25 /* BGAboutViewController.m */; };
 		6D543465170D709F00D4EC25 /* BGAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D543463170D709F00D4EC25 /* BGAboutViewController.xib */; };
@@ -69,6 +71,12 @@
 		6DBE632A17119B1D0071C669 /* BGTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE632917119B1D0071C669 /* BGTableViewController.m */; };
 		6DBE632E1711BB2B0071C669 /* BGTplHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBE632C1711BB2B0071C669 /* BGTplHomeViewController.m */; };
 		6DBE632F1711BB2B0071C669 /* BGTplHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DBE632D1711BB2B0071C669 /* BGTplHomeViewController.xib */; };
+		6DCD0082171298B4003A7B9B /* BGDiaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCD0080171298B3003A7B9B /* BGDiaryViewController.m */; };
+		6DCD0083171298B4003A7B9B /* BGDiaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD0081171298B3003A7B9B /* BGDiaryViewController.xib */; };
+		6DCD00881712AE84003A7B9B /* btn_cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD00841712AE84003A7B9B /* btn_cancel.png */; };
+		6DCD00891712AE84003A7B9B /* btn_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD00851712AE84003A7B9B /* btn_cancel@2x.png */; };
+		6DCD008A1712AE84003A7B9B /* btn_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD00861712AE84003A7B9B /* btn_ok.png */; };
+		6DCD008B1712AE84003A7B9B /* btn_ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD00871712AE84003A7B9B /* btn_ok@2x.png */; };
 		6DD7BE45170EABB3002EA9B4 /* AKSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD7BE44170EABB3002EA9B4 /* AKSegmentedControl.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6DD7BE47170EAD31002EA9B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD7BE46170EAD31002EA9B4 /* QuartzCore.framework */; };
 		6DD7BE4C170EB28F002EA9B4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6DD7BE49170EB28F002EA9B4 /* SVProgressHUD.bundle */; };
@@ -85,6 +93,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D2AEB281712BEB9005CDE03 /* DiaryTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DiaryTemplates; sourceTree = "<group>"; };
+		6D2AEB2A171311FD005CDE03 /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading.jpg; sourceTree = "<group>"; };
 		6D54345E170D6B6E00D4EC25 /* BGSwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGSwitchViewController.h; sourceTree = "<group>"; };
 		6D54345F170D6B6E00D4EC25 /* BGSwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGSwitchViewController.m; sourceTree = "<group>"; };
 		6D543461170D709F00D4EC25 /* BGAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGAboutViewController.h; sourceTree = "<group>"; };
@@ -173,6 +183,13 @@
 		6DBE632B1711BB2B0071C669 /* BGTplHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGTplHomeViewController.h; sourceTree = "<group>"; };
 		6DBE632C1711BB2B0071C669 /* BGTplHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGTplHomeViewController.m; sourceTree = "<group>"; };
 		6DBE632D1711BB2B0071C669 /* BGTplHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGTplHomeViewController.xib; sourceTree = "<group>"; };
+		6DCD007F171298B3003A7B9B /* BGDiaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGDiaryViewController.h; sourceTree = "<group>"; };
+		6DCD0080171298B3003A7B9B /* BGDiaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGDiaryViewController.m; sourceTree = "<group>"; };
+		6DCD0081171298B3003A7B9B /* BGDiaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGDiaryViewController.xib; sourceTree = "<group>"; };
+		6DCD00841712AE84003A7B9B /* btn_cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_cancel.png; sourceTree = "<group>"; };
+		6DCD00851712AE84003A7B9B /* btn_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_cancel@2x.png"; sourceTree = "<group>"; };
+		6DCD00861712AE84003A7B9B /* btn_ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_ok.png; sourceTree = "<group>"; };
+		6DCD00871712AE84003A7B9B /* btn_ok@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_ok@2x.png"; sourceTree = "<group>"; };
 		6DD7BE43170EABB3002EA9B4 /* AKSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSegmentedControl.h; sourceTree = "<group>"; };
 		6DD7BE44170EABB3002EA9B4 /* AKSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSegmentedControl.m; sourceTree = "<group>"; };
 		6DD7BE46170EAD31002EA9B4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -292,6 +309,9 @@
 				6DBE632B1711BB2B0071C669 /* BGTplHomeViewController.h */,
 				6DBE632C1711BB2B0071C669 /* BGTplHomeViewController.m */,
 				6DBE632D1711BB2B0071C669 /* BGTplHomeViewController.xib */,
+				6DCD007F171298B3003A7B9B /* BGDiaryViewController.h */,
+				6DCD0080171298B3003A7B9B /* BGDiaryViewController.m */,
+				6DCD0081171298B3003A7B9B /* BGDiaryViewController.xib */,
 			);
 			path = NancyShow;
 			sourceTree = "<group>";
@@ -313,6 +333,7 @@
 		6D8E826E170C107300B1B45F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6D2AEB281712BEB9005CDE03 /* DiaryTemplates */,
 				6D5A186817110D2C00CBE762 /* Gallery0 */,
 				6D5A186917110D2C00CBE762 /* Gallery1 */,
 				6DD7BE56170EC98C002EA9B4 /* SettingData.plist */,
@@ -339,6 +360,11 @@
 		6D8E8271170C109F00B1B45F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6D2AEB2A171311FD005CDE03 /* loading.jpg */,
+				6DCD00841712AE84003A7B9B /* btn_cancel.png */,
+				6DCD00851712AE84003A7B9B /* btn_cancel@2x.png */,
+				6DCD00861712AE84003A7B9B /* btn_ok.png */,
+				6DCD00871712AE84003A7B9B /* btn_ok@2x.png */,
 				6D7B15B1170DC76F009116D6 /* btn_home_a.png */,
 				6D7B15B2170DC76F009116D6 /* btn_home_a@2x.png */,
 				6D7B15A1170DBFA7009116D6 /* beauty_background.png */,
@@ -529,6 +555,13 @@
 				6D5A186A17110D2C00CBE762 /* Gallery0 in Resources */,
 				6D5A186B17110D2C00CBE762 /* Gallery1 in Resources */,
 				6DBE632F1711BB2B0071C669 /* BGTplHomeViewController.xib in Resources */,
+				6DCD0083171298B4003A7B9B /* BGDiaryViewController.xib in Resources */,
+				6DCD00881712AE84003A7B9B /* btn_cancel.png in Resources */,
+				6DCD00891712AE84003A7B9B /* btn_cancel@2x.png in Resources */,
+				6DCD008A1712AE84003A7B9B /* btn_ok.png in Resources */,
+				6DCD008B1712AE84003A7B9B /* btn_ok@2x.png in Resources */,
+				6D2AEB291712BEB9005CDE03 /* DiaryTemplates in Resources */,
+				6D2AEB2B171311FD005CDE03 /* loading.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +597,7 @@
 				6DBE632717119AC60071C669 /* UIView+WhenTappedBlocks.m in Sources */,
 				6DBE632A17119B1D0071C669 /* BGTableViewController.m in Sources */,
 				6DBE632E1711BB2B0071C669 /* BGTplHomeViewController.m in Sources */,
+				6DCD0082171298B4003A7B9B /* BGDiaryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

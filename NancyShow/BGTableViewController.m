@@ -21,7 +21,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.arrayView.itemSize = CGSizeMake(300, 300);
+    self.arrayView.itemSize = CGSizeMake(200, 200);
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,8 +45,10 @@
 
 #pragma mark - 
 #pragma mark Public Methods
-- (void) reloadDataSource:(NSArray *)ds{
+- (void) reloadDataSource:(NSArray *)ds isOnlineData:(BOOL)online{
+    NSLog(@"reload Data Source in BGTableViewController");
     self.dataSource=ds;
+    self.isOnlineData=online;
     [self.arrayView reloadData];
 }
 
@@ -60,7 +62,6 @@
     UIView *itemView = (UIView *) [arrayView dequeueReusableItem];
     if (itemView == nil) {
         itemView = [[[UIView alloc] init] autorelease];
-        itemView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         itemView.backgroundColor = [UIColor clearColor];
     }
     
@@ -71,7 +72,9 @@
         }
     }];
     
-    UIImageView *imageView = [[[UIImageView alloc] initWithFrame: self.view.frame] autorelease];
+//    UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height)] autorelease];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading.jpg"]];
+    imageView.frame = CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height);
     NSString *imageURI = [self.dataSource objectAtIndex:index];
     NSLog(@"loadng imagURI: %@", imageURI);
     

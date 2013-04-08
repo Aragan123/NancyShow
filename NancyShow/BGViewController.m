@@ -77,11 +77,11 @@
                                                      NSDictionary *pList = (NSDictionary*)propertyList;
                                                      [[BGGlobalData sharedData] setOnlineGalleryBooks:[pList objectForKey:@"OLGalleryBooks"]];
                                                      if (nil != delegate) {
-//                                                         [delegate switchViewTo:kPageOnlineGallery fromView:kPageMain]; // go to gallery show page
+                                                         [delegate switchViewTo:kPageOnlineGallery fromView:kPageMain]; // go to gallery show page
                                                      }
                                                  }
                                                  failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id propertyList){
-                                                     NSLog(@"Network Error: %@", error);
+                                                     NSLog(@"Network Error when click onlineGallery menu button: %@", error);
                                                      // stop HUD with error
                                                      [SVProgressHUD showErrorWithStatus:@"Network Not Connected"];
                                                  }];
