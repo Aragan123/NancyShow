@@ -55,6 +55,13 @@
 		6D7B15B0170DC03E009116D6 /* beauty_bottomBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7B15AF170DC03E009116D6 /* beauty_bottomBar.png */; };
 		6D7B15B3170DC76F009116D6 /* btn_home_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7B15B1170DC76F009116D6 /* btn_home_a.png */; };
 		6D7B15B4170DC76F009116D6 /* btn_home_a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D7B15B2170DC76F009116D6 /* btn_home_a@2x.png */; };
+		6D86BB0C17155F0800ABC481 /* AHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D86BB0B17155F0800ABC481 /* AHAlertView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6D86BB1317155FF800ABC481 /* custom-button-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D86BB0D17155FF800ABC481 /* custom-button-normal.png */; };
+		6D86BB1417155FF800ABC481 /* custom-button-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D86BB0E17155FF800ABC481 /* custom-button-normal@2x.png */; };
+		6D86BB1517155FF800ABC481 /* custom-cancel-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D86BB0F17155FF800ABC481 /* custom-cancel-normal.png */; };
+		6D86BB1617155FF800ABC481 /* custom-cancel-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D86BB1017155FF800ABC481 /* custom-cancel-normal@2x.png */; };
+		6D86BB1717155FF800ABC481 /* custom-dialog-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D86BB1117155FF800ABC481 /* custom-dialog-background.png */; };
+		6D86BB1817155FF800ABC481 /* custom-dialog-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D86BB1217155FF800ABC481 /* custom-dialog-background@2x.png */; };
 		6D8E824C170C0CE500B1B45F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8E824B170C0CE500B1B45F /* UIKit.framework */; };
 		6D8E824E170C0CE500B1B45F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8E824D170C0CE500B1B45F /* Foundation.framework */; };
 		6D8E8250170C0CE500B1B45F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8E824F170C0CE500B1B45F /* CoreGraphics.framework */; };
@@ -156,6 +163,14 @@
 		6D7B15AF170DC03E009116D6 /* beauty_bottomBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beauty_bottomBar.png; sourceTree = "<group>"; };
 		6D7B15B1170DC76F009116D6 /* btn_home_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_home_a.png; sourceTree = "<group>"; };
 		6D7B15B2170DC76F009116D6 /* btn_home_a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_home_a@2x.png"; sourceTree = "<group>"; };
+		6D86BB0A17155F0800ABC481 /* AHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAlertView.h; sourceTree = "<group>"; };
+		6D86BB0B17155F0800ABC481 /* AHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAlertView.m; sourceTree = "<group>"; };
+		6D86BB0D17155FF800ABC481 /* custom-button-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom-button-normal.png"; sourceTree = "<group>"; };
+		6D86BB0E17155FF800ABC481 /* custom-button-normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom-button-normal@2x.png"; sourceTree = "<group>"; };
+		6D86BB0F17155FF800ABC481 /* custom-cancel-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom-cancel-normal.png"; sourceTree = "<group>"; };
+		6D86BB1017155FF800ABC481 /* custom-cancel-normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom-cancel-normal@2x.png"; sourceTree = "<group>"; };
+		6D86BB1117155FF800ABC481 /* custom-dialog-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom-dialog-background.png"; sourceTree = "<group>"; };
+		6D86BB1217155FF800ABC481 /* custom-dialog-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "custom-dialog-background@2x.png"; sourceTree = "<group>"; };
 		6D8E8248170C0CE500B1B45F /* NancyShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NancyShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D8E824B170C0CE500B1B45F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6D8E824D170C0CE500B1B45F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -248,6 +263,21 @@
 				6D5A185917104D1200CBE762 /* UIImageView+AFNetworking.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		6D86BB0917155F0800ABC481 /* AHAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				6D86BB0A17155F0800ABC481 /* AHAlertView.h */,
+				6D86BB0B17155F0800ABC481 /* AHAlertView.m */,
+				6D86BB0D17155FF800ABC481 /* custom-button-normal.png */,
+				6D86BB0E17155FF800ABC481 /* custom-button-normal@2x.png */,
+				6D86BB0F17155FF800ABC481 /* custom-cancel-normal.png */,
+				6D86BB1017155FF800ABC481 /* custom-cancel-normal@2x.png */,
+				6D86BB1117155FF800ABC481 /* custom-dialog-background.png */,
+				6D86BB1217155FF800ABC481 /* custom-dialog-background@2x.png */,
+			);
+			path = AHAlertView;
 			sourceTree = "<group>";
 		};
 		6D8E823F170C0CE500B1B45F = {
@@ -346,6 +376,7 @@
 		6D8E8270170C108C00B1B45F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				6D86BB0917155F0800ABC481 /* AHAlertView */,
 				6DBE631F17119AC60071C669 /* ATArrayView */,
 				6DBE632217119AC60071C669 /* JMWhenTapped */,
 				6D5A184617104D1200CBE762 /* AFNetworking */,
@@ -562,6 +593,12 @@
 				6DCD008B1712AE84003A7B9B /* btn_ok@2x.png in Resources */,
 				6D2AEB291712BEB9005CDE03 /* DiaryTemplates in Resources */,
 				6D2AEB2B171311FD005CDE03 /* loading.jpg in Resources */,
+				6D86BB1317155FF800ABC481 /* custom-button-normal.png in Resources */,
+				6D86BB1417155FF800ABC481 /* custom-button-normal@2x.png in Resources */,
+				6D86BB1517155FF800ABC481 /* custom-cancel-normal.png in Resources */,
+				6D86BB1617155FF800ABC481 /* custom-cancel-normal@2x.png in Resources */,
+				6D86BB1717155FF800ABC481 /* custom-dialog-background.png in Resources */,
+				6D86BB1817155FF800ABC481 /* custom-dialog-background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +635,7 @@
 				6DBE632A17119B1D0071C669 /* BGTableViewController.m in Sources */,
 				6DBE632E1711BB2B0071C669 /* BGTplHomeViewController.m in Sources */,
 				6DCD0082171298B4003A7B9B /* BGDiaryViewController.m in Sources */,
+				6D86BB0C17155F0800ABC481 /* AHAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

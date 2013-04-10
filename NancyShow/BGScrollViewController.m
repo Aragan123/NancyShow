@@ -74,6 +74,7 @@
     }
     
     UIImageView *imageView = [[[UIImageView alloc] initWithFrame: self.view.frame] autorelease];
+    [imageView setContentMode:UIViewContentModeCenter|UIViewContentModeScaleAspectFit]; // very important
     NSString *imageURI = [dataSource objectAtIndex:index];
     NSLog(@"loadng imagURI: %@", imageURI);
     
@@ -82,7 +83,7 @@
         imageView.image = [UIImage imageWithContentsOfFile:imageURI];
     }else{
         // online gallery
-        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:nil];
+        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
     }
     
     [view addSubview:imageView];

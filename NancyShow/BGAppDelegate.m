@@ -25,7 +25,7 @@
     // Override point for customization after application launch.
 //    self.viewController = [[[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil] autorelease];
     [application setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
-
+    
     self.viewController = [[BGSwitchViewController alloc] init];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
@@ -67,5 +67,6 @@
     // write global data to plist
     
 }
+
 
 @end

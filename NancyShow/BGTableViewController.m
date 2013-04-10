@@ -72,9 +72,9 @@
         }
     }];
     
-//    UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height)] autorelease];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading.jpg"]];
-    imageView.frame = CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height);
+    UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height)] autorelease];
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading.jpg"]];
+//    imageView.frame = CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height);
     NSString *imageURI = [self.dataSource objectAtIndex:index];
     NSLog(@"loadng imagURI: %@", imageURI);
     
@@ -83,7 +83,7 @@
         imageView.image = [UIImage imageWithContentsOfFile:imageURI];
     }else{
         // online gallery
-        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:nil];
+        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
     }
     
     [itemView addSubview:imageView];
