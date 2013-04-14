@@ -30,6 +30,7 @@ typedef enum : NSUInteger
     AKSegmentedControlModeSticky,
     AKSegmentedControlModeButton,
     AKSegmentedControlModeMultipleSelectionable,
+    AKSegmentedControlModeSingleSelectionable,
 } AKSegmentedControlMode;
 
 

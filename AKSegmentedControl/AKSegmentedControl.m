@@ -142,6 +142,19 @@
         
         [self setSelectedIndexes:[mutableSet copy]];
     }
+    if (_segmentedControlMode == AKSegmentedControlModeSingleSelectionable)
+    {
+        NSMutableIndexSet *mutableSet = [set mutableCopy];
+        
+        if ([_selectedIndexes containsIndex:selectedIndex]){
+            [mutableSet removeIndex:selectedIndex];
+        }else{
+            [mutableSet removeAllIndexes];
+            [mutableSet addIndex:selectedIndex];
+            
+        }
+        [self setSelectedIndexes:[mutableSet copy]];
+    }
     else
     {
         [self setSelectedIndex:selectedIndex];

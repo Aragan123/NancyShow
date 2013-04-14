@@ -7,8 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D28092A171942A400DFE95C /* BGDiarySaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D280928171942A400DFE95C /* BGDiarySaveViewController.m */; };
+		6D28092B171942A400DFE95C /* BGDiarySaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D280929171942A400DFE95C /* BGDiarySaveViewController.xib */; };
+		6D28092E1719474300DFE95C /* logo_share_sinaweibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D28092C1719474300DFE95C /* logo_share_sinaweibo.png */; };
+		6D28092F1719474300DFE95C /* logo_share_sinaweibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D28092D1719474300DFE95C /* logo_share_sinaweibo@2x.png */; };
+		6D28093217194A9800DFE95C /* btn_forgetpassword_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D28093017194A9800DFE95C /* btn_forgetpassword_a.png */; };
+		6D28093317194A9800DFE95C /* btn_forgetpassword_a@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D28093117194A9800DFE95C /* btn_forgetpassword_a@2x.png */; };
+		6D2809381719511A00DFE95C /* logo_share_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D2809341719511A00DFE95C /* logo_share_facebook.png */; };
+		6D2809391719511A00DFE95C /* logo_share_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D2809351719511A00DFE95C /* logo_share_facebook@2x.png */; };
+		6D28093A1719511A00DFE95C /* logo_share_twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D2809361719511A00DFE95C /* logo_share_twitter.png */; };
+		6D28093B1719511A00DFE95C /* logo_share_twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D2809371719511A00DFE95C /* logo_share_twitter@2x.png */; };
+		6D28093D171953E300DFE95C /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D28093C171953E300DFE95C /* Social.framework */; };
+		6D28093F171953F700DFE95C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D28093E171953F700DFE95C /* Accounts.framework */; };
+		6D2809411719A2BC00DFE95C /* editor_tv.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D2809401719A2BB00DFE95C /* editor_tv.png */; };
+		6D2855F0171700DB0066BAEC /* BGTextEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D2855EE171700DA0066BAEC /* BGTextEditorViewController.m */; };
+		6D2855F1171700DB0066BAEC /* BGTextEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D2855EF171700DB0066BAEC /* BGTextEditorViewController.xib */; };
+		6D2855F4171703620066BAEC /* color_bottombar_sliderview.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D2855F2171703620066BAEC /* color_bottombar_sliderview.png */; };
+		6D2855F5171703620066BAEC /* color_bottombar_sliderview@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D2855F3171703620066BAEC /* color_bottombar_sliderview@2x.png */; };
 		6D2AEB291712BEB9005CDE03 /* DiaryTemplates in Resources */ = {isa = PBXBuildFile; fileRef = 6D2AEB281712BEB9005CDE03 /* DiaryTemplates */; };
 		6D2AEB2B171311FD005CDE03 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6D2AEB2A171311FD005CDE03 /* loading.jpg */; };
+		6D3F0CF5171ADDC300C7BA7F /* btn_forgetpassword_b.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3F0CF3171ADDC300C7BA7F /* btn_forgetpassword_b.png */; };
+		6D3F0CF6171ADDC300C7BA7F /* btn_forgetpassword_b@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D3F0CF4171ADDC300C7BA7F /* btn_forgetpassword_b@2x.png */; };
 		6D543460170D6B6E00D4EC25 /* BGSwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D54345F170D6B6E00D4EC25 /* BGSwitchViewController.m */; };
 		6D543464170D709F00D4EC25 /* BGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D543462170D709F00D4EC25 /* BGAboutViewController.m */; };
 		6D543465170D709F00D4EC25 /* BGAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D543463170D709F00D4EC25 /* BGAboutViewController.xib */; };
@@ -100,8 +119,29 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D280927171942A400DFE95C /* BGDiarySaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGDiarySaveViewController.h; sourceTree = "<group>"; };
+		6D280928171942A400DFE95C /* BGDiarySaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGDiarySaveViewController.m; sourceTree = "<group>"; };
+		6D280929171942A400DFE95C /* BGDiarySaveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGDiarySaveViewController.xib; sourceTree = "<group>"; };
+		6D28092C1719474300DFE95C /* logo_share_sinaweibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_share_sinaweibo.png; path = ../logo_share_sinaweibo.png; sourceTree = "<group>"; };
+		6D28092D1719474300DFE95C /* logo_share_sinaweibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_share_sinaweibo@2x.png"; path = "../logo_share_sinaweibo@2x.png"; sourceTree = "<group>"; };
+		6D28093017194A9800DFE95C /* btn_forgetpassword_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_forgetpassword_a.png; sourceTree = "<group>"; };
+		6D28093117194A9800DFE95C /* btn_forgetpassword_a@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_forgetpassword_a@2x.png"; sourceTree = "<group>"; };
+		6D2809341719511A00DFE95C /* logo_share_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_share_facebook.png; sourceTree = "<group>"; };
+		6D2809351719511A00DFE95C /* logo_share_facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_share_facebook@2x.png"; sourceTree = "<group>"; };
+		6D2809361719511A00DFE95C /* logo_share_twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_share_twitter.png; sourceTree = "<group>"; };
+		6D2809371719511A00DFE95C /* logo_share_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_share_twitter@2x.png"; sourceTree = "<group>"; };
+		6D28093C171953E300DFE95C /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		6D28093E171953F700DFE95C /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		6D2809401719A2BB00DFE95C /* editor_tv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editor_tv.png; sourceTree = "<group>"; };
+		6D2855ED171700DA0066BAEC /* BGTextEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGTextEditorViewController.h; sourceTree = "<group>"; };
+		6D2855EE171700DA0066BAEC /* BGTextEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGTextEditorViewController.m; sourceTree = "<group>"; };
+		6D2855EF171700DB0066BAEC /* BGTextEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BGTextEditorViewController.xib; sourceTree = "<group>"; };
+		6D2855F2171703620066BAEC /* color_bottombar_sliderview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color_bottombar_sliderview.png; sourceTree = "<group>"; };
+		6D2855F3171703620066BAEC /* color_bottombar_sliderview@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "color_bottombar_sliderview@2x.png"; sourceTree = "<group>"; };
 		6D2AEB281712BEB9005CDE03 /* DiaryTemplates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DiaryTemplates; sourceTree = "<group>"; };
 		6D2AEB2A171311FD005CDE03 /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading.jpg; sourceTree = "<group>"; };
+		6D3F0CF3171ADDC300C7BA7F /* btn_forgetpassword_b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_forgetpassword_b.png; sourceTree = "<group>"; };
+		6D3F0CF4171ADDC300C7BA7F /* btn_forgetpassword_b@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_forgetpassword_b@2x.png"; sourceTree = "<group>"; };
 		6D54345E170D6B6E00D4EC25 /* BGSwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGSwitchViewController.h; sourceTree = "<group>"; };
 		6D54345F170D6B6E00D4EC25 /* BGSwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGSwitchViewController.m; sourceTree = "<group>"; };
 		6D543461170D709F00D4EC25 /* BGAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGAboutViewController.h; sourceTree = "<group>"; };
@@ -233,6 +273,8 @@
 				6D8E824E170C0CE500B1B45F /* Foundation.framework in Frameworks */,
 				6D8E8250170C0CE500B1B45F /* CoreGraphics.framework in Frameworks */,
 				6DD7BE47170EAD31002EA9B4 /* QuartzCore.framework in Frameworks */,
+				6D28093D171953E300DFE95C /* Social.framework in Frameworks */,
+				6D28093F171953F700DFE95C /* Accounts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +346,8 @@
 		6D8E824A170C0CE500B1B45F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D28093E171953F700DFE95C /* Accounts.framework */,
+				6D28093C171953E300DFE95C /* Social.framework */,
 				6DD7BE46170EAD31002EA9B4 /* QuartzCore.framework */,
 				6D8E824B170C0CE500B1B45F /* UIKit.framework */,
 				6D8E824D170C0CE500B1B45F /* Foundation.framework */,
@@ -342,6 +386,12 @@
 				6DCD007F171298B3003A7B9B /* BGDiaryViewController.h */,
 				6DCD0080171298B3003A7B9B /* BGDiaryViewController.m */,
 				6DCD0081171298B3003A7B9B /* BGDiaryViewController.xib */,
+				6D2855ED171700DA0066BAEC /* BGTextEditorViewController.h */,
+				6D2855EE171700DA0066BAEC /* BGTextEditorViewController.m */,
+				6D2855EF171700DB0066BAEC /* BGTextEditorViewController.xib */,
+				6D280927171942A400DFE95C /* BGDiarySaveViewController.h */,
+				6D280928171942A400DFE95C /* BGDiarySaveViewController.m */,
+				6D280929171942A400DFE95C /* BGDiarySaveViewController.xib */,
 			);
 			path = NancyShow;
 			sourceTree = "<group>";
@@ -391,7 +441,20 @@
 		6D8E8271170C109F00B1B45F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6D2809401719A2BB00DFE95C /* editor_tv.png */,
+				6D2809341719511A00DFE95C /* logo_share_facebook.png */,
+				6D2809351719511A00DFE95C /* logo_share_facebook@2x.png */,
+				6D2809361719511A00DFE95C /* logo_share_twitter.png */,
+				6D2809371719511A00DFE95C /* logo_share_twitter@2x.png */,
+				6D28093017194A9800DFE95C /* btn_forgetpassword_a.png */,
+				6D28093117194A9800DFE95C /* btn_forgetpassword_a@2x.png */,
+				6D3F0CF3171ADDC300C7BA7F /* btn_forgetpassword_b.png */,
+				6D3F0CF4171ADDC300C7BA7F /* btn_forgetpassword_b@2x.png */,
+				6D28092C1719474300DFE95C /* logo_share_sinaweibo.png */,
+				6D28092D1719474300DFE95C /* logo_share_sinaweibo@2x.png */,
 				6D2AEB2A171311FD005CDE03 /* loading.jpg */,
+				6D2855F2171703620066BAEC /* color_bottombar_sliderview.png */,
+				6D2855F3171703620066BAEC /* color_bottombar_sliderview@2x.png */,
 				6DCD00841712AE84003A7B9B /* btn_cancel.png */,
 				6DCD00851712AE84003A7B9B /* btn_cancel@2x.png */,
 				6DCD00861712AE84003A7B9B /* btn_ok.png */,
@@ -599,6 +662,21 @@
 				6D86BB1617155FF800ABC481 /* custom-cancel-normal@2x.png in Resources */,
 				6D86BB1717155FF800ABC481 /* custom-dialog-background.png in Resources */,
 				6D86BB1817155FF800ABC481 /* custom-dialog-background@2x.png in Resources */,
+				6D2855F1171700DB0066BAEC /* BGTextEditorViewController.xib in Resources */,
+				6D2855F4171703620066BAEC /* color_bottombar_sliderview.png in Resources */,
+				6D2855F5171703620066BAEC /* color_bottombar_sliderview@2x.png in Resources */,
+				6D28092B171942A400DFE95C /* BGDiarySaveViewController.xib in Resources */,
+				6D28092E1719474300DFE95C /* logo_share_sinaweibo.png in Resources */,
+				6D28092F1719474300DFE95C /* logo_share_sinaweibo@2x.png in Resources */,
+				6D28093217194A9800DFE95C /* btn_forgetpassword_a.png in Resources */,
+				6D28093317194A9800DFE95C /* btn_forgetpassword_a@2x.png in Resources */,
+				6D2809381719511A00DFE95C /* logo_share_facebook.png in Resources */,
+				6D2809391719511A00DFE95C /* logo_share_facebook@2x.png in Resources */,
+				6D28093A1719511A00DFE95C /* logo_share_twitter.png in Resources */,
+				6D28093B1719511A00DFE95C /* logo_share_twitter@2x.png in Resources */,
+				6D2809411719A2BC00DFE95C /* editor_tv.png in Resources */,
+				6D3F0CF5171ADDC300C7BA7F /* btn_forgetpassword_b.png in Resources */,
+				6D3F0CF6171ADDC300C7BA7F /* btn_forgetpassword_b@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +714,8 @@
 				6DBE632E1711BB2B0071C669 /* BGTplHomeViewController.m in Sources */,
 				6DCD0082171298B4003A7B9B /* BGDiaryViewController.m in Sources */,
 				6D86BB0C17155F0800ABC481 /* AHAlertView.m in Sources */,
+				6D2855F0171700DB0066BAEC /* BGTextEditorViewController.m in Sources */,
+				6D28092A171942A400DFE95C /* BGDiarySaveViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

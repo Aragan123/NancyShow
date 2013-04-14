@@ -12,7 +12,7 @@ static BGGlobalData *instance = nil;
 
 @implementation BGGlobalData
 @synthesize galleryBooks, galleryURI, onlineGalleryBooks, diaryTemplates;
-@synthesize diaryTplImage, onlineDiaryTemplates;
+@synthesize diaryTplImage, diaryTplDetail, onlineDiaryTemplates;
 
 #pragma mark -
 #pragma mark Data File Read & Write
@@ -112,6 +112,7 @@ static BGGlobalData *instance = nil;
 	[diaryTemplates release];
     
     [diaryTplImage release];
+    [diaryTplDetail release];
     [onlineDiaryTemplates release];
     
 	[super release];

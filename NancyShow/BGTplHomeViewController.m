@@ -265,12 +265,16 @@ const int ONLINE_TPL_INDEX = 1;
     }
     
     NSString *tplImageURI = [templateObjects objectAtIndex:atIndex];
+    NSArray *tplDetails = [self.templateData objectForKey:@"TemplateDetails"];
+    [[BGGlobalData sharedData] setDiaryTplDetail:[tplDetails objectAtIndex:atIndex]]; // set tpl detail
+    
     NSLog(@"diary template image URI: %@", tplImageURI);
     
     if (!self.isOnlineTpl){
         // local template
         UIImage *tplImage = [UIImage imageWithContentsOfFile:tplImageURI];
-        [[BGGlobalData sharedData] setDiaryTplImage:tplImage];
+        [[BGGlobalData sharedData] setDiaryTplImage:tplImage]; // set diary template image
+        
         
         [delegate switchViewTo:kPageDiary fromView:kPageDiaryHome];
     }else{

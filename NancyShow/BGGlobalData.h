@@ -21,6 +21,7 @@
     NSDictionary *onlineDiaryTemplates;
     
     UIImage *diaryTplImage; // used to share between diary page and other pages
+    NSArray *diaryTplDetail;
 }
 
 @property (nonatomic, retain) NSArray *galleryBooks;
@@ -31,6 +32,7 @@
 @property (nonatomic, retain) NSDictionary *onlineDiaryTemplates;
 
 @property (nonatomic, retain) UIImage *diaryTplImage;
+@property (nonatomic, retain) NSArray *diaryTplDetail;
 
 + (BGGlobalData *) sharedData;
 -(void) loadSettingsDataFile;

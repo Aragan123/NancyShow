@@ -8,14 +8,35 @@
 
 #import <UIKit/UIKit.h>
 #import "BGPageSwitcherDelegate.h"
+#import "BGDiarySaveViewController.h"
 
-@interface BGDiaryViewController : UIViewController{
+@class SLComposeViewController;
+@class AKSegmentedControl;
+@class BGTextEditorViewController;
+
+@interface BGDiaryViewController : UIViewController<UITextViewDelegate, BGDiarySaveViewControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
+    BOOL isEdited;
     UIImageView *tplImageView;
     IBOutlet UIView *tplMainView;
+    IBOutlet UIView *bottomBarView;
+    IBOutlet UIImageView *bottomBarImgView;
+    
+    NSArray *tplDetail;
+    NSMutableArray *textViews;
+    int lastSelectedTVIndex;
+    
+    SLComposeViewController *slComposerSheet;
+    UIImage *savedImage;
+    AKSegmentedControl *segmentedControl;
+    
+    BGTextEditorViewController *textEditor;
 }
 
-@property (nonatomic,retain) id<BGPageSwitcherDelegate> delegate;
+@property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
+@property (nonatomic) BOOL isEdited;
+@property (nonatomic, retain) UIImage *savedImage;
+@property (nonatomic, retain) BGTextEditorViewController *textEditor;
 
 - (void) reloadImageView;
 

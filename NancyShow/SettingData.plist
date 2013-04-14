@@ -18,6 +18,39 @@
 			<string>1_thumb.jpg</string>
 			<string>2_thumb.jpg</string>
 		</array>
+		<key>TemplateDetails</key>
+		<array>
+			<array>
+				<dict>
+					<key>tvFrame</key>
+					<string>{{650,40},{300,380}}</string>
+					<key>tvBackgroundColor</key>
+					<string>,</string>
+				</dict>
+				<dict>
+					<key>tvFrame</key>
+					<string>{{50,150},{250,300}}</string>
+					<key>tvBackgroundColor</key>
+					<string>,</string>
+				</dict>
+			</array>
+			<array>
+				<dict>
+					<key>tvFrame</key>
+					<string>0,0,200,300</string>
+					<key>tvBackgroundColor</key>
+					<string>,</string>
+				</dict>
+			</array>
+			<array>
+				<dict>
+					<key>tvFrame</key>
+					<string>0,0,200,300</string>
+					<key>tvBackgroundColor</key>
+					<string>,</string>
+				</dict>
+			</array>
+		</array>
 	</dict>
 	<key>OLGalleryBooks</key>
 	<array>

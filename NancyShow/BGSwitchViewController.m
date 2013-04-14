@@ -146,7 +146,6 @@
             self.diaryViewController = controller;
             [controller release];
         }
-//        [self.diaryViewController reloadImageView];
         self.diaryViewController.delegate = self;
     }
     
