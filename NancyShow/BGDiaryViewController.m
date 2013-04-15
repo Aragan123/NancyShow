@@ -156,14 +156,21 @@
     [segmentedControl sendActionsForControlEvents:UIControlEventValueChanged];
     
     // when ok clicked, show share to Weibo 
-    self.savedImage = [self screenshot:tplMainView]; // screen shot
+
     
     if (isEdited) {
+        self.savedImage = [self screenshot:tplMainView]; // screen shot only has some change
         UIImageWriteToSavedPhotosAlbum(self.savedImage, nil, nil, nil); // save to photo album
         isEdited=NO;
+        [self displayModalView]; // display sharing option view
+    }else{
+        //no change, then display a warning
+        AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"You have not done any change" message:nil];
+        [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
+        [alert setCancelButtonTitle:@"OK" block:nil];
+        [alert show];
+        [alert release];
     }
-    
-    [self displayModalView];
 
 }
 
@@ -173,9 +180,9 @@
     // lazy load text editor view
     if (self.textEditor == nil) {
         self.textEditor = [[BGTextEditorViewController alloc] initWithNibName:@"BGTextEditorViewController" bundle:nil];
-        [tplMainView addSubview:self.textEditor.view];
         self.textEditor.delegate = self;
         self.textEditor.view.frame = CGRectMake(0, self.view.frame.size.height, tplMainView.frame.size.width, 52);
+        [self.view insertSubview:self.textEditor.view belowSubview:bottomBarView];
     }
 
     if ([[textSeg selectedIndexes] count] == 0) {
@@ -198,7 +205,7 @@
         if (lastSelectedTVIndex == kTextNotSelected) {
             // first time to display text editor view
             [UIView animateWithDuration:0.2f animations:^{
-                self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, tplMainView.frame.size.height-55*0.5);
+                self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, tplMainView.frame.size.height-52*0.5);
             }];
             
         }else{
@@ -210,7 +217,7 @@
                 self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height);
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.2f animations:^{
-                     self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, tplMainView.frame.size.height-55*0.5);
+                     self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, tplMainView.frame.size.height-52*0.5);
                 }];
             }];
         }
