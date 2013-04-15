@@ -178,7 +178,7 @@ const int ONLINE_TPL_INDEX = 1;
     int totalGategories = 2;
     NSMutableArray *buttonArray = [NSMutableArray arrayWithCapacity:totalGategories];
     for (int i=0; i<totalGategories; i++) {
-        UIButton *button = [[UIButton alloc] init];
+        UIButton *button = [[[UIButton alloc] init] autorelease];
         //        [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 5.0)];
         
         NSString *buttonTitle = @"Templates";

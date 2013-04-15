@@ -9,12 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "BGPageSwitcherDelegate.h"
 #import "BGDiarySaveViewController.h"
+#import "BGTextEditorViewController.h"
 
 @class SLComposeViewController;
 @class AKSegmentedControl;
-@class BGTextEditorViewController;
+@class BGTextView;
 
-@interface BGDiaryViewController : UIViewController<UITextViewDelegate, BGDiarySaveViewControllerDelegate>{
+#define kTextNotSelected 100
+#define kMaxTextFontSize 42
+#define kMinTextFontSize 8
+
+@interface BGDiaryViewController : UIViewController<UITextViewDelegate, BGDiarySaveViewControllerDelegate, BGTextEditorViewControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     BOOL isEdited;
     UIImageView *tplImageView;

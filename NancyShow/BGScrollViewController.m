@@ -83,7 +83,7 @@
         imageView.image = [UIImage imageWithContentsOfFile:imageURI];
     }else{
         // online gallery
-        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
+        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading_b.jpg"]];
     }
     
     [view addSubview:imageView];

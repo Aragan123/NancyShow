@@ -10,11 +10,12 @@
 
 #ifndef kPageMain
 #define kPageMain 0
-#define kPageDiaryHome 1
-#define kPageGallery 2
+#define kPageGallery 1
+#define kPageOnlineGallery 2
 #define kPageAbout 3
-#define kPageDiary 4
-#define kPageOnlineGallery 5
+#define kPageDiaryHome 4
+#define kPageDiary 5
+
 #endif
 
 #define kOnlineGalleryURI @"http://122.70.133.214/GalleryNancy/GetGalleryData.php?FileType=plist"
@@ -22,11 +23,12 @@
 
 enum enumPage {
 	pageMain =0,
-	pageDiaryHome,
 	pageGallery,
-    pageAbout,
-    pageDiary,
     pageOnlineGallery,
+    pageAbout,
+    pageDiaryHome,
+    pageDiary,
+
 }PageNumber;
 
 

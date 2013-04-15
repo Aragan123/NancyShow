@@ -82,7 +82,7 @@
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
-						<int key="IBUITag">1</int>
+						<int key="IBUITag">4</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
@@ -106,7 +106,7 @@
 						<reference key="NSNextKeyView" ref="452567117"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
-						<int key="IBUITag">2</int>
+						<int key="IBUITag">1</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
@@ -130,7 +130,7 @@
 						<reference key="NSNextKeyView" ref="1027653330"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
-						<int key="IBUITag">5</int>
+						<int key="IBUITag">2</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>

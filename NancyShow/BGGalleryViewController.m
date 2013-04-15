@@ -198,7 +198,7 @@
     int totalGalleries = [galleries count];
     NSMutableArray *buttonArray = [NSMutableArray arrayWithCapacity:totalGalleries];
     for (int i=0; i<totalGalleries; i++) {
-        UIButton *button = [[UIButton alloc] init];
+        UIButton *button = [[[UIButton alloc] init] autorelease];
 //        [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 5.0)];
         
         // get buttontitle from plist data
@@ -215,21 +215,15 @@
         if (i==0) {
             // first one, must use left image
             [button setBackgroundImage:buttonBackgroundImageLeft forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
             [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateSelected];
-            [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:(UIControlStateHighlighted|UIControlStateSelected)];
         }else if (i == totalGalleries-1){
             // last one, must use right image
             [button setBackgroundImage:buttonBackgroundImageRight forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
             [button setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateSelected];
-            [button setBackgroundImage:buttonBackgroundImagePressedRight forState:(UIControlStateHighlighted|UIControlStateSelected)];
         }else{
             // rest use middle image
             [button setBackgroundImage:buttonBackgroundImageCenter forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedCenter forState:UIControlStateHighlighted];
             [button setBackgroundImage:buttonBackgroundImagePressedCenter forState:UIControlStateSelected];
-            [button setBackgroundImage:buttonBackgroundImagePressedCenter forState:(UIControlStateHighlighted|UIControlStateSelected)];
         }
 
 

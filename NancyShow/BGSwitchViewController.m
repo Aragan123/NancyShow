@@ -7,6 +7,7 @@
 //
 
 #import "BGSwitchViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import "BGGlobalData.h"
 #import "BGViewController.h"
 #import "BGAboutViewController.h"
@@ -73,14 +74,17 @@
 #pragma mark -
 #pragma mark PageSwitcher delegate Functons
 -(void) switchViewTo: (int)toPage fromView:(int)fromPage  {
-	[UIView beginAnimations:@"PageSwitch" context:nil];
-	[UIView setAnimationDuration:0.75];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:0.55f];
+    [animation setType:kCATransitionReveal];
+    [animation setFillMode:kCAFillModeForwards];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    
 	// set different transition types
 	if (toPage > fromPage) {
-		[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
+        [animation setSubtype:kCATransitionFromTop];
 	}else {
-		[UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.view cache:YES];
+        [animation setSubtype:kCATransitionFromBottom];
 	}
     
     if (toPage == kPageMain) {
@@ -163,8 +167,8 @@
 	[fromViewController viewDidDisappear:YES];
 	[toViewController viewDidAppear:YES];
     
-	// commit animation
-	[UIView commitAnimations];
+	// commit/start animation
+    [self.view.layer addAnimation:animation forKey:@"Switch View Animation"];
     
 }
 

@@ -12,10 +12,9 @@
 #import <Accounts/Accounts.h>
 
 #import "BGGlobalData.h"
+#import "BGTextView.h"
 #import "AHAlertView.h"
-#import "BGDiarySaveViewController.h"
 #import "AKSegmentedControl.h"
-#import "BGTextEditorViewController.h"
 
 @interface BGDiaryViewController ()
 
@@ -29,9 +28,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        tplDetail = [[BGGlobalData sharedData] diaryTplDetail];
-        textViews = [[NSMutableArray alloc] initWithCapacity:tplDetail.count];
+        tplDetail = [[[BGGlobalData sharedData] diaryTplDetail] retain];
+        textViews = [[[NSMutableArray alloc] initWithCapacity:tplDetail.count] retain];
         isEdited = NO;
+        lastSelectedTVIndex=kTextNotSelected;
     }
     return self;
 }
@@ -50,11 +50,9 @@
     
     // add Text View(s) and icons
     for (int i=0; i<tplDetail.count; i++){
-//    for (NSDictionary *tvData in tplDetail){
         NSString *tvFrameStr = [[tplDetail objectAtIndex:i] objectForKey:@"tvFrame"];
-//        NSString *tvBackgroundColorStr = [tvData objectForKey:@"tvBackgroundColor"];
         
-        UITextView *tv = [[[UITextView alloc] initWithFrame:CGRectFromString(tvFrameStr)] autorelease];
+        BGTextView *tv = [[[BGTextView alloc] initWithFrame:CGRectFromString(tvFrameStr)] autorelease];
         [self setupTextViewByDefaultValue:&tv atIndex:i]; // pass by reference
         [tplMainView addSubview:tv];
         
@@ -71,6 +69,7 @@
     [self setupSegmentedControl];
     
     [bottomBarView insertSubview:segmentedControl aboveSubview:bottomBarImgView];
+
     
 }
 
@@ -128,8 +127,11 @@
 #pragma mark -
 #pragma mark Action Methods
 - (IBAction)clickCancelButton:(id)sender {
-    // when cancel click, show a alert before return back to template home page
+    // de-select all text segControl buttons and dismiss text editor
+    [segmentedControl setSelectedIndexes:[NSIndexSet indexSet]];
+    [segmentedControl sendActionsForControlEvents:UIControlEventValueChanged];
     
+    // when cancel click, show a alert before return back to template home page
     if (nil == delegate) {
         return;
     }
@@ -149,11 +151,11 @@
 }
 
 - (IBAction)clickOkButton:(id)sender {
-    // when ok clicked, show share to Weibo
-    if (nil == delegate) {
-        return;
-    }
+    // de-select all text segControl buttons and dismiss text editor
+    [segmentedControl setSelectedIndexes:[NSIndexSet indexSet]];
+    [segmentedControl sendActionsForControlEvents:UIControlEventValueChanged];
     
+    // when ok clicked, show share to Weibo 
     self.savedImage = [self screenshot:tplMainView]; // screen shot
     
     if (isEdited) {
@@ -168,52 +170,59 @@
 - (void) segTextViewController: (id) sender{
     AKSegmentedControl *textSeg = (AKSegmentedControl *)sender;
     
-    // show text editor view
+    // lazy load text editor view
     if (self.textEditor == nil) {
         self.textEditor = [[BGTextEditorViewController alloc] initWithNibName:@"BGTextEditorViewController" bundle:nil];
         [tplMainView addSubview:self.textEditor.view];
-//        self.textEditor.delegate = self;
-        self.textEditor.view.frame = CGRectMake(0, tplMainView.frame.size.height, tplMainView.frame.size.width, 52);
-//        self.textEditor.view.center = CGPointMake(tplMainView.frame.size.width*0.5, tplMainView.frame.size.height-55*0.5);
-        
+        self.textEditor.delegate = self;
+        self.textEditor.view.frame = CGRectMake(0, self.view.frame.size.height, tplMainView.frame.size.width, 52);
     }
-    
-    
+
     if ([[textSeg selectedIndexes] count] == 0) {
         NSLog(@"Text Seg is de-selected");
-        // remove border of text view
-        UITextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
-        tv.layer.borderWidth = 0.0f;
-        // dismiss text editor view
-        [UIView animateWithDuration:0.3f animations:^{
-            self.textEditor.view.center = CGPointMake(tplMainView.frame.size.width*0.5, tplMainView.frame.size.height+55*0.5);
-        }];
+        [self dismissTextEditorView];
         
-    }else{    
+    }else{        
         int selectedTextSegIndex = [[textSeg selectedIndexes] firstIndex];
         NSLog(@"TextSegmentedControl: selected index %i", selectedTextSegIndex);
-        // show border on text view
-        UITextView *tv = [textViews objectAtIndex:selectedTextSegIndex];
-        tv.layer.borderWidth = 3.0f;
-        if (selectedTextSegIndex != lastSelectedTVIndex) {
-            UITextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
-            tv.layer.borderWidth = 0.0f;
-        }
-        lastSelectedTVIndex = selectedTextSegIndex;
+        // show border on selected text view
+        BGTextView *tv = [textViews objectAtIndex:selectedTextSegIndex];
+        tv.layer.borderWidth = 2.5f;
+        //set text editor's segmented control values
+        [self.textEditor updateAlignmentSegContol:tv.textAlignment];
+        [self.textEditor updateFontColorSegControl:tv.fontColorIndex];
+        [self.textEditor updateFontSegControl:tv.fontIndex];
+
         
         // pop up text editor
-        [UIView animateWithDuration:0.8f animations:^{
-            self.textEditor.view.center = CGPointMake(tplMainView.frame.size.width*0.5, tplMainView.frame.size.height+55*0.5);
-            self.textEditor.view.center = CGPointMake(tplMainView.frame.size.width*0.5, tplMainView.frame.size.height-55*0.5);
-        }];
-
+        if (lastSelectedTVIndex == kTextNotSelected) {
+            // first time to display text editor view
+            [UIView animateWithDuration:0.2f animations:^{
+                self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, tplMainView.frame.size.height-55*0.5);
+            }];
+            
+        }else{
+            // has previous text editor displayed
+            BGTextView *lastTextView = [textViews objectAtIndex:lastSelectedTVIndex];
+            lastTextView.layer.borderWidth = 0.0f;
+            
+            [UIView animateWithDuration:0.3f animations:^{
+                self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.2f animations:^{
+                     self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, tplMainView.frame.size.height-55*0.5);
+                }];
+            }];
+        }
+        
+        lastSelectedTVIndex = selectedTextSegIndex;
 
     }
 }
 
 #pragma mark -
 #pragma mark Private Methods
-- (void) setupTextViewByDefaultValue: (UITextView **) tv atIndex: (int) index{
+- (void) setupTextViewByDefaultValue: (BGTextView **) tv atIndex: (int) index{
     (*tv).tag = index;
     (*tv).delegate = self;
     (*tv).backgroundColor= [UIColor lightGrayColor];
@@ -224,6 +233,23 @@
     [(*tv).layer setBorderColor:[[UIColor blueColor] CGColor]];
     [(*tv).layer setBorderWidth:0.0f]; // initially no border
     
+    (*tv).fontIndex = 1;
+    (*tv).fontSize = 18;
+    (*tv).fontColorIndex = 1;
+}
+
+// used to dismiss text editor view if has any
+- (void) dismissTextEditorView{
+    if (lastSelectedTVIndex != kTextNotSelected) {
+        // means text editor is show
+        BGTextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
+        tv.layer.borderWidth = 0.0f; // remove border
+        lastSelectedTVIndex = kTextNotSelected;
+        // dismiss text editor view
+        [UIView animateWithDuration:0.1f animations:^{
+            self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height+52*0.5);
+        }];
+    }
 }
 
 // used to get screenshot
@@ -342,11 +368,10 @@
                 break;
         }
         
-        if (result != SLComposeViewControllerResultCancelled)
-        {            
+        if (result != SLComposeViewControllerResultCancelled){
             AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"Weibo Message" message:output];
             [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-            [alert setCancelButtonTitle:@"OK" block:^(void){
+            [alert setCancelButtonTitle:@"OK" block:^{
                 [self.view endEditing:YES];
             }];
             [alert show];
@@ -419,17 +444,50 @@
 }
 
 -(void) clickSaveViewCloseButton{
-//    [self dismissModalViewControllerAnimated:YES];
+    //    [self dismissModalViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -
+#pragma mark BGTextEditorViewController delegate methods
+- (void) updateFontName: (UIFont*) newFont withFontIndex: (int) index{
+    BGTextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
+    [tv setFont:[newFont fontWithSize:tv.fontSize]];
+    tv.fontIndex = index;
+}
+
+- (void) updateTextAlignment: (int) index{
+    BGTextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
+    tv.textAlignment = index;
+}
+
+- (void) updateFontSize: (int) index{
+    BGTextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
+    int fSize = tv.fontSize;
+    
+    if (0==index && (fSize-1)>=kMinTextFontSize) {
+        fSize--; //smaller
+     }else if (1==index && (fSize+1)<=kMaxTextFontSize){
+         fSize++; // larger
+     }else return;
+    
+    [tv setFont:[tv.font fontWithSize:fSize]];
+    tv.fontSize = fSize;
+
+}
+
+- (void) updateFontColor: (UIColor*) newColor withColorIndex: (int) index{
+    NSLog(@"updateFontColor:newColor is selected");
+    BGTextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
+    tv.textColor = newColor;
+    tv.fontColorIndex = index;
+}
+
+
+#pragma mark -
 #pragma mark Segmented Control Methods
 - (void) setupSegmentedControl{
-    [segmentedControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
-    
-    //    [segmentedControl setSeparatorImage:[UIImage imageNamed:@"sep_border_material.png.png"]];
-    
+    [segmentedControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];    
     // normal images
     UIImage *buttonBackgroundImageLeft = [[UIImage imageNamed:@"btn_left_a.png"]
                                           resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
@@ -448,7 +506,7 @@
     int totalTpl = [tplDetail count];
     NSMutableArray *buttonArray = [NSMutableArray arrayWithCapacity:totalTpl];
     for (int i=0; i<totalTpl; i++) {
-        UIButton *button = [[UIButton alloc] init];
+        UIButton *button = [[[UIButton alloc] init] autorelease];
         //        [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 5.0)];
 
         NSString *buttonTitle = [NSString stringWithFormat:@"Text %i", i+1];
@@ -461,21 +519,15 @@
         if (i==0) {
             // first one, must use left image
             [button setBackgroundImage:buttonBackgroundImageLeft forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
             [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateSelected];
-            [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:(UIControlStateHighlighted|UIControlStateSelected)];
         }else if (i == totalTpl-1){
             // last one, must use right image
             [button setBackgroundImage:buttonBackgroundImageRight forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
             [button setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateSelected];
-            [button setBackgroundImage:buttonBackgroundImagePressedRight forState:(UIControlStateHighlighted|UIControlStateSelected)];
         }else{
             // rest use middle image
             [button setBackgroundImage:buttonBackgroundImageCenter forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedCenter forState:UIControlStateHighlighted];
             [button setBackgroundImage:buttonBackgroundImagePressedCenter forState:UIControlStateSelected];
-            [button setBackgroundImage:buttonBackgroundImagePressedCenter forState:(UIControlStateHighlighted|UIControlStateSelected)];
         }
         
         
