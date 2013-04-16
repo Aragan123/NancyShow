@@ -25,8 +25,14 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    
-    
+    // add background image
+//    UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//    iv.image = [UIImage imageNamed:@"menu_background.jpg"];
+//    [iv setContentMode:UIViewContentModeScaleAspectFill];
+//    
+//    [self.view addSubview:iv];
+//    [self.view sendSubviewToBack:iv];
+//    [iv release];
 }
 
 - (void)didReceiveMemoryWarning

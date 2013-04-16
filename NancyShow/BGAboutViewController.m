@@ -29,9 +29,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    UIImage *backgroundPattern = [UIImage imageNamed:@"beauty_background.png"]; // background color pattern
+    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundPattern];
     
     UIImage *bottomBarImage = [UIImage imageNamed:@"beauty_bottomBar.png"];
     CGSize imgSize = bottomBarImage.size;
+    
+    /* construct background view
+     */
+    UIImageView *backgroundImgView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-imgSize.height)] autorelease];
+    backgroundImgView.image = [UIImage imageNamed:@"bg_aboutMe.png"];
+    backgroundImgView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:backgroundImgView];
+    
+    /*
+     * construct bottom bar view
+     */
     UIView *bottomBarView = [[[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - imgSize.height, self.view.frame.size.width, imgSize.height)] autorelease];
     // add bottom background image
     UIImageView *bottomImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imgSize.width, imgSize.height)] autorelease];

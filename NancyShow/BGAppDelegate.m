@@ -27,6 +27,10 @@
     [application setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
     self.viewController = [[BGSwitchViewController alloc] init];
+    
+    // Insert delay of 5 seconds befor the splash screen disappers.
+    [NSThread sleepForTimeInterval:3.0f];
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
