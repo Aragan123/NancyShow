@@ -282,6 +282,7 @@
     BGDiarySaveViewController *modelViewController = [[BGDiarySaveViewController alloc] initWithNibName:@"BGDiarySaveViewController" bundle:nil];
     modelViewController.delegate = self;
     modelViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    modelViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self presentViewController:modelViewController animated:YES completion:nil];
     modelViewController.view.superview.bounds = CGRectMake(0,0, 400,  220);
 

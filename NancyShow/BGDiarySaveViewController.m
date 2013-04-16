@@ -41,6 +41,11 @@
     
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Overriden to allow landscape orientation only.
+	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
