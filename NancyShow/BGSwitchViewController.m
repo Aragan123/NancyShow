@@ -134,7 +134,7 @@
     
     else if (toPage == kPageDiaryHome) {
         NSLog(@"toPage = DiaryHomePage");
-        if (self.tplHomeViewController == nil) {
+        if (self.tplHomeViewController.view.subviews == nil) {
             BGTplHomeViewController *controller = [[BGTplHomeViewController alloc] initWithNibName:@"BGTplHomeViewController" bundle:nil];
                                                                                         
             self.tplHomeViewController = controller;

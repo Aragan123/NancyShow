@@ -26,9 +26,11 @@
     BGTableViewController *tableViewController;
 }
 
-@property (nonatomic, retain) id<BGPageSwitcherDelegate> delegate;
+@property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
 @property (nonatomic, assign) BOOL isOnlineTpl;
 @property (nonatomic, retain) NSDictionary *templateData;
+@property (nonatomic, retain) NSMutableArray *templateObjects;
+@property (nonatomic, retain) NSMutableArray *templateThumbnails;
 
 @property (nonatomic, retain) AKSegmentedControl *segControl;
 @property (nonatomic, retain) BGTableViewController *tableViewController;

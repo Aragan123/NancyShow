@@ -23,6 +23,7 @@ const int ONLINE_TPL_INDEX = 1;
 
 @implementation BGTplHomeViewController
 @synthesize delegate, isOnlineTpl, templateData, tableViewController, segControl;
+@synthesize templateObjects, templateThumbnails;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,19 +56,19 @@ const int ONLINE_TPL_INDEX = 1;
     self.segControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(0,0, 2*103, 44)];
     self.segControl.center = CGPointMake(bottomImageView.center.x, bottomImageView.center.y+3);
     
-    [segControl addTarget:self action:@selector(segmentedViewController:) forControlEvents:UIControlEventValueChanged];
-    [segControl setSegmentedControlMode:AKSegmentedControlModeSticky];
-    [segControl setSelectedIndex:0];
+    [self.segControl addTarget:self action:@selector(segmentedViewController:) forControlEvents:UIControlEventValueChanged];
+    [self.segControl setSegmentedControlMode:AKSegmentedControlModeSticky];
+    [self.segControl setSelectedIndex:0];
     [self setupSegmentedControl];
     
-    [bottomBarView insertSubview:segControl aboveSubview:bottomImageView];
+    [bottomBarView insertSubview:self.segControl aboveSubview:bottomImageView];
     
     // add table view
     self.tableViewController = [[BGTableViewController alloc] init];
     self.tableViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - bottomBarView.frame.size.height);
     self.tableViewController.delegate=self;
     self.tableViewController.isOnlineData = self.isOnlineTpl;
-    self.tableViewController.dataSource = templateThumbnails;
+    self.tableViewController.dataSource = self.templateThumbnails;
     
     [self.view addSubview: self.tableViewController.view];
 }
@@ -130,8 +131,8 @@ const int ONLINE_TPL_INDEX = 1;
     NSArray *tplFiles = [self.templateData objectForKey:@"TemplateNames"];
     NSArray *tplThumbnails = [self.templateData objectForKey:@"TemplateThumbnails"];
     
-    templateObjects = [[NSMutableArray alloc] initWithCapacity:[tplFiles count]];
-    templateThumbnails = [[NSMutableArray alloc] initWithCapacity:[tplFiles count]];
+    self.templateObjects = [[NSMutableArray alloc] initWithCapacity:[tplFiles count]];
+    self.templateThumbnails = [[NSMutableArray alloc] initWithCapacity:[tplFiles count]];
     
     for (int i=0; i<tplFiles.count; i++){
         NSString *tplFile;
@@ -148,8 +149,8 @@ const int ONLINE_TPL_INDEX = 1;
             tplThumbnail = [NSString stringWithFormat:@"%@/%@", tplURI, [tplThumbnails objectAtIndex:i]];
         }
         
-        [templateObjects addObject:tplFile];
-        [templateThumbnails addObject:tplThumbnail];
+        [self.templateObjects addObject:tplFile];
+        [self.templateThumbnails addObject:tplThumbnail];
     }
     
 }
