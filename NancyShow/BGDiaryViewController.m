@@ -232,7 +232,8 @@
 - (void) setupTextViewByDefaultValue: (BGTextView **) tv atIndex: (int) index{
     (*tv).tag = index;
     (*tv).delegate = self;
-    (*tv).backgroundColor= [UIColor lightGrayColor];
+//    (*tv).backgroundColor= [UIColor lightGrayColor];
+    (*tv).backgroundColor= [UIColor clearColor];
     (*tv).textColor = [UIColor blackColor];
     (*tv).font = [UIFont fontWithName:@"Arial" size:18.0];
     (*tv).scrollEnabled = NO;
@@ -494,54 +495,72 @@
 #pragma mark -
 #pragma mark Segmented Control Methods
 - (void) setupSegmentedControl{
-    [segmentedControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];    
-    // normal images
-    UIImage *buttonBackgroundImageLeft = [[UIImage imageNamed:@"btn_left_a.png"]
-                                          resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
-    UIImage *buttonBackgroundImageCenter = [[UIImage imageNamed:@"btn_middle_a.png"]
-                                            resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
-    UIImage *buttonBackgroundImageRight = [[UIImage imageNamed:@"btn_right_a.png"]
-                                           resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 4.0)];
-    // pressed images
-    UIImage *buttonBackgroundImagePressedLeft = [[UIImage imageNamed:@"btn_left_b.png"]
-                                                 resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
-    UIImage *buttonBackgroundImagePressedCenter = [[UIImage imageNamed:@"btn_middle_b.png"]
-                                                   resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
-    UIImage *buttonBackgroundImagePressedRight = [[UIImage imageNamed:@"btn_right_b.png"]
-                                                  resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 4.0)];
-    
+    [segmentedControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+
     int totalTpl = [tplDetail count];
     NSMutableArray *buttonArray = [NSMutableArray arrayWithCapacity:totalTpl];
-    for (int i=0; i<totalTpl; i++) {
+    
+    if (totalTpl == 1){
+        // when only a single text pad in template
         UIButton *button = [[[UIButton alloc] init] autorelease];
-        //        [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 5.0)];
-
-        NSString *buttonTitle = [NSString stringWithFormat:@"Text %i", i+1];
+        NSString *buttonTitle = [NSString stringWithFormat:@"Text 1"];
         [button setTitle:buttonTitle forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
         [button.titleLabel setFont:[UIFont fontWithName:@"Noteworthy-Bold" size:12.0]];
         [button setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
-        
-        if (i==0) {
-            // first one, must use left image
-            [button setBackgroundImage:buttonBackgroundImageLeft forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateSelected];
-        }else if (i == totalTpl-1){
-            // last one, must use right image
-            [button setBackgroundImage:buttonBackgroundImageRight forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateSelected];
-        }else{
-            // rest use middle image
-            [button setBackgroundImage:buttonBackgroundImageCenter forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedCenter forState:UIControlStateSelected];
-        }
-        
-        
-        
+        [button setBackgroundImage:[UIImage imageNamed:@"btn_single_a.png"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"btn_single_b.png"] forState:UIControlStateSelected];
+        // add button to mutable array
         [buttonArray addObject:button];
+        
+    }else{
+        // when there are more than one text pad
+        // normal images
+        UIImage *buttonBackgroundImageLeft = [[UIImage imageNamed:@"btn_left_a.png"]
+                                              resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
+        UIImage *buttonBackgroundImageCenter = [[UIImage imageNamed:@"btn_middle_a.png"]
+                                                resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
+        UIImage *buttonBackgroundImageRight = [[UIImage imageNamed:@"btn_right_a.png"]
+                                               resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 4.0)];
+        // pressed images
+        UIImage *buttonBackgroundImagePressedLeft = [[UIImage imageNamed:@"btn_left_b.png"]
+                                                     resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
+        UIImage *buttonBackgroundImagePressedCenter = [[UIImage imageNamed:@"btn_middle_b.png"]
+                                                       resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
+        UIImage *buttonBackgroundImagePressedRight = [[UIImage imageNamed:@"btn_right_b.png"]
+                                                      resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 4.0)];
+
+        for (int i=0; i<totalTpl; i++) {
+            UIButton *button = [[[UIButton alloc] init] autorelease];
+            //        [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 5.0)];
+
+            NSString *buttonTitle = [NSString stringWithFormat:@"Text %i", i+1];
+            [button setTitle:buttonTitle forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
+            [button.titleLabel setFont:[UIFont fontWithName:@"Noteworthy-Bold" size:12.0]];
+            [button setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+            
+            if (i==0) {
+                // first one, must use left image
+                [button setBackgroundImage:buttonBackgroundImageLeft forState:UIControlStateNormal];
+                [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateSelected];
+            }else if (i == totalTpl-1){
+                // last one, must use right image
+                [button setBackgroundImage:buttonBackgroundImageRight forState:UIControlStateNormal];
+                [button setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateSelected];
+            }else{
+                // rest use middle image
+                [button setBackgroundImage:buttonBackgroundImageCenter forState:UIControlStateNormal];
+                [button setBackgroundImage:buttonBackgroundImagePressedCenter forState:UIControlStateSelected];
+            }
+            // add button to mutable array
+            [buttonArray addObject:button];
+        }
     }
     
+    // finally add button array
     [segmentedControl setButtonsArray:buttonArray];
 }
 

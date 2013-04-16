@@ -29,7 +29,7 @@
 				</dict>
 				<dict>
 					<key>tvFrame</key>
-					<string>{{50,150},{250,300}}</string>
+					<string>{{50,250},{300,450}}</string>
 					<key>tvBackgroundColor</key>
 					<string>,</string>
 				</dict>
@@ -37,7 +37,7 @@
 			<array>
 				<dict>
 					<key>tvFrame</key>
-					<string>0,0,200,300</string>
+					<string>{{60,60},{540,600}}</string>
 					<key>tvBackgroundColor</key>
 					<string>,</string>
 				</dict>
@@ -45,7 +45,7 @@
 			<array>
 				<dict>
 					<key>tvFrame</key>
-					<string>0,0,200,300</string>
+					<string>{{30,30},{400, 200}}</string>
 					<key>tvBackgroundColor</key>
 					<string>,</string>
 				</dict>
