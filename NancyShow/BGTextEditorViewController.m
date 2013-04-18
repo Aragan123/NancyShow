@@ -24,8 +24,8 @@
         
         fontNames = [[NSArray arrayWithObjects:@"Noteworthy", @"Arial", @"Marion", @"Zapfino",nil] retain];
         fontArray = [[NSArray arrayWithObjects:[UIFont fontWithName:@"Noteworthy" size:12.0],
-                      [UIFont fontWithName:@"Arial" size:12.0],
-                      [UIFont fontWithName:@"Marion-Bold" size:14.0],
+                      [UIFont fontWithName:@"Arial" size:16.0],
+                      [UIFont fontWithName:@"Marion-Bold" size:16.0],
                       [UIFont fontWithName:@"Zapfino" size:9.0],nil] retain];
         fontColor = [[NSArray arrayWithObjects:[UIColor redColor], [UIColor blackColor],
                       [UIColor blueColor], [UIColor orangeColor], [UIColor greenColor], nil] retain];
@@ -63,7 +63,7 @@
     [self.view addSubview:self.fontSizeSegControl];
     
     // set up fontColorSegControl
-    self.fontColorSegControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(718, 4, 280, 44)];
+    self.fontColorSegControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(718, 4, 250, 44)];
     [self.fontColorSegControl addTarget:self action:@selector(selectFontColorSegControl:) forControlEvents:UIControlEventValueChanged];
     [self.fontColorSegControl setSegmentedControlMode:AKSegmentedControlModeSticky];
     [self.fontColorSegControl setSelectedIndex:0];
@@ -214,45 +214,27 @@
 -(void) setupAlignmentSegControl{
     // set up alignmentSegControl
     // normal images
-    UIImage *buttonBackgroundImageLeft = [[UIImage imageNamed:@"btn_left_sa.png"]
-                                          resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
-    UIImage *buttonBackgroundImageCenter = [[UIImage imageNamed:@"btn_middle_sa.png"]
-                                            resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
-    UIImage *buttonBackgroundImageRight = [[UIImage imageNamed:@"btn_right_sa.png"]
-                                           resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 4.0)];
+    UIImage *buttonBackgroundImageLeft = [UIImage imageNamed:@"btn_alignLeft_sa.png"];
+    UIImage *buttonBackgroundImageCenter = [UIImage imageNamed:@"btn_alignCentre_sa.png"];
+    UIImage *buttonBackgroundImageRight = [UIImage imageNamed:@"btn_alignRight_sa.png"];
     // pressed images
-    UIImage *buttonBackgroundImagePressedLeft = [[UIImage imageNamed:@"btn_left_sb.png"]
-                                                 resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
-    UIImage *buttonBackgroundImagePressedCenter = [[UIImage imageNamed:@"btn_middle_sb.png"]
-                                                   resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
-    UIImage *buttonBackgroundImagePressedRight = [[UIImage imageNamed:@"btn_right_sb.png"]
-                                                  resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 4.0)];
+    UIImage *buttonBackgroundImagePressedLeft = [UIImage imageNamed:@"btn_alignLeft_sb.png"];
+    UIImage *buttonBackgroundImagePressedCenter = [UIImage imageNamed:@"btn_alignCentre_sb.png"];
+    UIImage *buttonBackgroundImagePressedRight = [UIImage imageNamed:@"btn_alignRight_sb.png"];
     // define button array
     NSMutableArray *buttonArray = [NSMutableArray arrayWithCapacity:3];
     // left alignment button
     UIButton *buttonL = [[[UIButton alloc] init] autorelease];
-    [buttonL setTitle:@"L" forState:UIControlStateNormal];
-    [buttonL setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [buttonL setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
-    [buttonL setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
     [buttonL setBackgroundImage:buttonBackgroundImageLeft forState:UIControlStateNormal];
     [buttonL setBackgroundImage:buttonBackgroundImagePressedLeft forState:(UIControlStateSelected)];
     [buttonArray addObject:buttonL];
     // Centre alignment button
     UIButton *buttonC = [[[UIButton alloc] init] autorelease];
-    [buttonC setTitle:@"C" forState:UIControlStateNormal];
-    [buttonC setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [buttonC setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
-    [buttonC setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
     [buttonC setBackgroundImage:buttonBackgroundImageCenter forState:UIControlStateNormal];
     [buttonC setBackgroundImage:buttonBackgroundImagePressedCenter forState:(UIControlStateSelected)];
     [buttonArray addObject:buttonC];
     // Right alignment button
     UIButton *buttonR = [[[UIButton alloc] init] autorelease];
-    [buttonR setTitle:@"R" forState:UIControlStateNormal];
-    [buttonR setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [buttonR setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
-    [buttonR setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
     [buttonR setBackgroundImage:buttonBackgroundImageRight forState:UIControlStateNormal];
     [buttonR setBackgroundImage:buttonBackgroundImagePressedRight forState:(UIControlStateSelected)];
     [buttonArray addObject:buttonR];
@@ -309,8 +291,8 @@
     [buttonArray addObject:buttonRed];
     // Black button
     UIButton *buttonBalck = [[[UIButton alloc] init] autorelease];
-    [buttonBalck setImage:[UIImage imageNamed:@"btn_fc_black_sa.png"] forState:UIControlStateNormal];
-    [buttonBalck setImage:[UIImage imageNamed:@"btn_fc_black_sb.png"] forState:(UIControlStateSelected)];
+    [buttonBalck setImage:[UIImage imageNamed:@"btn_fc_purple_sa.png"] forState:UIControlStateNormal];
+    [buttonBalck setImage:[UIImage imageNamed:@"btn_fc_purple_sb.png"] forState:(UIControlStateSelected)];
     [buttonArray addObject:buttonBalck];
     // Blue button
     UIButton *buttonBlue = [[[UIButton alloc] init] autorelease];

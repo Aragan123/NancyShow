@@ -194,7 +194,7 @@
         NSLog(@"TextSegmentedControl: selected index %i", selectedTextSegIndex);
         // show border on selected text view
         BGTextView *tv = [textViews objectAtIndex:selectedTextSegIndex];
-        tv.layer.borderWidth = 2.5f;
+        tv.layer.borderWidth = 1.5f;
         //set text editor's segmented control values
         [self.textEditor updateAlignmentSegContol:tv.textAlignment];
         [self.textEditor updateFontColorSegControl:tv.fontColorIndex];
@@ -237,7 +237,7 @@
     (*tv).textColor = [UIColor blackColor];
     (*tv).font = [UIFont fontWithName:@"Arial" size:18.0];
     (*tv).scrollEnabled = NO;
-    [(*tv).layer setCornerRadius: 6];
+    [(*tv).layer setCornerRadius: 4];
     [(*tv).layer setBorderColor:[[UIColor blueColor] CGColor]];
     [(*tv).layer setBorderWidth:0.0f]; // initially no border
     
