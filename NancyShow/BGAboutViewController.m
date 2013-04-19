@@ -8,7 +8,8 @@
 
 #import "BGAboutViewController.h"
 
-@interface BGAboutViewController ()
+@interface BGAboutViewController (PrivateMethods)
+-(void) clickGoHomeButton: (id)sender;
 
 @end
 
@@ -37,26 +38,26 @@
     
     /* construct background view
      */
-    UIImageView *backgroundImgView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-imgSize.height)] autorelease];
+    UIImageView *backgroundImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-imgSize.height)];
     backgroundImgView.image = [UIImage imageNamed:@"bg_aboutMe.png"];
     backgroundImgView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:backgroundImgView];
+    [backgroundImgView release];
     
     /*
      * construct bottom bar view
      */
     UIView *bottomBarView = [[[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - imgSize.height, self.view.frame.size.width, imgSize.height)] autorelease];
     // add bottom background image
-    UIImageView *bottomImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imgSize.width, imgSize.height)] autorelease];
+    UIImageView *bottomImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imgSize.width, imgSize.height)];
     bottomImageView.image = bottomBarImage;
     [bottomBarView addSubview:bottomImageView];
+    [bottomImageView release];
     
     // add go home button
     UIImage *btnHomeImage = [UIImage imageNamed: @"btn_home_a.png"];
-    imgSize = btnHomeImage.size;
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [button setFrame:CGRectMake(self.view.frame.size.width - 100 + 25, self.view.frame.size.height - 57 + 10, 50, 50)];
-    [button setFrame:CGRectMake((bottomBarView.frame.size.width - 100 + imgSize.width*0.5), (bottomBarView.frame.size.height-imgSize.height+10)*0.5, imgSize.width, imgSize.height)];
+    [button setFrame:CGRectMake(954, 8, btnHomeImage.size.width, btnHomeImage.size.height)];
     [button setBackgroundImage:btnHomeImage forState:UIControlStateNormal];
     [button addTarget:self action:@selector(clickGoHomeButton:) forControlEvents:UIControlEventTouchUpInside];
     [bottomBarView addSubview:button];
@@ -82,7 +83,7 @@
 }
 
 #pragma mark -
-#pragma mark Priavet Methods
+#pragma mark Actions & Priavet Methods
 -(void) clickGoHomeButton: (id)sender{
     if (delegate != nil) {
         [delegate switchViewTo:kPageMain fromView:kPageAbout];

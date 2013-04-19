@@ -28,7 +28,7 @@
     
     self.viewController = [[BGSwitchViewController alloc] init];
     
-    // Insert delay of 5 seconds befor the splash screen disappers.
+    // Insert delay of a few seconds before splash screen disappers.
     [NSThread sleepForTimeInterval:3.0f];
     
     self.window.rootViewController = self.viewController;
@@ -69,7 +69,7 @@
 #pragma mark private methods
 - (void) beforeTerminate {
     // write global data to plist
-    
+    // no writing action at the moment
 }
 
 

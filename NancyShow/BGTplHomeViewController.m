@@ -22,8 +22,9 @@
 const int ONLINE_TPL_INDEX = 1;
 
 @implementation BGTplHomeViewController
-@synthesize delegate, isOnlineTpl, templateData, tableViewController, segControl;
-@synthesize templateObjects, templateThumbnails;
+@synthesize delegate;
+@synthesize bottomBarView, bottomImageView, tableViewController, segControl;
+@synthesize isOnlineTpl, templateData, templateObjects, templateThumbnails;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,23 +50,23 @@ const int ONLINE_TPL_INDEX = 1;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     UIImage *backgroundPattern = [UIImage imageNamed:@"beauty_background.png"];
     self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundPattern];
     
     // add segmented control to bottom
     self.segControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(0,0, 2*103, 44)];
-    self.segControl.center = CGPointMake(bottomImageView.center.x, bottomImageView.center.y+3);
-    
+    self.segControl.center = CGPointMake(self.bottomImageView.center.x, self.bottomImageView.center.y+3);
     [self.segControl addTarget:self action:@selector(segmentedViewController:) forControlEvents:UIControlEventValueChanged];
     [self.segControl setSegmentedControlMode:AKSegmentedControlModeSticky];
     [self.segControl setSelectedIndex:0];
     [self setupSegmentedControl];
     
-    [bottomBarView insertSubview:self.segControl aboveSubview:bottomImageView];
+    [self.bottomBarView insertSubview:self.segControl aboveSubview:self.bottomImageView];
     
     // add table view
     self.tableViewController = [[BGTableViewController alloc] init];
-    self.tableViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - bottomBarView.frame.size.height);
+    self.tableViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - self.bottomBarView.frame.size.height);
     self.tableViewController.delegate=self;
     self.tableViewController.isOnlineData = self.isOnlineTpl;
     self.tableViewController.dataSource = self.templateThumbnails;
@@ -80,36 +81,42 @@ const int ONLINE_TPL_INDEX = 1;
 }
 
 - (void) viewDidUnload{
-    templateData=nil;
-    tableViewController=nil;
-    templateThumbnails=nil;
-    templateObjects=nil;
-    segControl=nil;
-    
     [bottomBarView release];
     bottomBarView = nil;
     [bottomImageView release];
     bottomImageView = nil;
+    [tableViewController release];
+    tableViewController=nil;
+    [segControl release];
+    segControl = nil;
+    
+    [templateData release];
+    templateData=nil;
+    [templateThumbnails release];
+    templateThumbnails=nil;
+    [templateObjects release];
+    templateObjects=nil;
+
     [super viewDidUnload];
 }
 
 - (void) dealloc{
     delegate=nil;
     
-    [templateData release];
-    [tableViewController release];
-    [templateObjects release];
-    [templateThumbnails release];
-    
     [bottomBarView release];
+    [bottomImageView release];
+    [tableViewController release];
     [segControl release];
     
-    [bottomImageView release];
+    [templateData release];
+    [templateObjects release];
+    [templateThumbnails release];
+
     [super dealloc];
 }
 
 #pragma mark - 
-#pragma mark Control Methods and Private Methods
+#pragma mark Actions and Private Methods
 -(void) clickReturnHome:(id)sender{
     if (nil != delegate) {
         [delegate switchViewTo:kPageMain fromView:kPageDiaryHome];
@@ -155,6 +162,44 @@ const int ONLINE_TPL_INDEX = 1;
     
 }
 
+
+- (void)segmentedViewController:(id)sender
+{
+    AKSegmentedControl *segment = (AKSegmentedControl *)sender;
+    int selectedSegIndex = [[segment selectedIndexes] firstIndex];
+    NSLog(@"SegmentedControl: selected index %i", selectedSegIndex);
+    
+    if (selectedSegIndex == ONLINE_TPL_INDEX) {
+        // choose online template data
+        // Need to retrieve online template data p-list/json file file with a HTTP call
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"Connecting", @"Network Connecting") maskType:SVProgressHUDMaskTypeGradient]; // show HUD
+        // make http call
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:kOnlineTemplateURI]];
+        AFJSONRequestOperation *operation =
+        [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                            // when success, dissimiss HUD and reload data with online template p-list/json
+                                                            NSLog(@"Get JSON template list successfully, %@", JSON);
+                                                            [SVProgressHUD dismiss];
+                                                            [[BGGlobalData sharedData] setOnlineDiaryTemplates: [(NSDictionary*)JSON objectForKey:@"DiaryTemplates"]];
+                                                            
+                                                            [self reloadDataWith:[(NSDictionary*)JSON objectForKey:@"DiaryTemplates"] isOnlineTpl:YES];
+                                                        }
+                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                            NSLog(@"Network Error in online template home: %@", error);
+                                                            // when fail, show an alert and stay where it is
+                                                            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"NetworkFailure", @"Network Connection Error")];
+                                                        }];
+        [operation start];
+        
+    }else{
+        // choose offiline/local template data
+        [self reloadDataWith:[[BGGlobalData sharedData] diaryTemplates] isOnlineTpl:NO];
+    }
+    
+    
+}
+
 #pragma mark -
 #pragma mark Segmented Control set up
 - (void) setupSegmentedControl{
@@ -179,13 +224,12 @@ const int ONLINE_TPL_INDEX = 1;
     int totalGategories = 2;
     NSMutableArray *buttonArray = [NSMutableArray arrayWithCapacity:totalGategories];
     for (int i=0; i<totalGategories; i++) {
-        UIButton *button = [[[UIButton alloc] init] autorelease];
-        //        [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 5.0)];
-        
-        NSString *buttonTitle = @"Templates";
+        NSString *buttonTitle = NSLocalizedString(@"Templates", @"Local templates button");
         if (i==1) {
-            buttonTitle = @"More Online";
+            buttonTitle = NSLocalizedString(@"More Online", @"More templates online");
         }
+        
+        UIButton *button = [[[UIButton alloc] init] autorelease];
         [button setTitle:buttonTitle forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
@@ -195,15 +239,11 @@ const int ONLINE_TPL_INDEX = 1;
         if (i==0) {
             // first one, must use left image
             [button setBackgroundImage:buttonBackgroundImageLeft forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
             [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateSelected];
-            [button setBackgroundImage:buttonBackgroundImagePressedLeft forState:(UIControlStateHighlighted|UIControlStateSelected)];
         }else if (i == totalGategories-1){
             // last one, must use right image
             [button setBackgroundImage:buttonBackgroundImageRight forState:UIControlStateNormal];
-            [button setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
             [button setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateSelected];
-            [button setBackgroundImage:buttonBackgroundImagePressedRight forState:(UIControlStateHighlighted|UIControlStateSelected)];
         }
         
         [buttonArray addObject:button];
@@ -212,46 +252,6 @@ const int ONLINE_TPL_INDEX = 1;
     [segControl setButtonsArray:buttonArray];
 }
 
-- (void)segmentedViewController:(id)sender
-{
-    AKSegmentedControl *segment = (AKSegmentedControl *)sender;
-    int selectedSegIndex = [[segment selectedIndexes] firstIndex];
-    
-    //    NSLog(@"SegmentedControl: Selected Index %@", [segControl selectedIndexes]);
-    NSLog(@"SegmentedControl: selected index %i", selectedSegIndex);
-    
-    if (selectedSegIndex == ONLINE_TPL_INDEX) {
-        // choose online template data
-        // Need to retrieve online template data p-list/json file file with a HTTP call
-        [SVProgressHUD showWithStatus:@"Connecting" maskType:SVProgressHUDMaskTypeGradient]; // show HUD
-        // make http call
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:kOnlineTemplateURI]];
-        AFJSONRequestOperation *operation =
-        [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                            // when success, dissimiss HUD and reload data with online template p-list/json
-                                                            NSLog(@"Get JSON template list successfully, %@", JSON);
-//                                                            NSLog(@"New URI: %@", [(NSDictionary*)JSON objectForKey:@"TemplateURI"]);
-                                                            [SVProgressHUD dismiss];
-                                                            [[BGGlobalData sharedData] setOnlineDiaryTemplates: [(NSDictionary*)JSON objectForKey:@"DiaryTemplates"]];
-                                                            
-                                                            [self reloadDataWith:[(NSDictionary*)JSON objectForKey:@"DiaryTemplates"] isOnlineTpl:YES];
-                                                        }
-                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                                                            NSLog(@"Network Error in online template home: %@", error);
-                                                            // when fail, show an alert and stay where it is
-                                                            [SVProgressHUD showErrorWithStatus:@"Network Error"];
-                                                        }];
-        [operation start];
-        
-    }else{
-        // choose offiline/local template data
-        [self reloadDataWith:[[BGGlobalData sharedData] diaryTemplates]
-                 isOnlineTpl:NO];
-    }
-    
-    
-}
 
 
 #pragma mark -
@@ -280,7 +280,7 @@ const int ONLINE_TPL_INDEX = 1;
         [delegate switchViewTo:kPageDiary fromView:kPageDiaryHome];
     }else{
         // online template
-        [SVProgressHUD showWithStatus:@"Downloading" maskType:SVProgressHUDMaskTypeGradient]; // show running HUD
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"Downloading", @"Downloading Image") maskType:SVProgressHUDMaskTypeGradient]; // show running HUD
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:tplImageURI]];
         AFImageRequestOperation *operation =
             [AFImageRequestOperation  imageRequestOperationWithRequest:request
@@ -296,7 +296,7 @@ const int ONLINE_TPL_INDEX = 1;
                                                                     [delegate switchViewTo:kPageDiary fromView:kPageDiaryHome]; // redirect to diary edit page
                                                                 }
                                                                failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                                    [SVProgressHUD showErrorWithStatus:@"Fail to Download"];
+                                                                    [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"NetworkFailure", @"Fail to Download")];
                                                                 }
               ];
         

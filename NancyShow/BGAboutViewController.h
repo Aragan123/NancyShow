@@ -13,6 +13,6 @@
     id<BGPageSwitcherDelegate> delegate;
 }
 
-@property (nonatomic,retain) id<BGPageSwitcherDelegate> delegate;
+@property (nonatomic,assign) id<BGPageSwitcherDelegate> delegate;
 
 @end

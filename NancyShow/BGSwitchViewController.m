@@ -16,8 +16,9 @@
 #import "BGDiaryViewController.h"
 
 
-@interface BGSwitchViewController ()
+@interface BGSwitchViewController (PrivateMethods)
 
+-(UIViewController*) getSwitchViewController: (int) pageNum;
 @end
 
 @implementation BGSwitchViewController
@@ -51,14 +52,30 @@
     if (self.aboutPageViewController.view.subviews==nil) {
         self.aboutPageViewController=nil;
     }
+    if (self.galleryPageViewController.view.subviews==nil){
+        self.galleryPageViewController=nil;
+    }
+    if  (self.tplHomeViewController.view.subviews==nil){
+        self.tplHomeViewController=nil;
+    }
+    if (self.diaryViewController.view.subviews==nil){
+        self.diaryViewController=nil;
+    }
 }
 
 - (void) viewDidUnload{
+    [homePageViewController release];
     homePageViewController=nil;
+    [aboutPageViewController release];
     aboutPageViewController=nil;
+    [tplHomeViewController release];
     galleryPageViewController=nil;
+    [tplHomeViewController release];
     tplHomeViewController=nil;
+    [diaryViewController release];
     diaryViewController=nil;
+    
+    [super viewDidUnload];
 }
 
 - (void) dealloc{
@@ -90,7 +107,7 @@
     if (toPage == kPageMain) {
         NSLog(@"toPage = MainPage");
         
-        if (self.homePageViewController == nil) {
+        if (self.homePageViewController.view.superview == nil) {
             BGViewController *controller = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
             self.homePageViewController = controller;
             [controller release];
@@ -101,7 +118,7 @@
     else if (toPage == kPageAbout) {
         NSLog(@"toPage = AboutPage");
         
-        if (self.aboutPageViewController == nil) {
+        if (self.aboutPageViewController.view.superview == nil) {
             BGAboutViewController *controller = [[BGAboutViewController alloc] initWithNibName:@"BGAboutViewController" bundle:nil];
             self.aboutPageViewController = controller;
             [controller release];
@@ -134,7 +151,7 @@
     
     else if (toPage == kPageDiaryHome) {
         NSLog(@"toPage = DiaryHomePage");
-        if (self.tplHomeViewController.view.subviews == nil) {
+        if (self.tplHomeViewController.view.superview == nil) {
             BGTplHomeViewController *controller = [[BGTplHomeViewController alloc] initWithNibName:@"BGTplHomeViewController" bundle:nil];
                                                                                         
             self.tplHomeViewController = controller;

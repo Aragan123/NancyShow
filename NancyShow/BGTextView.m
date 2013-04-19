@@ -9,7 +9,7 @@
 #import "BGTextView.h"
 
 @implementation BGTextView
-@synthesize fontIndex=_fontIndex, fontColorIndex=_fontColorIndex, fontSize=_fontSize;
+@synthesize fontIndex, fontColorIndex, fontSize;
 
 - (id)initWithFrame:(CGRect)frame
 {

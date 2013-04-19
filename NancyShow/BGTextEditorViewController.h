@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class AKSegmentedControl;
+@class BGGlobalData;
 
 @protocol BGTextEditorViewControllerDelegate;
 
@@ -20,9 +21,7 @@
     AKSegmentedControl *fontSizeSegControl;
     AKSegmentedControl *fontColorSegControl;
     
-    NSArray *fontNames;
-    NSArray *fontArray;
-    NSArray *fontColor;
+    BGGlobalData *globalData;
 }
 
 @property (nonatomic, assign) id<BGTextEditorViewControllerDelegate> delegate;

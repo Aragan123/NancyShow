@@ -14,8 +14,7 @@
     
 }
 
-@property (nonatomic, retain) id<BGPageSwitcherDelegate> delegate;
-//@property (nonatomic, retain) IBOutlet UIButton *btnAbout;
+@property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
 
 - (IBAction)clickMenuButton:(id)sender;
 - (IBAction)clickOnlineGallery:(id)sender;

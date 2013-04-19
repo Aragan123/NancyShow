@@ -21,17 +21,19 @@
 @end
 
 @implementation BGDiaryViewController
-@synthesize delegate, isEdited, savedImage, textEditor;
+@synthesize delegate;
+@synthesize tplMainView, bottomBarView, bottomBarImgView, tplImageView, slComposerSheet, segmentedControl, textEditor;
+@synthesize isEdited, tplDetail, textViews, lastSelectedTVIndex, savedImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        tplDetail = [[[BGGlobalData sharedData] diaryTplDetail] retain];
-        textViews = [[[NSMutableArray alloc] initWithCapacity:tplDetail.count] retain];
-        isEdited = NO;
-        lastSelectedTVIndex=kTextNotSelected;
+        self.tplDetail = [[BGGlobalData sharedData] diaryTplDetail];
+        self.textViews = [[NSMutableArray alloc] initWithCapacity:self.tplDetail.count];
+        self.isEdited = NO;
+        self.lastSelectedTVIndex=kTextNotSelected;
     }
     return self;
 }
@@ -40,6 +42,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     UIImage *backgroundPattern = [UIImage imageNamed:@"beauty_background.png"];
     self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundPattern];
     
@@ -50,36 +53,35 @@
     
     // add Text View(s) and icons
     for (int i=0; i<tplDetail.count; i++){
-        NSString *tvFrameStr = [[tplDetail objectAtIndex:i] objectForKey:@"tvFrame"];
+        NSString *tvFrameStr = [[self.tplDetail objectAtIndex:i] objectForKey:@"tvFrame"];
         
-        BGTextView *tv = [[[BGTextView alloc] initWithFrame:CGRectFromString(tvFrameStr)] autorelease];
+        BGTextView *tv = [[BGTextView alloc] initWithFrame:CGRectFromString(tvFrameStr)];
         [self setupTextViewByDefaultValue:&tv atIndex:i]; // pass by reference
-        [tplMainView addSubview:tv];
-        
-        // add to mutable array
-        [textViews addObject:tv];
+        [self.tplMainView addSubview:tv]; // add view to main view
+        [self.tplMainView bringSubviewToFront:tv];
+        [self.textViews addObject:tv]; // add to mutable array to store it
+        [tv release];
     }
     
     // add and set Segmented Control in bottomBar View
-    segmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(0,0, tplDetail.count*100+6, 44)];
-    segmentedControl.center = CGPointMake(bottomBarImgView.center.x, bottomBarImgView.center.y+3);
+    self.segmentedControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(0,0, self.tplDetail.count*100+6, 44)];
+    self.segmentedControl.center = CGPointMake(self.bottomBarImgView.center.x, self.bottomBarImgView.center.y+3);
     
-    [segmentedControl addTarget:self action:@selector(segTextViewController:) forControlEvents:UIControlEventValueChanged];
-    [segmentedControl setSegmentedControlMode:AKSegmentedControlModeSingleSelectionable];
+    [self.segmentedControl addTarget:self action:@selector(segTextViewController:) forControlEvents:UIControlEventValueChanged];
+    [self.segmentedControl setSegmentedControlMode:AKSegmentedControlModeSingleSelectionable];
     [self setupSegmentedControl];
     
-    [bottomBarView insertSubview:segmentedControl aboveSubview:bottomBarImgView];
-
-    
+    [self.bottomBarView insertSubview:self.segmentedControl aboveSubview:self.bottomBarImgView];    
 }
 
 - (void) reloadImageView{
     UIImage *tplImg = [[BGGlobalData sharedData] diaryTplImage];
-    tplImageView = [[UIImageView alloc] initWithFrame:CGRectMake((tplMainView.frame.size.width-tplImg.size.width)*0.5,
-                                                                 (tplMainView.frame.size.height-tplImg.size.height)*0.5,
+    self.tplImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.tplMainView.frame.size.width-tplImg.size.width)*0.5,
+                                                                 (self.tplMainView.frame.size.height-tplImg.size.height)*0.5,
                                                                  tplImg.size.width, tplImg.size.height)];
-    [tplImageView setImage:tplImg];
-    [tplMainView addSubview:tplImageView];
+    [self.tplImageView setContentMode:UIViewContentModeCenter]; // content mode: centre
+    [self.tplImageView setImage:tplImg];
+    [self.tplMainView addSubview:self.tplImageView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,34 +95,44 @@
     
     [tplMainView release];
     tplMainView = nil;
-    tplDetail = nil;
-    textViews=nil;
-    
-    slComposerSheet=nil;
-    savedImage=nil;
-    segmentedControl=nil;
     [bottomBarView release];
     bottomBarView = nil;
     [bottomBarImgView release];
     bottomBarImgView = nil;
-    textEditor =nil;
+    [tplImageView release];
+    tplImageView=nil;
+    [slComposerSheet release];
+    slComposerSheet=nil;
+    [segmentedControl release];
+    segmentedControl=nil;
+    [textEditor release];
+    textEditor=nil;
+    
+    [tplDetail release];
+    tplDetail = nil;
+    [textViews release];
+    textViews=nil;
+    [savedImage release];
+    savedImage=nil;
+    
     [super viewDidUnload];
 }
 
 - (void) dealloc{
     delegate=nil;
-    [tplImageView release];
     
     [tplMainView release];
-    [tplDetail release];
-    [textViews release];
-    
-    [slComposerSheet release];
-    [savedImage release];
-    [segmentedControl release];
     [bottomBarView release];
     [bottomBarImgView release];
+    [tplImageView release];
+    [slComposerSheet release];
+    [segmentedControl release];
     [textEditor release];
+    
+    [tplDetail release];
+    [textViews release];
+    [savedImage release];
+
     [super dealloc];
 }
 
@@ -128,46 +140,44 @@
 #pragma mark Action Methods
 - (IBAction)clickCancelButton:(id)sender {
     // de-select all text segControl buttons and dismiss text editor
-    [segmentedControl setSelectedIndexes:[NSIndexSet indexSet]];
-    [segmentedControl sendActionsForControlEvents:UIControlEventValueChanged];
+    [self.segmentedControl setSelectedIndexes:[NSIndexSet indexSet]];
+    [self.segmentedControl sendActionsForControlEvents:UIControlEventValueChanged];
     
     // when cancel click, show a alert before return back to template home page
-    if (nil == delegate) {
+    if (nil == self.delegate) {
         return;
     }
-    if (!isEdited) {
-        [delegate switchViewTo:kPageDiaryHome fromView:kPageDiary]; // go back directly
+    if (!self.isEdited) {
+        [self.delegate switchViewTo:kPageDiaryHome fromView:kPageDiary]; // go back directly
         return;
     }
     
-    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"Discard Changes" message:@"Are you sure to discard your changes?"];
+    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:NSLocalizedString(@"Discard Changes Title", nil) message:NSLocalizedString(@"Discard Changes Message", nil)];
     [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-    [alert setCancelButtonTitle:@"Disard" block:^{
+    [alert setCancelButtonTitle:NSLocalizedString(@"Discard Yes Button", nil) block:^{
         [delegate switchViewTo:kPageDiaryHome fromView:kPageDiary]; // go back
 	}];
-	[alert addButtonWithTitle:@"No" block:nil];     //do nothing, just dismiss alert view
+	[alert addButtonWithTitle:NSLocalizedString(@"No Button", nil) block:nil];     //do nothing, just dismiss alert view
 	[alert show];
     [alert release];
 }
 
 - (IBAction)clickOkButton:(id)sender {
     // de-select all text segControl buttons and dismiss text editor
-    [segmentedControl setSelectedIndexes:[NSIndexSet indexSet]];
-    [segmentedControl sendActionsForControlEvents:UIControlEventValueChanged];
+    [self.segmentedControl setSelectedIndexes:[NSIndexSet indexSet]];
+    [self.segmentedControl sendActionsForControlEvents:UIControlEventValueChanged];
     
-    // when ok clicked, show share to Weibo 
-
-    
-    if (isEdited) {
-        self.savedImage = [self screenshot:tplMainView]; // screen shot only has some change
+    // when ok clicked, show share to Weibo
+    if (self.isEdited) {
+        self.savedImage = [self screenshot:self.tplMainView]; // screen shot only has some change
         UIImageWriteToSavedPhotosAlbum(self.savedImage, nil, nil, nil); // save to photo album
-        isEdited=NO;
+        self.isEdited=NO;
         [self displayModalView]; // display sharing option view
     }else{
         //no change, then display a warning
-        AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"You have not done any change" message:nil];
+        AHAlertView *alert = [[AHAlertView alloc] initWithTitle:NSLocalizedString(@"No Change Message", nil) message:nil];
         [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-        [alert setCancelButtonTitle:@"OK" block:nil];
+        [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:nil];
         [alert show];
         [alert release];
     }
@@ -181,8 +191,8 @@
     if (self.textEditor == nil) {
         self.textEditor = [[BGTextEditorViewController alloc] initWithNibName:@"BGTextEditorViewController" bundle:nil];
         self.textEditor.delegate = self;
-        self.textEditor.view.frame = CGRectMake(0, self.view.frame.size.height, tplMainView.frame.size.width, 52);
-        [self.view insertSubview:self.textEditor.view belowSubview:bottomBarView];
+        self.textEditor.view.frame = CGRectMake(0, self.view.frame.size.height, self.tplMainView.frame.size.width, 52);
+        [self.view insertSubview:self.textEditor.view belowSubview:self.bottomBarView];
     }
 
     if ([[textSeg selectedIndexes] count] == 0) {
@@ -193,7 +203,7 @@
         int selectedTextSegIndex = [[textSeg selectedIndexes] firstIndex];
         NSLog(@"TextSegmentedControl: selected index %i", selectedTextSegIndex);
         // show border on selected text view
-        BGTextView *tv = [textViews objectAtIndex:selectedTextSegIndex];
+        BGTextView *tv = [self.textViews objectAtIndex:selectedTextSegIndex];
         tv.layer.borderWidth = 1.5f;
         //set text editor's segmented control values
         [self.textEditor updateAlignmentSegContol:tv.textAlignment];
@@ -202,27 +212,27 @@
 
         
         // pop up text editor
-        if (lastSelectedTVIndex == kTextNotSelected) {
+        if (self.lastSelectedTVIndex == kTextNotSelected) {
             // first time to display text editor view
             [UIView animateWithDuration:0.2f animations:^{
-                self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, tplMainView.frame.size.height-52*0.5);
+                self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, self.tplMainView.frame.size.height-52*0.5);
             }];
             
         }else{
             // has previous text editor displayed
-            BGTextView *lastTextView = [textViews objectAtIndex:lastSelectedTVIndex];
+            BGTextView *lastTextView = [self.textViews objectAtIndex:self.lastSelectedTVIndex];
             lastTextView.layer.borderWidth = 0.0f;
             
             [UIView animateWithDuration:0.3f animations:^{
                 self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height);
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.2f animations:^{
-                     self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, tplMainView.frame.size.height-52*0.5);
+                     self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, self.tplMainView.frame.size.height-52*0.5);
                 }];
             }];
         }
         
-        lastSelectedTVIndex = selectedTextSegIndex;
+        self.lastSelectedTVIndex = selectedTextSegIndex;
 
     }
 }
@@ -238,7 +248,7 @@
     (*tv).font = [UIFont fontWithName:@"Arial" size:18.0];
     (*tv).scrollEnabled = NO;
     [(*tv).layer setCornerRadius: 4];
-    [(*tv).layer setBorderColor:[[UIColor blueColor] CGColor]];
+    [(*tv).layer setBorderColor:[[UIColor grayColor] CGColor]];
     [(*tv).layer setBorderWidth:0.0f]; // initially no border
     
     (*tv).fontIndex = 1;
@@ -248,11 +258,11 @@
 
 // used to dismiss text editor view if has any
 - (void) dismissTextEditorView{
-    if (lastSelectedTVIndex != kTextNotSelected) {
+    if (self.lastSelectedTVIndex != kTextNotSelected) {
         // means text editor is show
-        BGTextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
+        BGTextView *tv = [self.textViews objectAtIndex:self.lastSelectedTVIndex];
         tv.layer.borderWidth = 0.0f; // remove border
-        lastSelectedTVIndex = kTextNotSelected;
+        self.lastSelectedTVIndex = kTextNotSelected;
         // dismiss text editor view
         [UIView animateWithDuration:0.1f animations:^{
             self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height+52*0.5);
@@ -291,15 +301,15 @@
 }
 
 - (void)shareToFacebook {
-    [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+    [self.slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
         NSLog(@"start completion block");
         NSString *output;
         switch (result) {
             case SLComposeViewControllerResultCancelled:
-                output = @"Action Cancelled";
+                output = NSLocalizedString(@"Sharing Cancelled", nil);
                 break;
             case SLComposeViewControllerResultDone:
-                output = @"Post Successfull";
+                output = NSLocalizedString(@"Sharing Sucessful", nil);
                 break;
             default:
                 break;
@@ -308,7 +318,7 @@
         {
             AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"Facebook Message" message:output];
             [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-            [alert setCancelButtonTitle:@"OK" block:^(void){
+            [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:^(void){
                 [self.view endEditing:YES];
             }];
             [alert show];
@@ -318,24 +328,24 @@
     
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
     {
-        slComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        [slComposerSheet setInitialText:@""];
-        [slComposerSheet addImage:self.savedImage];
-        [slComposerSheet addURL:[NSURL URLWithString:@"http://www.brutegame.com"]];
-        [self presentViewController:slComposerSheet animated:YES completion:nil];
+        self.slComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        [self.slComposerSheet setInitialText:@""];
+        [self.slComposerSheet addImage:self.savedImage];
+        [self.slComposerSheet addURL:[NSURL URLWithString:@"http://www.brutegame.com"]];
+        [self presentViewController:self.slComposerSheet animated:YES completion:nil];
     }
 }
 
 - (void)shareToTwitter {    
-    [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+    [self.slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
         NSLog(@"start completion block");
         NSString *output;
         switch (result) {
             case SLComposeViewControllerResultCancelled:
-                output = @"Action Cancelled";
+                output = NSLocalizedString(@"Sharing Cancelled", nil);
                 break;
             case SLComposeViewControllerResultDone:
-                output = @"Post Successfull";
+                output = NSLocalizedString(@"Sharing Sucessful", nil);
                 break;
             default:
                 break;
@@ -344,7 +354,7 @@
         {
             AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"Twitter Message" message:output];
             [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-            [alert setCancelButtonTitle:@"OK" block:^(void){
+            [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:^(void){
                 [self.view endEditing:YES];
             }];
             [alert show];
@@ -354,24 +364,23 @@
     
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
-        slComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [slComposerSheet setInitialText:@""];
-        [slComposerSheet addImage:self.savedImage];
-        [slComposerSheet addURL:[NSURL URLWithString:@"http://www.brutegame.com"]];
-        [self presentViewController:slComposerSheet animated:YES completion:nil];
+        self.slComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [self.slComposerSheet setInitialText:@""];
+        [self.slComposerSheet addImage:self.savedImage];
+        [self.slComposerSheet addURL:[NSURL URLWithString:@"http://www.brutegame.com"]];
+        [self presentViewController:self.slComposerSheet animated:YES completion:nil];
     }
 }
 
 - (void)shareToWeibo{
     [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
-        NSLog(@"start weibo completion block");
         NSString *output;
         switch (result) {
             case SLComposeViewControllerResultCancelled:
-                output = @"Action Cancelled";
+                output = NSLocalizedString(@"Sharing Cancelled", nil);
                 break;
             case SLComposeViewControllerResultDone:
-                output = @"Post Successfully";
+                output = NSLocalizedString(@"Sharing Sucessful", nil);
                 break;
             default:
                 break;
@@ -380,7 +389,7 @@
         if (result != SLComposeViewControllerResultCancelled){
             AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"Weibo Message" message:output];
             [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-            [alert setCancelButtonTitle:@"OK" block:^{
+            [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:^{
                 [self.view endEditing:YES];
             }];
             [alert show];
@@ -396,6 +405,7 @@
         [slComposerSheet addURL:[NSURL URLWithString:@"http://www.brutegame.com/"]];
         [self presentViewController:slComposerSheet animated:YES completion:nil];
     }
+
 }
 
 - (void)shareByActivity:(UIImage*) sharingImage andText: (NSString*)sharingText {
@@ -407,18 +417,16 @@
         activityItems = @[sharingText];
     }
     
-    UIActivityViewController *activityController =
-    [[UIActivityViewController alloc] initWithActivityItems:activityItems
-                                      applicationActivities:nil];
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
     
-    [self presentViewController:activityController
-                       animated:YES completion:nil];
+    [self presentViewController:activityController animated:YES completion:nil];
+    [activityController release];
 }
 
 #pragma mark -
 #pragma mark UITextView Delegae Methods
 - (void)textViewDidChange:(UITextView *)textView{
-    isEdited=YES;
+    self.isEdited=YES;
 }
 
 #pragma mark -
@@ -426,11 +434,11 @@
 -(void) clickSaveViewShareButton: (int)shareType{
     [self dismissViewControllerAnimated:YES completion:^(void){
         if ( NSClassFromString(@"SLComposeViewController") == nil ) {
-            NSString *title = @"Not able to post";
-            NSString *output = @"To post your image, please upgrade your iOS version above 6.0. Your image has been saved to Photo Album.";
+            NSString *title = NSLocalizedString(@"Cannot Post Title", nil);
+            NSString *output = NSLocalizedString(@"Cannot Post Message", nil);
             AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:output];
             [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-            [alert setCancelButtonTitle:@"OK" block:nil];
+            [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:nil];
             [alert show];
             [alert release];
         }else{
@@ -453,25 +461,24 @@
 }
 
 -(void) clickSaveViewCloseButton{
-    //    [self dismissModalViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -
 #pragma mark BGTextEditorViewController delegate methods
 - (void) updateFontName: (UIFont*) newFont withFontIndex: (int) index{
-    BGTextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
+    BGTextView *tv = [self.textViews objectAtIndex:self.lastSelectedTVIndex];
     [tv setFont:[newFont fontWithSize:tv.fontSize]];
     tv.fontIndex = index;
 }
 
 - (void) updateTextAlignment: (int) index{
-    BGTextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
+    BGTextView *tv = [self.textViews objectAtIndex:self.lastSelectedTVIndex];
     tv.textAlignment = index;
 }
 
 - (void) updateFontSize: (int) index{
-    BGTextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
+    BGTextView *tv = [self.textViews objectAtIndex:self.lastSelectedTVIndex];
     int fSize = tv.fontSize;
     
     if (0==index && (fSize-1)>=kMinTextFontSize) {
@@ -487,7 +494,7 @@
 
 - (void) updateFontColor: (UIColor*) newColor withColorIndex: (int) index{
     NSLog(@"updateFontColor:newColor is selected");
-    BGTextView *tv = [textViews objectAtIndex:lastSelectedTVIndex];
+    BGTextView *tv = [self.textViews objectAtIndex:self.lastSelectedTVIndex];
     tv.textColor = newColor;
     tv.fontColorIndex = index;
 }
@@ -496,15 +503,15 @@
 #pragma mark -
 #pragma mark Segmented Control Methods
 - (void) setupSegmentedControl{
-    [segmentedControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+    [self.segmentedControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
 
-    int totalTpl = [tplDetail count];
+    int totalTpl = [self.tplDetail count];
     NSMutableArray *buttonArray = [NSMutableArray arrayWithCapacity:totalTpl];
     
     if (totalTpl == 1){
         // when only a single text pad in template
         UIButton *button = [[[UIButton alloc] init] autorelease];
-        NSString *buttonTitle = [NSString stringWithFormat:@"Text 1"];
+        NSString *buttonTitle = [NSString stringWithFormat:@"%@ %i", NSLocalizedString(@"Text Area Button", nil), 1];
         [button setTitle:buttonTitle forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
@@ -536,7 +543,7 @@
             UIButton *button = [[[UIButton alloc] init] autorelease];
             //        [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 5.0)];
 
-            NSString *buttonTitle = [NSString stringWithFormat:@"Text %i", i+1];
+            NSString *buttonTitle = [NSString stringWithFormat:@"%@ %i", NSLocalizedString(@"Text Area Button", nil), i+1];
             [button setTitle:buttonTitle forState:UIControlStateNormal];
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
@@ -562,7 +569,7 @@
     }
     
     // finally add button array
-    [segmentedControl setButtonsArray:buttonArray];
+    [self.segmentedControl setButtonsArray:buttonArray];
 }
 
 @end

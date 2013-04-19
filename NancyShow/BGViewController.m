@@ -17,7 +17,6 @@
 
 @implementation BGViewController
 @synthesize delegate;
-//@synthesize btnAbout;
 
 - (void)viewDidLoad
 {
@@ -42,12 +41,12 @@
 }
 
 - (void)viewDidUnload{
-//    self.btnAbout=nil;
+
+    [super viewDidUnload];
 }
 
 - (void) dealloc{
     delegate=nil;
-//    [btnAbout release];
     
     [super dealloc];
 }
@@ -58,7 +57,7 @@
     
     NSLog(@"click button tag = %i", tag);
     
-    if (delegate != nil) {
+    if (nil != delegate) {
         [delegate switchViewTo:tag fromView:kPageMain];
     }
     
@@ -66,12 +65,11 @@
 
 - (IBAction)clickOnlineGallery:(id)sender{
     NSLog(@"click online gallery button");
-    [SVProgressHUD showWithStatus:@"Connecting" maskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"Connecting", "Network Connecting") maskType:SVProgressHUDMaskTypeGradient];
     
     // download online plist file
     NSURL *url = [NSURL URLWithString:kOnlineGalleryURI];
     NSURLRequest *requst = [NSURLRequest requestWithURL:url];
-    NSLog(@"Network URL: %@", kOnlineGalleryURI);
     
     AFPropertyListRequestOperation *operation = [AFPropertyListRequestOperation
                                                  propertyListRequestOperationWithRequest:requst
@@ -89,7 +87,7 @@
                                                  failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id propertyList){
                                                      NSLog(@"Network Error when click onlineGallery menu button: %@", error);
                                                      // stop HUD with error
-                                                     [SVProgressHUD showErrorWithStatus:@"Network Not Connected"];
+                                                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"NetworkFailure", @"Network Connection Error")];
                                                  }];
     // start http call
     [operation start];

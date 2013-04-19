@@ -21,6 +21,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.arrayView.itemSize = CGSizeMake(200, 200);
 }
 
@@ -31,6 +32,7 @@
 }
 
 -(void) viewDidUnload{
+    [dataSource release];
     dataSource=nil;
     
     [super viewDidUnload];
@@ -44,9 +46,9 @@
 }
 
 #pragma mark - 
-#pragma mark Public Methods
+#pragma mark Actions & Public Methods
 - (void) reloadDataSource:(NSArray *)ds isOnlineData:(BOOL)online{
-    NSLog(@"reload Data Source in BGTableViewController");
+    NSLog(@"Load Data Source in BGTableViewController");
     self.dataSource=ds;
     self.isOnlineData=online;
     [self.arrayView reloadData];
@@ -64,6 +66,13 @@
         itemView = [[[UIView alloc] init] autorelease];
         itemView.backgroundColor = [UIColor clearColor];
     }
+    else{
+        UIView *removeView = nil;
+        removeView = [itemView viewWithTag:kRemoveViewTag];
+        if (removeView) {
+            [removeView removeFromSuperview];
+        }
+    }
     
     // add tap guesture to call delegate method
     [itemView whenTapped:^{
@@ -73,8 +82,7 @@
     }];
     
     UIImageView *imageView = [[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height)] autorelease];
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loading.jpg"]];
-//    imageView.frame = CGRectMake(0, 0, self.arrayView.itemSize.width, self.arrayView.itemSize.height);
+    imageView.tag = kRemoveViewTag;
     NSString *imageURI = [self.dataSource objectAtIndex:index];
     NSLog(@"loadng imagURI: %@", imageURI);
     
@@ -83,7 +91,7 @@
         imageView.image = [UIImage imageWithContentsOfFile:imageURI];
     }else{
         // online gallery
-        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
+        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.png"]];
     }
     
     [itemView addSubview:imageView];

@@ -14,29 +14,30 @@
 
 @interface BGTplHomeViewController : UIViewController <BGTableViewControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
-    IBOutlet UIView *bottomBarView;
-    IBOutlet UIImageView *bottomImageView;
-    
+    // view
+    UIView *bottomBarView;
+    UIImageView *bottomImageView;
+    AKSegmentedControl *segControl;
+    BGTableViewController *tableViewController;
+    // data
     BOOL isOnlineTpl;
     NSDictionary *templateData;
     NSMutableArray *templateObjects;
     NSMutableArray *templateThumbnails;
-    
-    AKSegmentedControl *segControl;
-    BGTableViewController *tableViewController;
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
+@property (nonatomic, retain) IBOutlet UIView *bottomBarView;
+@property (nonatomic, retain) IBOutlet UIImageView *bottomImageView;
+@property (nonatomic, retain) AKSegmentedControl *segControl;
+@property (nonatomic, retain) BGTableViewController *tableViewController;
+
 @property (nonatomic, assign) BOOL isOnlineTpl;
 @property (nonatomic, retain) NSDictionary *templateData;
 @property (nonatomic, retain) NSMutableArray *templateObjects;
 @property (nonatomic, retain) NSMutableArray *templateThumbnails;
 
-@property (nonatomic, retain) AKSegmentedControl *segControl;
-@property (nonatomic, retain) BGTableViewController *tableViewController;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil templateData:(NSDictionary*)tplData isOnlineTpl:(BOOL)online;
-
 - (IBAction)clickReturnHome:(id)sender;
 
 @end

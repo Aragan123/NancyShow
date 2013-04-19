@@ -5,3 +5,20 @@
   Created by Jeff Zhong on 2013/04/18.
   Copyright (c) 2013 Brute Games Studio. All rights reserved.
 */
+
+"Connecting" = "Connecting";    //BGViewController, BGTplHomeViewController
+"NetworkFailure" = "Netork Connection Error";   // BGViewController, BGTplHomeViewController x2
+"Templates" = "Templates";  //BGTplHomeViewController
+"More Online" = "More Online";  // BGTplHomeViewController
+"Downloading" = "Downloading";  // BGTplHomeViewController
+"Discard Changes Title" = "Discard Changes";  // BGDiaryViewController
+"Discard Changes Message" = "Are you sure to discard your changes?";    // BGDiaryViewController
+"Discard Yes Button" = "Discard";    // BGDiaryViewController
+"No Button" = "No";     // BGDiaryViewController
+"OK Button" = "OK";     // BGDiaryViewController
+"No Change Message" = "You have not done any change";   // BGDiaryViewController
+"Text Area Button" = "Text Area";           // BGDiaryViewController
+"Cannot Post Title" = "Not able to post";   // BGDiaryViewController
+"Cannot Post Message" = "To post your image, please upgrade your iOS version above 6.0. Your image has been saved to Photo Album."; // BGDiaryViewController
+"Sharing Cancelled" = "Action Cancelled";   // BGDiaryViewController
+"Sharing Successful" = "Post Successfully"; // BGDiaryViewController

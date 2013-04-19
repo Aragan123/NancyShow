@@ -13,6 +13,7 @@ static BGGlobalData *instance = nil;
 @implementation BGGlobalData
 @synthesize galleryBooks, galleryURI, onlineGalleryBooks, diaryTemplates;
 @synthesize diaryTplImage, diaryTplDetail, onlineDiaryTemplates;
+@synthesize fontColor, fontArray, fontNames;
 
 #pragma mark -
 #pragma mark Data File Read & Write
@@ -69,8 +70,19 @@ static BGGlobalData *instance = nil;
 	self = [super init];
 	if (self) {
 		[self loadSettingsDataFile];
+        [self commonSetup];
 	}
 	return self;
+}
+
+- (void) commonSetup{
+    self.fontNames = [NSArray arrayWithObjects:@"Noteworthy", @"Arial", @"Marion", @"Zapfino",nil];
+    self.fontArray = [NSArray arrayWithObjects:[UIFont fontWithName:@"Noteworthy" size:12.0],
+                      [UIFont fontWithName:@"Arial" size:16.0],
+                      [UIFont fontWithName:@"Marion-Bold" size:16.0],
+                      [UIFont fontWithName:@"Zapfino" size:9.0],nil];
+    self.fontColor = [NSArray arrayWithObjects:[UIColor redColor], [UIColor blackColor],
+                      [UIColor blueColor], [UIColor orangeColor], [UIColor greenColor], nil];
 }
 
 + (BGGlobalData *) sharedData{
@@ -114,6 +126,10 @@ static BGGlobalData *instance = nil;
     [diaryTplImage release];
     [diaryTplDetail release];
     [onlineDiaryTemplates release];
+    
+    [fontNames release];
+    [fontArray release];
+    [fontColor release];
     
 	[super release];
 }

@@ -7,6 +7,7 @@
 //
 
 #import "BGTextEditorViewController.h"
+#import "BGGlobalData.h"
 #import "AKSegmentedControl.h"
 
 @interface BGTextEditorViewController ()
@@ -21,14 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
-        fontNames = [[NSArray arrayWithObjects:@"Noteworthy", @"Arial", @"Marion", @"Zapfino",nil] retain];
-        fontArray = [[NSArray arrayWithObjects:[UIFont fontWithName:@"Noteworthy" size:12.0],
-                      [UIFont fontWithName:@"Arial" size:16.0],
-                      [UIFont fontWithName:@"Marion-Bold" size:16.0],
-                      [UIFont fontWithName:@"Zapfino" size:9.0],nil] retain];
-        fontColor = [[NSArray arrayWithObjects:[UIColor redColor], [UIColor blackColor],
-                      [UIColor blueColor], [UIColor orangeColor], [UIColor greenColor], nil] retain];
+        globalData = [BGGlobalData sharedData];
     }
     return self;
 }
@@ -77,29 +71,31 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) viewDidUnload{
-    fontNames=nil;
-    fontArray=nil;
-    fontColor=nil;
-    
+- (void) viewDidUnload{    
+    [fontSegControl release];
     fontSegControl=nil;
+    [fontSizeSegControl release];
     fontSizeSegControl=nil;
+    [fontColorSegControl release];
     fontColorSegControl=nil;
+    [alignmentSegControl release];
     alignmentSegControl=nil;
+    
+    [globalData release];
+    globalData=nil;
     
     [super viewDidUnload];
 }
 
 - (void) dealloc{
     delegate=nil;
-    [fontNames release];
-    [fontArray release];
-    [fontColor release];
     
     [fontSizeSegControl release];
     [fontColorSegControl release];
     [fontSegControl release];
     [alignmentSegControl release];
+    [globalData release];
+    
     [super dealloc];
 }
 
@@ -123,7 +119,7 @@
     NSLog(@"selectFontSegControl: selected index %i", selectedSegIndex);
     
     if (nil != delegate && [delegate respondsToSelector:@selector(updateFontName:withFontIndex:)]) {
-        [delegate updateFontName:[fontArray objectAtIndex:selectedSegIndex] withFontIndex:selectedSegIndex];
+        [delegate updateFontName:[[globalData fontArray] objectAtIndex:selectedSegIndex] withFontIndex:selectedSegIndex];
     }
 }
 
@@ -150,7 +146,7 @@
     NSLog(@"selectFontColorSegControl: selected index %i", selectedSegIndex);
     
     if (nil != delegate && [delegate respondsToSelector:@selector(updateFontColor:withColorIndex:)]) {
-        UIColor *fc =  [fontColor objectAtIndex:selectedSegIndex];
+        UIColor *fc =  [[globalData fontColor] objectAtIndex:selectedSegIndex];
         [delegate updateFontColor:fc withColorIndex:selectedSegIndex];
     }
 }
@@ -178,17 +174,17 @@
                                                   resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 4.0)];
     
     // construct segmented control buttons
-    int totalButtons = [fontArray count];
+    int totalButtons = [[globalData fontArray] count];
     NSMutableArray *buttonArray = [NSMutableArray arrayWithCapacity:totalButtons];
     
     for (int i=0; i<totalButtons; i++) {
         UIButton *button = [[[UIButton alloc] init] autorelease];
         
-        NSString *buttonTitle = [fontNames objectAtIndex:i];
+        NSString *buttonTitle = [[globalData fontNames] objectAtIndex:i];
         [button setTitle:buttonTitle forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
-        [button.titleLabel setFont:[fontArray objectAtIndex:i]];
+        [button.titleLabel setFont:[[globalData fontArray] objectAtIndex:i]];
         [button setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
         
         if (i==0) {
@@ -283,7 +279,7 @@
 -(void) setupFontColorSegControl{
     // set up fontColorSegControl
     // define button array
-    NSMutableArray *buttonArray = [NSMutableArray arrayWithCapacity:[fontColor count]];
+    NSMutableArray *buttonArray = [NSMutableArray arrayWithCapacity:[[globalData fontColor] count]];
     // Red button
     UIButton *buttonRed = [[[UIButton alloc] init] autorelease];
     [buttonRed setImage:[UIImage imageNamed:@"btn_fc_red_sa.png"] forState:UIControlStateNormal];

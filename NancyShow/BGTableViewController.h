@@ -8,6 +8,10 @@
 
 #import "ATArrayView.h"
 
+#ifndef kRemoveViewTag
+#define kRemoveViewTag 118
+#endif
+
 @protocol BGTableViewControllerDelegate;
 
 @interface BGTableViewController : ATArrayViewController{
@@ -17,7 +21,7 @@
     BOOL isOnlineData;
 }
 
-@property (nonatomic, retain) id<BGTableViewControllerDelegate> delegate;
+@property (nonatomic, assign) id<BGTableViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSArray *dataSource;
 @property (nonatomic, assign) BOOL isOnlineData;
 
@@ -26,7 +30,6 @@
 @end
 
 @protocol BGTableViewControllerDelegate <NSObject>
-
 @required
 - (void) itemCellSelected: (int) atIndex;
 

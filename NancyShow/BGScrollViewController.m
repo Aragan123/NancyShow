@@ -20,6 +20,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -34,6 +35,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void) viewDidUnload {
+    [dataSource release];
     dataSource=nil;
     
     [super viewDidUnload];
@@ -60,7 +62,6 @@
 
 #pragma mark -
 #pragma mark ATPagingViewDelegate methods
-
 - (NSInteger)numberOfPagesInPagingView:(ATPagingView *)pagingView {
     return [self.dataSource count];
 }
@@ -71,19 +72,26 @@
         view = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         view.backgroundColor = [UIColor clearColor];
+    }else{
+        UIView *removeView = nil;
+        removeView = [view viewWithTag:kRemoveViewTag];
+        if (removeView) {
+            [removeView removeFromSuperview];
+        }
     }
     
     UIImageView *imageView = [[[UIImageView alloc] initWithFrame: self.view.frame] autorelease];
-    [imageView setContentMode:UIViewContentModeCenter|UIViewContentModeScaleAspectFit]; // very important
-    NSString *imageURI = [dataSource objectAtIndex:index];
+    [imageView setContentMode:UIViewContentModeScaleAspectFit|UIViewContentModeCenter]; // very important
+    imageView.tag = kRemoveViewTag;
+    NSString *imageURI = [self.dataSource objectAtIndex:index];
     NSLog(@"loadng imagURI: %@", imageURI);
     
-    if (!isOnlineData){
+    if (!self.isOnlineData){
         // local gallery
         imageView.image = [UIImage imageWithContentsOfFile:imageURI];
     }else{
         // online gallery
-        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading_b.jpg"]];
+        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.png"]];
     }
     
     [view addSubview:imageView];
@@ -96,6 +104,6 @@
         NSLog (@"scroller page to : %i", pagingView.currentPageIndex);
         [delegate scrollerPageViewChanged:pagingView.currentPageIndex];
     } else
-        NSLog(@"there is no delegate is defined");}
+        NSLog(@"BGScrollViewController: there is no delegate is defined");}
 
 @end

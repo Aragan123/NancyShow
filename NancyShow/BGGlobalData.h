@@ -22,6 +22,11 @@
     
     UIImage *diaryTplImage; // used to share between diary page and other pages
     NSArray *diaryTplDetail;
+    
+    // used in text editor view controller
+    NSArray *fontNames;
+    NSArray *fontArray;
+    NSArray *fontColor;
 }
 
 @property (nonatomic, retain) NSArray *galleryBooks;
@@ -33,6 +38,10 @@
 
 @property (nonatomic, retain) UIImage *diaryTplImage;
 @property (nonatomic, retain) NSArray *diaryTplDetail;
+
+@property (nonatomic, retain) NSArray *fontNames;
+@property (nonatomic, retain) NSArray *fontArray;
+@property (nonatomic, retain) NSArray *fontColor;
 
 + (BGGlobalData *) sharedData;
 -(void) loadSettingsDataFile;

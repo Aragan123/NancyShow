@@ -15,33 +15,45 @@
 @class AKSegmentedControl;
 @class BGTextView;
 
+#ifndef kTextNotSelected
 #define kTextNotSelected 100
-#define kMaxTextFontSize 42
-#define kMinTextFontSize 8
+#define kMaxTextFontSize 56
+#define kMinTextFontSize 10
+#endif
 
 @interface BGDiaryViewController : UIViewController<UITextViewDelegate, BGDiarySaveViewControllerDelegate, BGTextEditorViewControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
-    BOOL isEdited;
+    // views
+    UIView *tplMainView;
+    UIView *bottomBarView;
+    UIImageView *bottomBarImgView;
     UIImageView *tplImageView;
-    IBOutlet UIView *tplMainView;
-    IBOutlet UIView *bottomBarView;
-    IBOutlet UIImageView *bottomBarImgView;
-    
+    SLComposeViewController *slComposerSheet;
+    AKSegmentedControl *segmentedControl;
+    BGTextEditorViewController *textEditor;
+    // data
+    BOOL isEdited;
     NSArray *tplDetail;
     NSMutableArray *textViews;
     int lastSelectedTVIndex;
-    
-    SLComposeViewController *slComposerSheet;
     UIImage *savedImage;
-    AKSegmentedControl *segmentedControl;
-    
-    BGTextEditorViewController *textEditor;
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
-@property (nonatomic) BOOL isEdited;
-@property (nonatomic, retain) UIImage *savedImage;
+@property (nonatomic, retain) IBOutlet UIView *tplMainView;
+@property (nonatomic, retain) IBOutlet UIView *bottomBarView;
+@property (nonatomic, retain) IBOutlet UIImageView *bottomBarImgView;
+@property (nonatomic, retain) UIImageView *tplImageView;
+@property (nonatomic, retain) SLComposeViewController *slComposerSheet;
+@property (nonatomic, retain) AKSegmentedControl *segmentedControl;
 @property (nonatomic, retain) BGTextEditorViewController *textEditor;
+
+@property (nonatomic, assign) BOOL isEdited;
+@property (nonatomic, retain) NSArray *tplDetail;
+@property (nonatomic, retain) NSMutableArray *textViews;
+@property (nonatomic, assign) int lastSelectedTVIndex;
+@property (nonatomic, retain) UIImage *savedImage;
+
 
 - (void) reloadImageView;
 

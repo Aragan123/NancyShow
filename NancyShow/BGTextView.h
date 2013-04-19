@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface BGTextView : UITextView{
-    int _fontIndex;
-    int _fontColorIndex;
-    int _fontSize;
+    int fontIndex;
+    int fontColorIndex;
+    int fontSize;
 }
 
-@property (nonatomic) int fontIndex;
-@property (nonatomic) int fontColorIndex;
-@property (nonatomic) int fontSize;
+@property (nonatomic, assign) int fontIndex;
+@property (nonatomic, assign) int fontColorIndex;
+@property (nonatomic, assign) int fontSize;
 
 @end

@@ -29,6 +29,4 @@
 @property(nonatomic, retain) BGTplHomeViewController *tplHomeViewController;
 @property(nonatomic, retain) BGDiaryViewController *diaryViewController;
 
--(UIViewController*) getSwitchViewController: (int) pageNum;
-
 @end

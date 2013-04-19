@@ -8,33 +8,37 @@
 
 #import <UIKit/UIKit.h>
 #import "BGPageSwitcherDelegate.h"
-#import "ATPagingView.h"
 #import "BGScrollViewController.h"
 
 @class AKSegmentedControl;
+@class ATPagingView;
 
 @interface BGGalleryViewController : UIViewController <BGScrollViewControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
-    IBOutlet UIView *bottomBarView;
-    IBOutlet UIPageControl *pageControl;
-    IBOutlet UIImageView *bottomBarImgView;
-    
+    // views
+    UIView *bottomBarView;
+    UIPageControl *pageControl;
+    UIImageView *bottomBarImgView;
     AKSegmentedControl *segmentedControl;
+    BGScrollViewController *scrollViewController;
+    // data
     NSArray *galleries;
+    BOOL isOnlineGallery; // default is NO
     int currentGalleryIndex; // init with 0
     NSDictionary *currentGalleryObject;
-    BOOL isOnlineGallery; // default is NO
-    
-    BGScrollViewController *scrollViewController;
-    
 }
 
-@property(nonatomic, retain) id<BGPageSwitcherDelegate> delegate;
+@property(nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
 @property(nonatomic, retain) IBOutlet UIView *bottomBarView;
 @property(nonatomic, retain) IBOutlet UIPageControl *pageControl;
 @property(nonatomic, retain) IBOutlet UIImageView *bottomBarImgView;
-@property (nonatomic, retain) BGScrollViewController *scrollViewController;
-@property (nonatomic, assign) BOOL isOnlineGallery;
+@property(nonatomic, retain) AKSegmentedControl *segmentedControl;
+@property(nonatomic, retain) BGScrollViewController *scrollViewController;
+
+@property(nonatomic, retain) NSArray *galleries;
+@property(nonatomic, assign) BOOL isOnlineGallery;
+@property(nonatomic, assign) int currentGalleryIndex;
+@property(nonatomic, retain) NSDictionary *currentGalleryObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil galleries:(NSArray*)gBooks isOnlineGallery:(BOOL)online;
 

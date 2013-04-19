@@ -8,6 +8,10 @@
 
 #import "ATPagingView.h"
 
+#ifndef kRemoveViewTag
+#define kRemoveViewTag 118
+#endif
+
 @protocol BGScrollViewControllerDelegate;
 
 @interface BGScrollViewController : ATPagingViewController{
@@ -16,7 +20,7 @@
     BOOL isOnlineData;
 }
 
-@property (nonatomic, retain) id<BGScrollViewControllerDelegate> delegate;
+@property (nonatomic, assign) id<BGScrollViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSArray *dataSource;
 @property (nonatomic, assign) BOOL isOnlineData;
 
@@ -27,7 +31,6 @@
 
 
 @protocol BGScrollViewControllerDelegate <NSObject>
-
 @required
 - (void) scrollerPageViewChanged: (int) newPageIndex;
 
