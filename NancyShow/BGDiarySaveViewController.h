@@ -21,12 +21,14 @@
     UIButton *sharing_sinaweibo;
     UIButton *sharing_facebook;
     UIButton *sharing_twitter;
+    UILabel *sharing_desc;
 }
 
 @property (nonatomic, assign) id<BGDiarySaveViewControllerDelegate> delegate;
 @property (retain, nonatomic) IBOutlet UIButton *sharing_sinaweibo;
 @property (retain, nonatomic) IBOutlet UIButton *sharing_facebook;
 @property (retain, nonatomic) IBOutlet UIButton *sharing_twitter;
+@property (retain, nonatomic) IBOutlet UILabel *sharing_desc;
 
 - (IBAction)clickCloseButton:(id)sender;
 - (IBAction)clickShareButton:(id)sender;

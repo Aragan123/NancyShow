@@ -14,7 +14,7 @@
 @end
 
 @implementation BGDiarySaveViewController
-@synthesize delegate, sharing_facebook, sharing_sinaweibo, sharing_twitter;
+@synthesize delegate, sharing_facebook, sharing_sinaweibo, sharing_twitter, sharing_desc;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,29 +35,37 @@
     UIImage *backgroundPattern = [UIImage imageNamed:@"beauty_background.png"];
     self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundPattern];
 
-    // add share buttons
-    if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]) {
+    // set text label string
+    if (![self socialShareAvailable]) {
+        self.sharing_desc.alpha = 1.0f;
+    }else{
+        self.sharing_desc.alpha = 0.0f;
+    }
+    
+    // set share buttons
+    BOOL isSocialClassAvailable = (NSClassFromString(@"SLComposeViewController") != nil) ? YES : NO;
+    if ( isSocialClassAvailable && [SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]) {
+        sharing_sinaweibo.enabled = YES;
+        sharing_sinaweibo.alpha = 0.1f;
+    }else{
         sharing_sinaweibo.enabled = NO;
         sharing_sinaweibo.alpha = 0.5f;
-    }else{
-        sharing_sinaweibo.enabled = YES;
-        sharing_sinaweibo.alpha = 1.0f;
     }
     
-    if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
-        sharing_facebook.enabled = NO;
-        sharing_facebook.alpha = 0.5f;
-    }else{
+    if (isSocialClassAvailable && [SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
         sharing_facebook.enabled = YES;
         sharing_facebook.alpha = 1.0f;
+    }else{
+        sharing_facebook.enabled = NO;
+        sharing_facebook.alpha = 0.5f;
     }
     
-    if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
-        sharing_twitter.enabled = NO;
-        sharing_twitter.alpha = 0.5f;
-    }else{
+    if (isSocialClassAvailable && [SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         sharing_twitter.enabled = YES;
         sharing_twitter.alpha = 1.0f;
+    }else{
+        sharing_twitter.enabled = NO;
+        sharing_twitter.alpha = 0.5f;
     }
 }
 
@@ -80,6 +88,9 @@
     [self setSharing_facebook:nil];
     [sharing_twitter release];
     [self setSharing_twitter:nil];
+    [sharing_desc release];
+    sharing_desc=nil;
+    
     [super viewDidUnload];
 }
 
@@ -89,6 +100,7 @@
     [sharing_sinaweibo release];
     [sharing_facebook release];
     [sharing_twitter release];
+    [sharing_desc release];
     [super dealloc];
 }
 
@@ -107,5 +119,18 @@
         [delegate clickSaveViewShareButton:shareType]; // call delegate method
     }
     
+}
+
+-(BOOL)socialShareAvailable {
+    if ( NSClassFromString(@"SLComposeViewController") != nil ) {
+        BOOL facebookAvailable = [SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook];
+        BOOL twitterAvailable = [SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter];
+        BOOL weiboAvailable = [SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo];
+        
+        return ( facebookAvailable || twitterAvailable || weiboAvailable );
+    }
+    else {
+        return NO;
+    }
 }
 @end

@@ -20,7 +20,7 @@
 "Text Area Button" = "Text Area";           // BGDiaryViewController
 "Cannot Post Title" = "Not able to post";   // BGDiaryViewController
 "Cannot Post Message" = "To post your image, please upgrade your iOS version above 6.0. Your image has been saved to Photo Album."; // BGDiaryViewController
-"Sharing Cancelled" = "Action Cancelled";   // BGDiaryViewController
+"Sharing Cancelled" = "Sharing is Cancelled";   // BGDiaryViewController
 "Sharing Successful" = "Post Successfully"; // BGDiaryViewController
 "TextArea Date Format" = "yyyy-MM-dd EEE";  // BGDiaryViewController
 "TextArea Today Format" = "Today: %@"; // BGDiaryViewController

@@ -299,38 +299,14 @@
 // when ok button is selected
 -(void) displayModalView {
     NSLog(@"Diary Save Model View display");
-    
-    if ( ![self socialShareAvailable] ) {
-        NSString *title = NSLocalizedString(@"Cannot Post Title", nil);
-        NSString *output = NSLocalizedString(@"Cannot Post Message", nil);
-        AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:output];
-        [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-        [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:nil];
-        [alert show];
-        [alert release];
-    }else{
-        BGDiarySaveViewController *modelViewController = [[BGDiarySaveViewController alloc] initWithNibName:@"BGDiarySaveViewController" bundle:nil];
-        modelViewController.delegate = self;
-        modelViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-        modelViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self presentViewController:modelViewController animated:YES completion:nil];
-        modelViewController.view.superview.bounds = CGRectMake(0,0, 400,  220);
+    BGDiarySaveViewController *modelViewController = [[BGDiarySaveViewController alloc] initWithNibName:@"BGDiarySaveViewController" bundle:nil];
+    modelViewController.delegate = self;
+    modelViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    modelViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self presentViewController:modelViewController animated:YES completion:nil];
+    modelViewController.view.superview.bounds = CGRectMake(0,0, 400,  220);
 
-        [modelViewController release];
-    }
-}
-
--(BOOL)socialShareAvailable {
-    if ( NSClassFromString(@"SLComposeViewController") != nil ) {
-        BOOL facebookAvailable = [SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook];
-        BOOL twitterAvailable = [SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter];
-        BOOL weiboAvailable = [SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo];
-        
-        return ( facebookAvailable || twitterAvailable || weiboAvailable );
-    }
-    else {
-        return NO;
-    }
+    [modelViewController release];
 }
 
 - (void)shareToFacebook {
