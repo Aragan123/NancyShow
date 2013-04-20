@@ -11,15 +11,21 @@
 #import "BGDiarySaveViewController.h"
 #import "BGTextEditorViewController.h"
 
-@class SLComposeViewController;
-@class AKSegmentedControl;
-@class BGTextView;
-
 #ifndef kTextNotSelected
 #define kTextNotSelected 100
 #define kMaxTextFontSize 56
 #define kMinTextFontSize 10
 #endif
+
+typedef enum : NSInteger{
+    BGDiaryTextAreaTypeNormal=0,
+    BGDiaryTextAreaTypeDate,
+} BGDiaryTextAreaType;
+
+
+@class SLComposeViewController;
+@class AKSegmentedControl;
+@class BGTextView;
 
 @interface BGDiaryViewController : UIViewController<UITextViewDelegate, BGDiarySaveViewControllerDelegate, BGTextEditorViewControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
@@ -27,7 +33,7 @@
     UIView *tplMainView;
     UIView *bottomBarView;
     UIImageView *bottomBarImgView;
-    UIImageView *tplImageView;
+    UIView *tplHolderView;
     AKSegmentedControl *segmentedControl;
     BGTextEditorViewController *textEditor;
     // data
@@ -42,7 +48,7 @@
 @property (nonatomic, retain) IBOutlet UIView *tplMainView;
 @property (nonatomic, retain) IBOutlet UIView *bottomBarView;
 @property (nonatomic, retain) IBOutlet UIImageView *bottomBarImgView;
-@property (nonatomic, retain) UIImageView *tplImageView;
+@property (nonatomic, retain) UIView *tplHolderView;
 @property (nonatomic, retain) AKSegmentedControl *segmentedControl;
 @property (nonatomic, retain) BGTextEditorViewController *textEditor;
 

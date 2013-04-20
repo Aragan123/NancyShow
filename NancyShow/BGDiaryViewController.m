@@ -21,7 +21,7 @@
 
 @implementation BGDiaryViewController
 @synthesize delegate;
-@synthesize tplMainView, bottomBarView, bottomBarImgView, tplImageView, segmentedControl, textEditor;
+@synthesize tplMainView, bottomBarView, bottomBarImgView, tplHolderView, segmentedControl, textEditor;
 @synthesize isEdited, tplDetail, textViews, lastSelectedTVIndex, savedImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -47,17 +47,18 @@
     
     // set alert view style
     [AHAlertView applyCustomAlertAppearance];
-    // load back ground images
+    // load back ground images, must run before loading other views
     [self reloadImageView];
     
     // add Text View(s) and icons
     for (int i=0; i<tplDetail.count; i++){
         NSString *tvFrameStr = [[self.tplDetail objectAtIndex:i] objectForKey:@"tvFrame"];
+        int tvType = [[[self.tplDetail objectAtIndex:i] objectForKey:@"tvType"] intValue];
         
         BGTextView *tv = [[BGTextView alloc] initWithFrame:CGRectFromString(tvFrameStr)];
-        [self setupTextViewByDefaultValue:&tv atIndex:i]; // pass by reference
-        [self.tplMainView addSubview:tv]; // add view to main view
-        [self.tplMainView bringSubviewToFront:tv];
+        [self setupTextViewByDefaultValue:&tv atIndex:i withType:tvType]; // pass by reference
+        [self.tplHolderView addSubview:tv]; // add view to main view
+        [self.tplHolderView bringSubviewToFront:tv];
         [self.textViews addObject:tv]; // add to mutable array to store it
         [tv release];
     }
@@ -75,12 +76,16 @@
 
 - (void) reloadImageView{
     UIImage *tplImg = [[BGGlobalData sharedData] diaryTplImage];
-    self.tplImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.tplMainView.frame.size.width-tplImg.size.width)*0.5,
+    [self.tplMainView setContentMode:UIViewContentModeScaleAspectFit|UIViewContentModeCenter]; // main view content mode: fit and centre
+    self.tplHolderView = [[UIView alloc] initWithFrame:CGRectMake((self.tplMainView.frame.size.width-tplImg.size.width)*0.5,
                                                                  (self.tplMainView.frame.size.height-tplImg.size.height)*0.5,
                                                                  tplImg.size.width, tplImg.size.height)];
-    [self.tplImageView setContentMode:UIViewContentModeCenter]; // content mode: centre
-    [self.tplImageView setImage:tplImg];
-    [self.tplMainView addSubview:self.tplImageView];
+    [self.tplHolderView setContentMode:UIViewContentModeCenter|UIViewContentModeScaleAspectFill];
+    UIImageView *tplImageView = [[UIImageView alloc] initWithImage:tplImg];
+    [self.tplHolderView addSubview:tplImageView];
+    [tplImageView release];
+    // finally add to main view
+    [self.tplMainView addSubview:tplHolderView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,17 +94,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) viewDidUnload{
-    tplImageView=nil;
-    
+- (void) viewDidUnload{    
     [tplMainView release];
     tplMainView = nil;
     [bottomBarView release];
     bottomBarView = nil;
     [bottomBarImgView release];
     bottomBarImgView = nil;
-    [tplImageView release];
-    tplImageView=nil;
+    [tplHolderView release];
+    tplHolderView=nil;
     [segmentedControl release];
     segmentedControl=nil;
     [textEditor release];
@@ -121,7 +124,7 @@
     [tplMainView release];
     [bottomBarView release];
     [bottomBarImgView release];
-    [tplImageView release];
+    [tplHolderView release];
     [segmentedControl release];
     [textEditor release];
     
@@ -165,7 +168,7 @@
     
     // when ok clicked, show share to Weibo
     if (self.isEdited) {
-        self.savedImage = [self screenshot:self.tplMainView]; // screen shot only has some change
+        self.savedImage = [self screenshot:self.tplHolderView]; // screen shot only has some change
         UIImageWriteToSavedPhotosAlbum(self.savedImage, nil, nil, nil); // save to photo album
         self.isEdited=NO;
         [self displayModalView]; // display sharing option view
@@ -235,21 +238,33 @@
 
 #pragma mark -
 #pragma mark Private Methods
-- (void) setupTextViewByDefaultValue: (BGTextView **) tv atIndex: (int) index{
+- (void) setupTextViewByDefaultValue: (BGTextView **) tv atIndex:(int)index withType:(int)type{
     (*tv).tag = index;
     (*tv).delegate = self;
 //    (*tv).backgroundColor= [UIColor lightGrayColor];
     (*tv).backgroundColor= [UIColor clearColor];
     (*tv).textColor = [UIColor blackColor];
-    (*tv).font = [UIFont fontWithName:@"Arial" size:18.0];
+    (*tv).font = [UIFont fontWithName:@"Noteworthy" size:18.0];
     (*tv).scrollEnabled = NO;
     [(*tv).layer setCornerRadius: 4];
     [(*tv).layer setBorderColor:[[UIColor grayColor] CGColor]];
     [(*tv).layer setBorderWidth:0.0f]; // initially no border
     
-    (*tv).fontIndex = 1;
+    (*tv).fontIndex = 0;
     (*tv).fontSize = 18;
     (*tv).fontColorIndex = 1;
+    
+    if (BGDiaryTextAreaTypeDate == type) {
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:NSLocalizedString(@"TextArea Date Format", nil)];
+        int sysLang = [NSLocalizedString(@"System Language", nil) intValue];
+        if (sysLang==1) { // if Chinese
+            [df setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"] autorelease]];
+        }
+        NSString *today = [[df stringFromDate:[NSDate date]] uppercaseString];
+        (*tv).text = [NSString stringWithFormat:NSLocalizedString(@"TextArea Today Format", nil), today];
+        [df release];
+    }
 }
 
 // used to dismiss text editor view if has any

@@ -5,7 +5,7 @@
   Created by Jeff Zhong on 2013/04/18.
   Copyright (c) 2013 Brute Games Studio. All rights reserved.
 */
-
+"System Language" = "1";    // system: 0-ENG, 1-CHN
 "Connecting" = "正在连接";    //BGViewController, BGTplHomeViewController
 "NetworkFailure" = "网络无法连接";   // BGViewController, BGTplHomeViewController x2
 "Templates" = "本地模板";  //BGTplHomeViewController
@@ -22,3 +22,5 @@
 "Cannot Post Message" = "请升级你的iOS版本到6.0以上，再使用分享功能。图片已经保存到本地相册。"; // BGDiaryViewController
 "Sharing Cancelled" = "取消分享";   // BGDiaryViewController
 "Sharing Successful" = "已经发送成功"; // BGDiaryViewController
+"TextArea Date Format" = "yyyy年MM月dd日（EEEE）";  // BGDiaryViewController
+"TextArea Today Format" = "今天是%@"; // BGDiaryViewController

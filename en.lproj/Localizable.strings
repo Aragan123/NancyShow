@@ -5,7 +5,7 @@
   Created by Jeff Zhong on 2013/04/18.
   Copyright (c) 2013 Brute Games Studio. All rights reserved.
 */
-
+"System Language" = "0";       // system: 0-ENG, 1-CHN
 "Connecting" = "Connecting";    //BGViewController, BGTplHomeViewController
 "NetworkFailure" = "Netork Connection Error";   // BGViewController, BGTplHomeViewController x2
 "Templates" = "Templates";  //BGTplHomeViewController
@@ -22,3 +22,5 @@
 "Cannot Post Message" = "To post your image, please upgrade your iOS version above 6.0. Your image has been saved to Photo Album."; // BGDiaryViewController
 "Sharing Cancelled" = "Action Cancelled";   // BGDiaryViewController
 "Sharing Successful" = "Post Successfully"; // BGDiaryViewController
+"TextArea Date Format" = "yyyy-MM-dd EEE";  // BGDiaryViewController
+"TextArea Today Format" = "Today: %@"; // BGDiaryViewController

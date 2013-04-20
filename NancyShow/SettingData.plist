@@ -23,31 +23,37 @@
 			<array>
 				<dict>
 					<key>tvFrame</key>
+					<string>{{10, 10},{400, 50}}</string>
+					<key>tvType</key>
+					<integer>1</integer>
+				</dict>
+				<dict>
+					<key>tvFrame</key>
 					<string>{{650,40},{300,380}}</string>
-					<key>tvBackgroundColor</key>
-					<string>,</string>
+					<key>tvType</key>
+					<real>0</real>
 				</dict>
 				<dict>
 					<key>tvFrame</key>
 					<string>{{50,250},{300,450}}</string>
-					<key>tvBackgroundColor</key>
-					<string>,</string>
+					<key>tvType</key>
+					<real>0</real>
 				</dict>
 			</array>
 			<array>
 				<dict>
 					<key>tvFrame</key>
 					<string>{{60,60},{540,600}}</string>
-					<key>tvBackgroundColor</key>
-					<string>,</string>
+					<key>tvType</key>
+					<real>0</real>
 				</dict>
 			</array>
 			<array>
 				<dict>
 					<key>tvFrame</key>
 					<string>{{30,30},{400, 200}}</string>
-					<key>tvBackgroundColor</key>
-					<string>,</string>
+					<key>tvType</key>
+					<real>0</real>
 				</dict>
 			</array>
 		</array>
