@@ -28,7 +28,6 @@
     UIView *bottomBarView;
     UIImageView *bottomBarImgView;
     UIImageView *tplImageView;
-    SLComposeViewController *slComposerSheet;
     AKSegmentedControl *segmentedControl;
     BGTextEditorViewController *textEditor;
     // data
@@ -44,7 +43,6 @@
 @property (nonatomic, retain) IBOutlet UIView *bottomBarView;
 @property (nonatomic, retain) IBOutlet UIImageView *bottomBarImgView;
 @property (nonatomic, retain) UIImageView *tplImageView;
-@property (nonatomic, retain) SLComposeViewController *slComposerSheet;
 @property (nonatomic, retain) AKSegmentedControl *segmentedControl;
 @property (nonatomic, retain) BGTextEditorViewController *textEditor;
 

@@ -9,7 +9,6 @@
 #import "BGDiaryViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Social/Social.h>
-#import <Accounts/Accounts.h>
 
 #import "BGGlobalData.h"
 #import "BGTextView.h"
@@ -22,7 +21,7 @@
 
 @implementation BGDiaryViewController
 @synthesize delegate;
-@synthesize tplMainView, bottomBarView, bottomBarImgView, tplImageView, slComposerSheet, segmentedControl, textEditor;
+@synthesize tplMainView, bottomBarView, bottomBarImgView, tplImageView, segmentedControl, textEditor;
 @synthesize isEdited, tplDetail, textViews, lastSelectedTVIndex, savedImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -101,8 +100,6 @@
     bottomBarImgView = nil;
     [tplImageView release];
     tplImageView=nil;
-    [slComposerSheet release];
-    slComposerSheet=nil;
     [segmentedControl release];
     segmentedControl=nil;
     [textEditor release];
@@ -125,7 +122,6 @@
     [bottomBarView release];
     [bottomBarImgView release];
     [tplImageView release];
-    [slComposerSheet release];
     [segmentedControl release];
     [textEditor release];
     
@@ -289,138 +285,155 @@
 -(void) displayModalView {
     NSLog(@"Diary Save Model View display");
     
-    BGDiarySaveViewController *modelViewController = [[BGDiarySaveViewController alloc] initWithNibName:@"BGDiarySaveViewController" bundle:nil];
-    modelViewController.delegate = self;
-    modelViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-    modelViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self presentViewController:modelViewController animated:YES completion:nil];
-    modelViewController.view.superview.bounds = CGRectMake(0,0, 400,  220);
+    if ( ![self socialShareAvailable] ) {
+        NSString *title = NSLocalizedString(@"Cannot Post Title", nil);
+        NSString *output = NSLocalizedString(@"Cannot Post Message", nil);
+        AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:output];
+        [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
+        [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:nil];
+        [alert show];
+        [alert release];
+    }else{
+        BGDiarySaveViewController *modelViewController = [[BGDiarySaveViewController alloc] initWithNibName:@"BGDiarySaveViewController" bundle:nil];
+        modelViewController.delegate = self;
+        modelViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        modelViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self presentViewController:modelViewController animated:YES completion:nil];
+        modelViewController.view.superview.bounds = CGRectMake(0,0, 400,  220);
 
-    [modelViewController release];
+        [modelViewController release];
+    }
+}
 
+-(BOOL)socialShareAvailable {
+    if ( NSClassFromString(@"SLComposeViewController") != nil ) {
+        BOOL facebookAvailable = [SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook];
+        BOOL twitterAvailable = [SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter];
+        BOOL weiboAvailable = [SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo];
+        
+        return ( facebookAvailable || twitterAvailable || weiboAvailable );
+    }
+    else {
+        return NO;
+    }
 }
 
 - (void)shareToFacebook {
-    [self.slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
-        NSLog(@"start completion block");
-        NSString *output;
-        switch (result) {
-            case SLComposeViewControllerResultCancelled:
-                output = NSLocalizedString(@"Sharing Cancelled", nil);
-                break;
-            case SLComposeViewControllerResultDone:
-                output = NSLocalizedString(@"Sharing Sucessful", nil);
-                break;
-            default:
-                break;
-        }
-        if (result != SLComposeViewControllerResultCancelled)
-        {
-            AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"Facebook Message" message:output];
-            [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-            [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:^(void){
-                [self.view endEditing:YES];
-            }];
-            [alert show];
-            [alert release];
-        }
-    }];
-    
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
     {
-        self.slComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        [self.slComposerSheet setInitialText:@""];
-        [self.slComposerSheet addImage:self.savedImage];
-        [self.slComposerSheet addURL:[NSURL URLWithString:@"http://www.brutegame.com"]];
-        [self presentViewController:self.slComposerSheet animated:YES completion:nil];
+        SLComposeViewController *socialVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        // add handler
+        SLComposeViewControllerCompletionHandler socialHandler = ^(SLComposeViewControllerResult result) {
+            NSString *output;
+            switch (result) {
+                case SLComposeViewControllerResultCancelled:
+                    output = NSLocalizedString(@"Sharing Cancelled", nil);
+                    break;
+                case SLComposeViewControllerResultDone:
+                    output = NSLocalizedString(@"Sharing Sucessful", nil);
+                    break;
+                default:
+                    break;
+            }
+            
+            [socialVC dismissViewControllerAnimated:YES completion:^(void){
+                AHAlertView *alert = [[AHAlertView alloc] initWithTitle:output message:nil];
+                [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
+                [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:^{
+                    [self.view endEditing:YES];
+                }];
+                [alert show];
+                [alert release];
+            }];
+        };
+        
+        socialVC.completionHandler = socialHandler;
+        [socialVC setInitialText:@"#Nancy Zhang#"];
+        [socialVC addImage:self.savedImage];
+        //        [socialVC addURL:[NSURL URLWithString:@"http://www.brutegame.com/"]];
+        
+        // finally display social view controller
+        [self presentViewController:socialVC animated:YES completion:nil];
     }
 }
 
 - (void)shareToTwitter {    
-    [self.slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
-        NSLog(@"start completion block");
-        NSString *output;
-        switch (result) {
-            case SLComposeViewControllerResultCancelled:
-                output = NSLocalizedString(@"Sharing Cancelled", nil);
-                break;
-            case SLComposeViewControllerResultDone:
-                output = NSLocalizedString(@"Sharing Sucessful", nil);
-                break;
-            default:
-                break;
-        }
-        if (result != SLComposeViewControllerResultCancelled)
-        {
-            AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"Twitter Message" message:output];
-            [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-            [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:^(void){
-                [self.view endEditing:YES];
-            }];
-            [alert show];
-            [alert release];
-        }
-    }];
-    
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
-        self.slComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [self.slComposerSheet setInitialText:@""];
-        [self.slComposerSheet addImage:self.savedImage];
-        [self.slComposerSheet addURL:[NSURL URLWithString:@"http://www.brutegame.com"]];
-        [self presentViewController:self.slComposerSheet animated:YES completion:nil];
+        SLComposeViewController *socialVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        // add handler
+        SLComposeViewControllerCompletionHandler socialHandler = ^(SLComposeViewControllerResult result) {
+            NSString *output;
+            switch (result) {
+                case SLComposeViewControllerResultCancelled:
+                    output = NSLocalizedString(@"Sharing Cancelled", nil);
+                    break;
+                case SLComposeViewControllerResultDone:
+                    output = NSLocalizedString(@"Sharing Sucessful", nil);
+                    break;
+                default:
+                    break;
+            }
+            
+            [socialVC dismissViewControllerAnimated:YES completion:^(void){
+                AHAlertView *alert = [[AHAlertView alloc] initWithTitle:output message:nil];
+                [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
+                [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:^{
+                    [self.view endEditing:YES];
+                }];
+                [alert show];
+                [alert release];
+            }];
+        };
+        
+        socialVC.completionHandler = socialHandler;
+        [socialVC setInitialText:@"#Nancy Zhang#"];
+        [socialVC addImage:self.savedImage];
+        //        [socialVC addURL:[NSURL URLWithString:@"http://www.brutegame.com/"]];
+        
+        // finally display social view controller
+        [self presentViewController:socialVC animated:YES completion:nil];
     }
 }
 
 - (void)shareToWeibo{
-    [slComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
-        NSString *output;
-        switch (result) {
-            case SLComposeViewControllerResultCancelled:
-                output = NSLocalizedString(@"Sharing Cancelled", nil);
-                break;
-            case SLComposeViewControllerResultDone:
-                output = NSLocalizedString(@"Sharing Sucessful", nil);
-                break;
-            default:
-                break;
-        }
-        
-        if (result != SLComposeViewControllerResultCancelled){
-            AHAlertView *alert = [[AHAlertView alloc] initWithTitle:@"Weibo Message" message:output];
-            [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-            [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:^{
-                [self.view endEditing:YES];
-            }];
-            [alert show];
-            [alert release];
-        }
-    }];
-    
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo])
     {
-        slComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
-        [slComposerSheet setInitialText:@""];
-        [slComposerSheet addImage:self.savedImage];
-        [slComposerSheet addURL:[NSURL URLWithString:@"http://www.brutegame.com/"]];
-        [self presentViewController:slComposerSheet animated:YES completion:nil];
+        SLComposeViewController *socialVC = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeSinaWeibo];
+        // add handler
+        SLComposeViewControllerCompletionHandler socialHandler = ^(SLComposeViewControllerResult result) {
+            NSString *output;
+            switch (result) {
+                case SLComposeViewControllerResultCancelled:
+                    output = NSLocalizedString(@"Sharing Cancelled", nil);
+                    break;
+                case SLComposeViewControllerResultDone:
+                    output = NSLocalizedString(@"Sharing Sucessful", nil);
+                    break;
+                default:
+                    break;
+            }
+            
+            [socialVC dismissViewControllerAnimated:YES completion:^(void){
+                AHAlertView *alert = [[AHAlertView alloc] initWithTitle:output message:nil];
+                [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
+                [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:^{
+                    [self.view endEditing:YES];
+                }];
+                [alert show];
+                [alert release];
+            }];
+        };
+        
+        socialVC.completionHandler = socialHandler;
+        [socialVC setInitialText:@"#Nancy的App#"];
+        [socialVC addImage:self.savedImage];
+        //        [socialVC addURL:[NSURL URLWithString:@"http://www.brutegame.com/"]];
+        
+        // finally display social view controller
+        [self presentViewController:socialVC animated:YES completion:nil];
     }
 
-}
-
-- (void)shareByActivity:(UIImage*) sharingImage andText: (NSString*)sharingText {
-    NSArray *activityItems;
-    
-    if (sharingImage != nil) {
-        activityItems = @[sharingText, sharingImage];
-    } else {
-        activityItems = @[sharingText];
-    }
-    
-    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-    
-    [self presentViewController:activityController animated:YES completion:nil];
-    [activityController release];
 }
 
 #pragma mark -
@@ -433,29 +446,19 @@
 #pragma mark BGDiarySaveViewController delegate methods
 -(void) clickSaveViewShareButton: (int)shareType{
     [self dismissViewControllerAnimated:YES completion:^(void){
-        if ( NSClassFromString(@"SLComposeViewController") == nil ) {
-            NSString *title = NSLocalizedString(@"Cannot Post Title", nil);
-            NSString *output = NSLocalizedString(@"Cannot Post Message", nil);
-            AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:output];
-            [alert setDismissalStyle:AHAlertViewDismissalStyleZoomDown];
-            [alert setCancelButtonTitle:NSLocalizedString(@"OK Button", nil) block:nil];
-            [alert show];
-            [alert release];
-        }else{
-            switch (shareType) {
-                case 0:
-                    [self shareToWeibo];
-                    break;
-                case 1:
-                    [self shareToTwitter];
-                    break;
-                case 2:
-                    [self shareToFacebook];
-                    break;
-                    
-                default:
-                    break;
-            }
+        switch (shareType) {
+            case 0:
+                [self shareToWeibo];
+                break;
+            case 1:
+                [self shareToTwitter];
+                break;
+            case 2:
+                [self shareToFacebook];
+                break;
+                
+            default:
+                break;
         }
     }]; // dissmis previous modal view first
 }

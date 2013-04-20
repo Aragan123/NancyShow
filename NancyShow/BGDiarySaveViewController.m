@@ -7,13 +7,14 @@
 //
 
 #import "BGDiarySaveViewController.h"
+#import <Social/Social.h>
 
 @interface BGDiarySaveViewController ()
 
 @end
 
 @implementation BGDiarySaveViewController
-@synthesize delegate;
+@synthesize delegate, sharing_facebook, sharing_sinaweibo, sharing_twitter;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,12 +34,31 @@
     // add background image
     UIImage *backgroundPattern = [UIImage imageNamed:@"beauty_background.png"];
     self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundPattern];
-    
-    // add saved text, icon and button
-    
-    
+
     // add share buttons
+    if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]) {
+        sharing_sinaweibo.enabled = NO;
+        sharing_sinaweibo.alpha = 0.5f;
+    }else{
+        sharing_sinaweibo.enabled = YES;
+        sharing_sinaweibo.alpha = 1.0f;
+    }
     
+    if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
+        sharing_facebook.enabled = NO;
+        sharing_facebook.alpha = 0.5f;
+    }else{
+        sharing_facebook.enabled = YES;
+        sharing_facebook.alpha = 1.0f;
+    }
+    
+    if (![SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        sharing_twitter.enabled = NO;
+        sharing_twitter.alpha = 0.5f;
+    }else{
+        sharing_twitter.enabled = YES;
+        sharing_twitter.alpha = 1.0f;
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -54,12 +74,21 @@
 
 - (void) viewDidUnload{
     
+    [sharing_sinaweibo release];
+    [self setSharing_sinaweibo:nil];
+    [sharing_facebook release];
+    [self setSharing_facebook:nil];
+    [sharing_twitter release];
+    [self setSharing_twitter:nil];
     [super viewDidUnload];
 }
 
 - (void) dealloc{
     delegate=nil;
     
+    [sharing_sinaweibo release];
+    [sharing_facebook release];
+    [sharing_twitter release];
     [super dealloc];
 }
 
