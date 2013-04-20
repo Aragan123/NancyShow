@@ -18,9 +18,8 @@
 "OK Button" = "确定";     // BGDiaryViewController
 "No Change Message" = "你还没有做任何改动哦！";   // BGDiaryViewController
 "Text Area Button" = "文字框";           // BGDiaryViewController
-"Cannot Post Title" = "无法分享";   // BGDiaryViewController
-"Cannot Post Message" = "请升级你的iOS版本到6.0以上，再使用分享功能。图片已经保存到本地相册。"; // BGDiaryViewController
 "Sharing Cancelled" = "取消分享";   // BGDiaryViewController
 "Sharing Successful" = "已经发送成功"; // BGDiaryViewController
 "TextArea Date Format" = "yyyy年MM月dd日（EEEE）";  // BGDiaryViewController
 "TextArea Today Format" = "今天是%@"; // BGDiaryViewController
+"TextArea Placehoder" = "你可以在这里添加文字哦~";     // BGDiaryViewController

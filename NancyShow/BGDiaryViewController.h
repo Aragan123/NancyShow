@@ -30,7 +30,7 @@ typedef enum : NSInteger{
 @interface BGDiaryViewController : UIViewController<UITextViewDelegate, BGDiarySaveViewControllerDelegate, BGTextEditorViewControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     // views
-    UIView *tplMainView;
+    UIScrollView *tplMainView;
     UIView *bottomBarView;
     UIImageView *bottomBarImgView;
     UIView *tplHolderView;
@@ -45,7 +45,7 @@ typedef enum : NSInteger{
 }
 
 @property (nonatomic, assign) id<BGPageSwitcherDelegate> delegate;
-@property (nonatomic, retain) IBOutlet UIView *tplMainView;
+@property (nonatomic, retain) IBOutlet UIScrollView *tplMainView;
 @property (nonatomic, retain) IBOutlet UIView *bottomBarView;
 @property (nonatomic, retain) IBOutlet UIImageView *bottomBarImgView;
 @property (nonatomic, retain) UIView *tplHolderView;

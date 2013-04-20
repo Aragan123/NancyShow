@@ -155,6 +155,7 @@
 		6DCD00891712AE84003A7B9B /* btn_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD00851712AE84003A7B9B /* btn_cancel@2x.png */; };
 		6DCD008A1712AE84003A7B9B /* btn_ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD00861712AE84003A7B9B /* btn_ok.png */; };
 		6DCD008B1712AE84003A7B9B /* btn_ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DCD00871712AE84003A7B9B /* btn_ok@2x.png */; };
+		6DD030491722BE70006E7815 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD030481722BE70006E7815 /* GCPlaceholderTextView.m */; };
 		6DD7BE45170EABB3002EA9B4 /* AKSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DD7BE44170EABB3002EA9B4 /* AKSegmentedControl.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6DD7BE47170EAD31002EA9B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD7BE46170EAD31002EA9B4 /* QuartzCore.framework */; };
 		6DD7BE4C170EB28F002EA9B4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6DD7BE49170EB28F002EA9B4 /* SVProgressHUD.bundle */; };
@@ -170,6 +171,7 @@
 		6DD960E3171D39100037CAC9 /* bg_aboutMe.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD960E2171D39100037CAC9 /* bg_aboutMe.png */; };
 		6DD960EA171D40E80037CAC9 /* Default-LandscapeRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD960E6171D40E80037CAC9 /* Default-LandscapeRight.png */; };
 		6DD960EB171D40E80037CAC9 /* Default-LandscapeRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DD960E7171D40E80037CAC9 /* Default-LandscapeRight@2x.png */; };
+		6DDBDDC91722DC0800379227 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDBDDC81722DC0800379227 /* TPKeyboardAvoidingScrollView.m */; };
 		6DDC0028170F14AC00A91279 /* DMLazyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDC0027170F14AC00A91279 /* DMLazyScrollView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6DDC002C170F177B00A91279 /* ATPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDC002B170F177B00A91279 /* ATPagingView.m */; };
 		6DF2D23F171D893D005CEA66 /* btn_single_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DF2D23B171D893D005CEA66 /* btn_single_a.png */; };
@@ -364,6 +366,8 @@
 		6DCD00851712AE84003A7B9B /* btn_cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_cancel@2x.png"; sourceTree = "<group>"; };
 		6DCD00861712AE84003A7B9B /* btn_ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_ok.png; sourceTree = "<group>"; };
 		6DCD00871712AE84003A7B9B /* btn_ok@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_ok@2x.png"; sourceTree = "<group>"; };
+		6DD030471722BE70006E7815 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
+		6DD030481722BE70006E7815 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		6DD7BE43170EABB3002EA9B4 /* AKSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSegmentedControl.h; sourceTree = "<group>"; };
 		6DD7BE44170EABB3002EA9B4 /* AKSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSegmentedControl.m; sourceTree = "<group>"; };
 		6DD7BE46170EAD31002EA9B4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -381,6 +385,8 @@
 		6DD960E2171D39100037CAC9 /* bg_aboutMe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_aboutMe.png; sourceTree = "<group>"; };
 		6DD960E6171D40E80037CAC9 /* Default-LandscapeRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-LandscapeRight.png"; sourceTree = "<group>"; };
 		6DD960E7171D40E80037CAC9 /* Default-LandscapeRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-LandscapeRight@2x.png"; sourceTree = "<group>"; };
+		6DDBDDC71722DC0800379227 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		6DDBDDC81722DC0800379227 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		6DDC0026170F14AC00A91279 /* DMLazyScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMLazyScrollView.h; sourceTree = "<group>"; };
 		6DDC0027170F14AC00A91279 /* DMLazyScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMLazyScrollView.m; sourceTree = "<group>"; };
 		6DDC002A170F177B00A91279 /* ATPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATPagingView.h; sourceTree = "<group>"; };
@@ -390,8 +396,8 @@
 		6DF2D23D171D893D005CEA66 /* btn_single_b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_single_b.png; sourceTree = "<group>"; };
 		6DF2D23E171D893D005CEA66 /* btn_single_b@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_single_b@2x.png"; sourceTree = "<group>"; };
 		6DF52C2B1721364E001F7C51 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
-		6DF52C2E17217B30001F7C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/BGDiarySaveViewController.xib; sourceTree = "<group>"; };
-		6DF52C3017217B3A001F7C51 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/BGDiarySaveViewController.xib"; sourceTree = "<group>"; };
+		6DF52C2E17217B30001F7C51 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BGDiarySaveViewController.xib; sourceTree = "<group>"; };
+		6DF52C3017217B3A001F7C51 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/BGDiarySaveViewController.xib"; sourceTree = "<group>"; };
 		6DF52C3117218639001F7C51 /* logo_share_twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_share_twitter.png; sourceTree = "<group>"; };
 		6DF52C3217218639001F7C51 /* logo_share_twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo_share_twitter@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -561,6 +567,8 @@
 		6D8E8270170C108C00B1B45F /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				6DDBDDC61722DC0800379227 /* TPKeyboardAvoiding */,
+				6DD030461722BE70006E7815 /* GCPlaceholderTextView */,
 				6D86BB0917155F0800ABC481 /* AHAlertView */,
 				6DBE631F17119AC60071C669 /* ATArrayView */,
 				6DBE632217119AC60071C669 /* JMWhenTapped */,
@@ -711,6 +719,15 @@
 			path = JMWhenTapped;
 			sourceTree = "<group>";
 		};
+		6DD030461722BE70006E7815 /* GCPlaceholderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				6DD030471722BE70006E7815 /* GCPlaceholderTextView.h */,
+				6DD030481722BE70006E7815 /* GCPlaceholderTextView.m */,
+			);
+			path = GCPlaceholderTextView;
+			sourceTree = "<group>";
+		};
 		6DD7BE42170EABB3002EA9B4 /* AKSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -728,6 +745,15 @@
 				6DD7BE4B170EB28F002EA9B4 /* SVProgressHUD.m */,
 			);
 			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		6DDBDDC61722DC0800379227 /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				6DDBDDC71722DC0800379227 /* TPKeyboardAvoidingScrollView.h */,
+				6DDBDDC81722DC0800379227 /* TPKeyboardAvoidingScrollView.m */,
+			);
+			path = TPKeyboardAvoiding;
 			sourceTree = "<group>";
 		};
 		6DDC0025170F14AC00A91279 /* DMLazyScrollView */ = {
@@ -978,6 +1004,8 @@
 				6D2855F0171700DB0066BAEC /* BGTextEditorViewController.m in Sources */,
 				6D28092A171942A400DFE95C /* BGDiarySaveViewController.m in Sources */,
 				6D95340E171C453D00B117A6 /* BGTextView.m in Sources */,
+				6DD030491722BE70006E7815 /* GCPlaceholderTextView.m in Sources */,
+				6DDBDDC91722DC0800379227 /* TPKeyboardAvoidingScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

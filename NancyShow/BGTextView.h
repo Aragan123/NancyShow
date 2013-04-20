@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GCPlaceholderTextView.h"
 
-@interface BGTextView : UITextView{
+@interface BGTextView : GCPlaceholderTextView{
     int fontIndex;
     int fontColorIndex;
     int fontSize;
+    int tvType;
 }
 
 @property (nonatomic, assign) int fontIndex;
 @property (nonatomic, assign) int fontColorIndex;
 @property (nonatomic, assign) int fontSize;
+@property (nonatomic, assign) int tvType;
 
 @end

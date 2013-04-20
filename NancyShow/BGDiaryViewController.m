@@ -168,9 +168,11 @@
     
     // when ok clicked, show share to Weibo
     if (self.isEdited) {
+        [self hideTextviewPlaceholder];  // remove default placeholder text if any
         self.savedImage = [self screenshot:self.tplHolderView]; // screen shot only has some change
         UIImageWriteToSavedPhotosAlbum(self.savedImage, nil, nil, nil); // save to photo album
         self.isEdited=NO;
+//        [self revertTextviewPlaceholder]; // rever placeholder back
         [self displayModalView]; // display sharing option view
     }else{
         //no change, then display a warning
@@ -240,6 +242,7 @@
 #pragma mark Private Methods
 - (void) setupTextViewByDefaultValue: (BGTextView **) tv atIndex:(int)index withType:(int)type{
     (*tv).tag = index;
+    (*tv).tvType = type;
     (*tv).delegate = self;
 //    (*tv).backgroundColor= [UIColor lightGrayColor];
     (*tv).backgroundColor= [UIColor clearColor];
@@ -250,20 +253,20 @@
     [(*tv).layer setBorderColor:[[UIColor grayColor] CGColor]];
     [(*tv).layer setBorderWidth:0.0f]; // initially no border
     
-    (*tv).fontIndex = 0;
-    (*tv).fontSize = 18;
-    (*tv).fontColorIndex = 1;
-    
     if (BGDiaryTextAreaTypeDate == type) {
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:NSLocalizedString(@"TextArea Date Format", nil)];
         int sysLang = [NSLocalizedString(@"System Language", nil) intValue];
         if (sysLang==1) { // if Chinese
             [df setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"] autorelease]];
+        }else{ // if English
+            [df setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease]];
         }
         NSString *today = [[df stringFromDate:[NSDate date]] uppercaseString];
         (*tv).text = [NSString stringWithFormat:NSLocalizedString(@"TextArea Today Format", nil), today];
         [df release];
+    }else if (BGDiaryTextAreaTypeNormal == type){
+        (*tv).placeholder = NSLocalizedString(@"TextArea Placehoder", nil); // add placehoder
     }
 }
 
@@ -278,6 +281,22 @@
         [UIView animateWithDuration:0.1f animations:^{
             self.textEditor.view.center = CGPointMake(self.view.frame.size.width*0.5, self.view.frame.size.height+52*0.5);
         }];
+    }
+}
+
+-(void) hideTextviewPlaceholder{
+    for (BGTextView *tv in self.textViews){
+        if (tv.tvType==BGDiaryTextAreaTypeNormal && tv.text.length==0) {
+            tv.text = @"   "; // add dummy text to disappear placeholder
+        }
+    }
+}
+
+- (void) revertTextviewPlaceholder{
+    for (BGTextView *tv in self.textViews){
+        if (tv.tvType==BGDiaryTextAreaTypeNormal && [tv.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length==0) {
+            tv.text = @""; // revert back to empty string, so that placeholder appear again
+        }
     }
 }
 
