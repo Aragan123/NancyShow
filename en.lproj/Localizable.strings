@@ -17,12 +17,13 @@
 "No Button" = "No";     // BGDiaryViewController
 "OK Button" = "OK";     // BGDiaryViewController
 "No Change Message" = "You have not done any change";   // BGDiaryViewController
-"Text Area Button" = "Text Area";           // BGDiaryViewController
+"TextArea Button" = "Text Area";           // BGDiaryViewController
+"TextArea Header Button" = "Header";           // BGDiaryViewController
 "Sharing Cancelled" = "Sharing is Cancelled";   // BGDiaryViewController
 "Sharing Successful" = "Post Successfully"; // BGDiaryViewController
-"TextArea Date Format" = "yyyy-MM-dd EEE";  // BGDiaryViewController
+"TextArea Date Format" = "yyyy-MM-dd, EEE";  // BGDiaryViewController
 "TextArea Today Format" = "Today: %@"; // BGDiaryViewController
-"TextArea Placehoder" = "You can add your text from here.";     // BGDiaryViewController
+"TextArea Placehoder" = "Add your text from here.";     // BGDiaryViewController
 "DiarySaveView Title" = "Already Saved to Your Photo Album";     // BGDiarySaveViewController
 "DiarySaveView ShareTo" = "Share To:";   // BGDiarySaveViewController
 "DiarySaveView NoShare" = "Please upgrade to iOS 6 or above to use social sharing functions";   // BGDiarySaveViewController

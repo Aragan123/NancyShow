@@ -296,7 +296,9 @@ const int ONLINE_TPL_INDEX = 1;
                                                                     [delegate switchViewTo:kPageDiary fromView:kPageDiaryHome]; // redirect to diary edit page
                                                                 }
                                                                failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                                   [self.segControl setSelectedIndex:0]; // focus on local template button
                                                                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"NetworkFailure", @"Fail to Download")];
+                                                                   
                                                                 }
               ];
         

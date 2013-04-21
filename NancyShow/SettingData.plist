@@ -43,9 +43,15 @@
 			<array>
 				<dict>
 					<key>tvFrame</key>
+					<string>{{10,10},{500,50}}</string>
+					<key>tvType</key>
+					<integer>1</integer>
+				</dict>
+				<dict>
+					<key>tvFrame</key>
 					<string>{{60,60},{540,600}}</string>
 					<key>tvType</key>
-					<real>0</real>
+					<integer>0</integer>
 				</dict>
 			</array>
 			<array>

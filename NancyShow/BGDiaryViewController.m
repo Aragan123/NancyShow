@@ -524,7 +524,7 @@
     if (totalTpl == 1){
         // when only a single text pad in template
         UIButton *button = [[[UIButton alloc] init] autorelease];
-        NSString *buttonTitle = [NSString stringWithFormat:@"%@ %i", NSLocalizedString(@"Text Area Button", nil), 1];
+        NSString *buttonTitle = NSLocalizedString(@"TextArea Button", nil);
         [button setTitle:buttonTitle forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
@@ -552,11 +552,20 @@
         UIImage *buttonBackgroundImagePressedRight = [[UIImage imageNamed:@"btn_right_b.png"]
                                                       resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 4.0)];
 
+        int textAreaIndex=0;
         for (int i=0; i<totalTpl; i++) {
             UIButton *button = [[[UIButton alloc] init] autorelease];
             //        [button setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 5.0)];
 
-            NSString *buttonTitle = [NSString stringWithFormat:@"%@ %i", NSLocalizedString(@"Text Area Button", nil), i+1];
+            NSString *buttonTitle;
+            BGTextView *tv = [self.textViews objectAtIndex:i];
+            if (tv.tvType == BGDiaryTextAreaTypeDate) {
+                buttonTitle = NSLocalizedString(@"TextArea Header Button", nil);
+            }else{
+                textAreaIndex++;
+                buttonTitle = [NSString stringWithFormat:@"%@ %i", NSLocalizedString(@"TextArea Button", nil), textAreaIndex];
+        
+            }
             [button setTitle:buttonTitle forState:UIControlStateNormal];
             [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];

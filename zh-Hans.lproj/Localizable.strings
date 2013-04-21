@@ -8,8 +8,8 @@
 "System Language" = "1";    // system: 0-ENG, 1-CHN
 "Connecting" = "正在连接";    //BGViewController, BGTplHomeViewController
 "NetworkFailure" = "网络无法连接";   // BGViewController, BGTplHomeViewController x2
-"Templates" = "本地模板";  //BGTplHomeViewController
-"More Online" = "更多";  // BGTplHomeViewController
+"Templates" = "模 板";  //BGTplHomeViewController
+"More Online" = "更多在线模板";  // BGTplHomeViewController
 "Downloading" = "正在下载";  // BGTplHomeViewController
 "Discard Changes Title" = "取消所有操作";  // BGDiaryViewController
 "Discard Changes Message" = "你确定取消所有的操作吗?";    // BGDiaryViewController
@@ -17,7 +17,8 @@
 "No Button" = "返回";     // BGDiaryViewController
 "OK Button" = "确定";     // BGDiaryViewController
 "No Change Message" = "你还没有做任何改动哦！";   // BGDiaryViewController
-"Text Area Button" = "文字框";           // BGDiaryViewController
+"TextArea Button" = "文本框";           // BGDiaryViewController
+"TextArea Header Button" = "日期栏";           // BGDiaryViewController
 "Sharing Cancelled" = "取消分享";   // BGDiaryViewController
 "Sharing Successful" = "已经发送成功"; // BGDiaryViewController
 "TextArea Date Format" = "yyyy年MM月dd日（EEEE）";  // BGDiaryViewController
