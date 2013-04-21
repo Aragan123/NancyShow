@@ -318,7 +318,7 @@
 // when ok button is selected
 -(void) displayModalView {
     NSLog(@"Diary Save Model View display");
-    BGDiarySaveViewController *modelViewController = [[BGDiarySaveViewController alloc] initWithNibName:@"BGDiarySaveViewController" bundle:nil];
+    BGDiaryModalViewController *modelViewController = [[BGDiaryModalViewController alloc] init];
     modelViewController.delegate = self;
     modelViewController.modalPresentationStyle = UIModalPresentationFormSheet;
     modelViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

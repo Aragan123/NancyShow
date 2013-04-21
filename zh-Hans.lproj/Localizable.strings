@@ -23,3 +23,6 @@
 "TextArea Date Format" = "yyyy年MM月dd日（EEEE）";  // BGDiaryViewController
 "TextArea Today Format" = "今天是%@"; // BGDiaryViewController
 "TextArea Placehoder" = "你可以在这里添加文字哦~";     // BGDiaryViewController
+"DiarySaveView Title" = "已经保存到你的本地相册";     // BGDiarySaveViewController
+"DiarySaveView ShareTo" = "分享到:";   // BGDiarySaveViewController
+"DiarySaveView NoShare" = "无法使用以上分享功能，请升级到iOS 6.0或以上版本";   // BGDiarySaveViewController

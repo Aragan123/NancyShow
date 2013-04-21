@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BGPageSwitcherDelegate.h"
-#import "BGDiarySaveViewController.h"
+#import "BGDiaryModalViewController.h"
 #import "BGTextEditorViewController.h"
 
 #ifndef kTextNotSelected
@@ -27,7 +27,7 @@ typedef enum : NSInteger{
 @class AKSegmentedControl;
 @class BGTextView;
 
-@interface BGDiaryViewController : UIViewController<UITextViewDelegate, BGDiarySaveViewControllerDelegate, BGTextEditorViewControllerDelegate>{
+@interface BGDiaryViewController : UIViewController<UITextViewDelegate, BGDiaryModalViewControllerDelegate, BGTextEditorViewControllerDelegate>{
     id<BGPageSwitcherDelegate> delegate;
     // views
     UIScrollView *tplMainView;

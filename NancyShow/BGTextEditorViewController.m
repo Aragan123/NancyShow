@@ -287,13 +287,13 @@
     [buttonArray addObject:buttonRed];
     // Black button
     UIButton *buttonBalck = [[[UIButton alloc] init] autorelease];
-    [buttonBalck setImage:[UIImage imageNamed:@"btn_fc_purple_sa.png"] forState:UIControlStateNormal];
-    [buttonBalck setImage:[UIImage imageNamed:@"btn_fc_purple_sb.png"] forState:(UIControlStateSelected)];
+    [buttonBalck setImage:[UIImage imageNamed:@"btn_fc_black_sa.png"] forState:UIControlStateNormal];
+    [buttonBalck setImage:[UIImage imageNamed:@"btn_fc_black_sb.png"] forState:(UIControlStateSelected)];
     [buttonArray addObject:buttonBalck];
     // Blue button
     UIButton *buttonBlue = [[[UIButton alloc] init] autorelease];
-    [buttonBlue setImage:[UIImage imageNamed:@"btn_fc_blue_sa.png"] forState:UIControlStateNormal];
-    [buttonBlue setImage:[UIImage imageNamed:@"btn_fc_blue_sb.png"] forState:(UIControlStateSelected)];
+    [buttonBlue setImage:[UIImage imageNamed:@"btn_fc_seablue_sa.png"] forState:UIControlStateNormal];
+    [buttonBlue setImage:[UIImage imageNamed:@"btn_fc_seablue_sb.png"] forState:(UIControlStateSelected)];
     [buttonArray addObject:buttonBlue];
     // Orange button
     UIButton *buttonOrange = [[[UIButton alloc] init] autorelease];

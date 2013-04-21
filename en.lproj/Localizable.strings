@@ -23,3 +23,6 @@
 "TextArea Date Format" = "yyyy-MM-dd EEE";  // BGDiaryViewController
 "TextArea Today Format" = "Today: %@"; // BGDiaryViewController
 "TextArea Placehoder" = "You can add your text from here.";     // BGDiaryViewController
+"DiarySaveView Title" = "Already Saved to Your Photo Album";     // BGDiarySaveViewController
+"DiarySaveView ShareTo" = "Share To:";   // BGDiarySaveViewController
+"DiarySaveView NoShare" = "Please upgrade to iOS 6 or above to use social sharing functions";   // BGDiarySaveViewController
