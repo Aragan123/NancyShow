@@ -187,6 +187,7 @@ const int ONLINE_TPL_INDEX = 1;
                                                         }
                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                             NSLog(@"Network Error in online template home: %@", error);
+                                                            [self.segControl setSelectedIndex:0]; // set focus back to local template button
                                                             // when fail, show an alert and stay where it is
                                                             [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"NetworkFailure", @"Network Connection Error")];
                                                         }];
@@ -252,8 +253,6 @@ const int ONLINE_TPL_INDEX = 1;
     [segControl setButtonsArray:buttonArray];
 }
 
-
-
 #pragma mark -
 #pragma mark BGTableViewControllerDelegate method
 - (void) itemCellSelected: (int) atIndex{
@@ -276,7 +275,6 @@ const int ONLINE_TPL_INDEX = 1;
         UIImage *tplImage = [UIImage imageWithContentsOfFile:tplImageURI];
         [[BGGlobalData sharedData] setDiaryTplImage:tplImage]; // set diary template image
         
-        
         [delegate switchViewTo:kPageDiary fromView:kPageDiaryHome];
     }else{
         // online template
@@ -296,7 +294,7 @@ const int ONLINE_TPL_INDEX = 1;
                                                                     [delegate switchViewTo:kPageDiary fromView:kPageDiaryHome]; // redirect to diary edit page
                                                                 }
                                                                failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                                   [self.segControl setSelectedIndex:0]; // focus on local template button
+                                                                   NSLog(@"Network Error while downloading template image: %@", error);
                                                                     [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"NetworkFailure", @"Fail to Download")];
                                                                    
                                                                 }

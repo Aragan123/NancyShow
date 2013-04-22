@@ -8,6 +8,7 @@
 
 #import "BGScrollViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "SPXFrameScroller.h"
 
 @interface BGScrollViewController ()
 
@@ -67,19 +68,7 @@
 }
 
 - (UIView *)viewForPageInPagingView:(ATPagingView *)pagingView atIndex:(NSInteger)index {
-    UIView *view = [pagingView dequeueReusablePage];
-    if (view == nil) {
-        view = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
-        view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        view.backgroundColor = [UIColor clearColor];
-    }else{
-        UIView *removeView = nil;
-        removeView = [view viewWithTag:kRemoveViewTag];
-        if (removeView) {
-            [removeView removeFromSuperview];
-        }
-    }
-    
+    // get imageview to be displayed
     UIImageView *imageView = [[[UIImageView alloc] initWithFrame: self.view.frame] autorelease];
     [imageView setContentMode:UIViewContentModeScaleAspectFit|UIViewContentModeCenter]; // very important
     imageView.tag = kRemoveViewTag;
@@ -94,8 +83,25 @@
         [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.png"]];
     }
     
+    
+    SPXFrameScroller *view = (SPXFrameScroller*)[pagingView dequeueReusablePage]; // get a reusable item
+    if (view == nil) {
+        view = [[[SPXFrameScroller alloc] initWithFrame:self.view.frame] autorelease];
+        view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        view.backgroundColor = [UIColor clearColor];
+        view.maximumZoomScale = 2.0f;
+        view.minimumZoomScale = 1.0f;
+    }else{
+        UIView *removeView = nil;
+        removeView = [view viewWithTag:kRemoveViewTag];
+        if (removeView) {
+            [removeView removeFromSuperview];
+        }
+    }
+    
+    view.contentSize = imageView.frame.size;
     [view addSubview:imageView];
-
+    
     return view;
 }
 
@@ -104,6 +110,7 @@
         NSLog (@"scroller page to : %i", pagingView.currentPageIndex);
         [delegate scrollerPageViewChanged:pagingView.currentPageIndex];
     } else
-        NSLog(@"BGScrollViewController: there is no delegate is defined");}
+        NSLog(@"BGScrollViewController: there is no delegate is defined");
+}
 
 @end
