@@ -70,7 +70,7 @@
 - (UIView *)viewForPageInPagingView:(ATPagingView *)pagingView atIndex:(NSInteger)index {
     // get imageview to be displayed
     UIImageView *imageView = [[[UIImageView alloc] initWithFrame: self.view.frame] autorelease];
-    [imageView setContentMode:UIViewContentModeScaleAspectFit|UIViewContentModeCenter]; // very important
+    [imageView setContentMode:UIViewContentModeScaleAspectFit]; // very important
     imageView.tag = kRemoveViewTag;
     NSString *imageURI = [self.dataSource objectAtIndex:index];
     NSLog(@"loadng imagURI: %@", imageURI);
@@ -80,14 +80,15 @@
         imageView.image = [UIImage imageWithContentsOfFile:imageURI];
     }else{
         // online gallery
-        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading.png"]];
+        [imageView setImageWithURL:[NSURL URLWithString:imageURI] placeholderImage:[UIImage imageNamed:@"loading_b.png"]];
     }
     
-    
+    // construct view to display
     SPXFrameScroller *view = (SPXFrameScroller*)[pagingView dequeueReusablePage]; // get a reusable item
     if (view == nil) {
         view = [[[SPXFrameScroller alloc] initWithFrame:self.view.frame] autorelease];
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        view.contentSize = self.view.frame.size;
         view.backgroundColor = [UIColor clearColor];
         view.maximumZoomScale = 2.0f;
         view.minimumZoomScale = 1.0f;
@@ -99,7 +100,6 @@
         }
     }
     
-    view.contentSize = imageView.frame.size;
     [view addSubview:imageView];
     
     return view;

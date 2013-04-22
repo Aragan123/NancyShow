@@ -44,7 +44,8 @@
     lbl_shareTo.font = [UIFont fontWithName:@"Noteworthy" size:16];
     [self.view addSubview:lbl_shareTo];
     
-    if (![self socialShareAvailable]) {
+    BOOL isSocialClassAvailable = ((NSClassFromString(@"SLComposeViewController") == nil) ? NO : YES);
+    if (!isSocialClassAvailable) {
         NSLog(@"social share is not available");
         UILabel *lbl_noShare = [[[UILabel alloc] initWithFrame:CGRectMake(20, 192, 360, 22)] autorelease];
         lbl_noShare.backgroundColor = [UIColor clearColor];
@@ -84,34 +85,22 @@
     [btn_facebook addTarget:self action:@selector(clickShareButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn_facebook];
     
-    
     // set share buttons
-    BOOL isSocialClassAvailable = ((NSClassFromString(@"SLComposeViewController") == nil) ? NO : YES);
-    NSLog(@"isSocialClassAvailable=%i", isSocialClassAvailable);
-    if ( isSocialClassAvailable && [SLComposeViewController isAvailableForServiceType:SLServiceTypeSinaWeibo]) {
+    if ( isSocialClassAvailable) {
         btn_sinaweibo.enabled = YES;
         btn_sinaweibo.alpha = 1.0f;
-    }else{
-        btn_sinaweibo.enabled = NO;
-        btn_sinaweibo.alpha = 0.5f;
-    }
-    
-    if (isSocialClassAvailable && [SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         btn_twitter.enabled = YES;
         btn_twitter.alpha = 1.0f;
-    }else{
-        btn_twitter.enabled = NO;
-        btn_twitter.alpha = 0.5f;
-    }
-    
-    if (isSocialClassAvailable && [SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]){
         btn_facebook.enabled = YES;
         btn_facebook.alpha = 1.0f;
     }else{
+        btn_sinaweibo.enabled = NO;
+        btn_sinaweibo.alpha = 0.5f;
+        btn_twitter.enabled = NO;
+        btn_twitter.alpha = 0.5f;
         btn_facebook.enabled = NO;
         btn_facebook.alpha = 0.5f;
     }
-    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

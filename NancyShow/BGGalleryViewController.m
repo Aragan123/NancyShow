@@ -220,8 +220,13 @@
         
         // get buttontitle from plist data
         NSDictionary *galleryBook = [galleries objectAtIndex:i];
-        NSString *buttonTitle = [galleryBook objectForKey:@"GalleryDesc"];
-        
+        NSString *buttonTitle;
+        int sysLang = [NSLocalizedString(@"System Language", nil) intValue];
+        if (0 == sysLang) { 
+            buttonTitle = [galleryBook objectForKey:@"GalleryDesc_ENG"]; // English
+        }else{
+            buttonTitle = [galleryBook objectForKey:@"GalleryDesc_CHN"]; // Chinese
+        }
         [button setTitle:buttonTitle forState:UIControlStateNormal];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:124.0 green:202.0 blue:0.0 alpha:1.0] forState:UIControlStateSelected];
