@@ -88,7 +88,6 @@
     if (view == nil) {
         view = [[[SPXFrameScroller alloc] initWithFrame:self.view.frame] autorelease];
         view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        view.contentSize = self.view.frame.size;
         view.backgroundColor = [UIColor clearColor];
         view.maximumZoomScale = 2.0f;
         view.minimumZoomScale = 1.0f;
@@ -100,6 +99,7 @@
         }
     }
     
+    view.contentSize = self.view.frame.size; // must put over here, not in initialization block above
     [view addSubview:imageView];
     
     return view;
