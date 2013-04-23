@@ -76,7 +76,7 @@
 
 - (void) reloadImageView{
     UIImage *tplImg = [[BGGlobalData sharedData] diaryTplImage];
-    [self.tplMainView setContentMode:UIViewContentModeScaleAspectFit|UIViewContentModeCenter]; // main view content mode: fit and centre
+    [self.tplMainView setContentMode:UIViewContentModeScaleAspectFit]; // main view content mode: fit and centre
     self.tplHolderView = [[UIView alloc] initWithFrame:CGRectMake((self.tplMainView.frame.size.width-tplImg.size.width)*0.5,
                                                                  (self.tplMainView.frame.size.height-tplImg.size.height)*0.5,
                                                                  tplImg.size.width, tplImg.size.height)];
