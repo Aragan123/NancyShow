@@ -18,8 +18,8 @@
 
 #endif
 
-#define kOnlineGalleryURI @"http://122.70.133.214/GalleryNancy/GetGalleryData.php?FileType=plist"
-#define kOnlineTemplateURI @"http://122.70.133.214/GalleryNancy/GetTemplateData.php?FileType=json"
+#define kOnlineGalleryURI @"http://122.70.133.214/NancyZhang/data/GetGalleryData.php?FileType=plist"
+#define kOnlineTemplateURI @"http://122.70.133.214/NancyZhang/data/GetTemplateData.php?FileType=json"
 
 enum enumPage {
 	pageMain =0,
