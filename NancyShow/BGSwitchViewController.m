@@ -46,19 +46,19 @@
     [super didReceiveMemoryWarning];
     
     // Dispose of any resources that can be recreated.
-    if (self.homePageViewController.view.subviews==nil) {
+    if (self.homePageViewController.view.superview==nil) {
         self.homePageViewController=nil;
     }
-    if (self.aboutPageViewController.view.subviews==nil) {
+    if (self.aboutPageViewController.view.superview==nil) {
         self.aboutPageViewController=nil;
     }
-    if (self.galleryPageViewController.view.subviews==nil){
+    if (self.galleryPageViewController.view.superview==nil){
         self.galleryPageViewController=nil;
     }
-    if  (self.tplHomeViewController.view.subviews==nil){
+    if  (self.tplHomeViewController.view.superview==nil){
         self.tplHomeViewController=nil;
     }
-    if (self.diaryViewController.view.subviews==nil){
+    if (self.diaryViewController.view.superview==nil){
         self.diaryViewController=nil;
     }
 }

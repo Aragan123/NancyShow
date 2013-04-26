@@ -11,12 +11,14 @@
 			<string>0.jpg</string>
 			<string>1.jpg</string>
 			<string>2.jpg</string>
+			<string>3.jpg</string>
 		</array>
 		<key>TemplateThumbnails</key>
 		<array>
 			<string>0_thumb.jpg</string>
 			<string>1_thumb.jpg</string>
 			<string>2_thumb.jpg</string>
+			<string>3_thumb.jpg</string>
 		</array>
 		<key>TemplateDetails</key>
 		<array>
@@ -50,6 +52,20 @@
 				<dict>
 					<key>tvFrame</key>
 					<string>{{200,70},{425,615}}</string>
+					<key>tvType</key>
+					<integer>0</integer>
+				</dict>
+			</array>
+			<array>
+				<dict>
+					<key>tvFrame</key>
+					<string>{{48,402},{194,45}}</string>
+					<key>tvType</key>
+					<integer>1</integer>
+				</dict>
+				<dict>
+					<key>tvFrame</key>
+					<string>{{600,155},{260,250}}</string>
 					<key>tvType</key>
 					<integer>0</integer>
 				</dict>

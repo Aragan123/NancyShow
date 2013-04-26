@@ -82,7 +82,7 @@ static BGGlobalData *instance = nil;
                       [UIFont fontWithName:@"Marion-Bold" size:16.0],
                       [UIFont fontWithName:@"Zapfino" size:9.0],nil];
     self.fontColor = [NSArray arrayWithObjects:[UIColor redColor], [UIColor blackColor],
-                      [UIColor blueColor], [UIColor orangeColor], [UIColor greenColor], nil];
+                      [UIColor blueColor], [UIColor orangeColor], [UIColor whiteColor], [UIColor greenColor], nil];
 }
 
 + (BGGlobalData *) sharedData{

@@ -57,7 +57,7 @@
     [self.view addSubview:self.fontSizeSegControl];
     
     // set up fontColorSegControl
-    self.fontColorSegControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(718, 4, 250, 44)];
+    self.fontColorSegControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(718, 4, 288, 44)];
     [self.fontColorSegControl addTarget:self action:@selector(selectFontColorSegControl:) forControlEvents:UIControlEventValueChanged];
     [self.fontColorSegControl setSegmentedControlMode:AKSegmentedControlModeSticky];
     [self.fontColorSegControl setSelectedIndex:0];
@@ -300,6 +300,11 @@
     [buttonOrange setImage:[UIImage imageNamed:@"btn_fc_orange_sa.png"] forState:UIControlStateNormal];
     [buttonOrange setImage:[UIImage imageNamed:@"btn_fc_orange_sb.png"] forState:(UIControlStateSelected)];
     [buttonArray addObject:buttonOrange];
+    // White button
+    UIButton *buttonWhite = [[[UIButton alloc] init] autorelease];
+    [buttonWhite setImage:[UIImage imageNamed:@"btn_fc_white_sa.png"] forState:UIControlStateNormal];
+    [buttonWhite setImage:[UIImage imageNamed:@"btn_fc_white_sb.png"] forState:(UIControlStateSelected)];
+    [buttonArray addObject:buttonWhite];
     // Green button
     UIButton *buttonGreen = [[[UIButton alloc] init] autorelease];
     [buttonGreen setImage:[UIImage imageNamed:@"btn_fc_green_sa.png"] forState:UIControlStateNormal];
