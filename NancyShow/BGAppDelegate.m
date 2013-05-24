@@ -29,7 +29,7 @@
     self.viewController = [[BGSwitchViewController alloc] init];
     
     // Insert delay of a few seconds before splash screen disappers.
-    [NSThread sleepForTimeInterval:1.0f];
+    [NSThread sleepForTimeInterval:1.80f];
     
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];

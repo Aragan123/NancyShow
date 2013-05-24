@@ -107,7 +107,7 @@
     if (toPage == kPageMain) {
         NSLog(@"toPage = MainPage");
         
-        if (self.homePageViewController.view.superview == nil) {
+        if (self.homePageViewController == nil) {
             BGViewController *controller = [[BGViewController alloc] initWithNibName:@"BGViewController" bundle:nil];
             self.homePageViewController = controller;
             [controller release];
@@ -118,7 +118,7 @@
     else if (toPage == kPageAbout) {
         NSLog(@"toPage = AboutPage");
         
-        if (self.aboutPageViewController.view.superview == nil) {
+        if (self.aboutPageViewController == nil) {
             BGAboutViewController *controller = [[BGAboutViewController alloc] initWithNibName:@"BGAboutViewController" bundle:nil];
             self.aboutPageViewController = controller;
             [controller release];
